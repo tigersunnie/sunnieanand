@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curation &amp; Consult — Sunnie Anand</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root { --black:#0e0c0a; --off-white:#f2ede4; --warm-white:#faf7f2; --marigold:#f5c842; --gold:#c9a84c; --rose:#e8917f; --rose-deep:#8c4a3f; --ink:#1c1814; --mid:#6b6259; }
+html { scroll-behavior:smooth; }
+body { background:var(--black); color:var(--off-white); font-family:'Jost',sans-serif; font-weight:300; font-size:1.2rem; line-height:1.8; overflow-x:hidden; cursor:none; }
+.cursor { width:8px; height:8px; background:var(--marigold); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; mix-blend-mode:screen; }
+.cursor-ring { width:32px; height:32px; border:1px solid rgba(245,200,66,0.5); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9998; transition:transform 0.4s ease, width 0.3s, height 0.3s, border-color 0.3s; }
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:1000; opacity:0.5; }
+
+/* NAV */
+nav { display:flex; justify-content:space-between; align-items:center; padding:28px 60px; position:relative; z-index:20; }
+.nav-logo { font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:1.1rem; letter-spacing:0.08em; color:var(--off-white); text-decoration:none; transition:color 0.2s; }
+.nav-logo:hover { color:var(--marigold); }
+.nav-links { display:flex; gap:28px; list-style:none; flex-wrap:wrap; align-items:center; }
+.nav-links a { font-size:0.9rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,237,228,0.75); text-decoration:none; transition:color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color:var(--marigold); }
+
+/* PAGE HERO */
+.page-hero { padding:64px 60px 0; text-align:center; }
+.page-eyebrow { font-size:1rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--marigold); margin-bottom:16px; opacity:0; animation:fadeUp 0.8s 0.2s forwards; }
+.page-title { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,7vw,5rem); font-weight:900; color:var(--off-white); line-height:1; opacity:0; animation:fadeUp 0.8s 0.4s forwards; }
+.page-title em { color:var(--marigold); font-style:italic; font-weight:400; }
+
+/* IN-PAGE ANCHOR NAV */
+.page-nav { display:flex; justify-content:center; gap:0; padding:36px 60px 0; opacity:0; animation:fadeUp 0.8s 0.6s forwards; flex-wrap:wrap; }
+.page-nav a { font-size:0.88rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(242,237,228,0.5); text-decoration:none; padding:10px 24px; border-bottom:1px solid rgba(245,200,66,0.15); transition:color 0.2s, border-color 0.2s; white-space:nowrap; }
+.page-nav a:hover, .page-nav a.current { color:var(--marigold); border-bottom-color:var(--marigold); }
+
+/* BURST */
+.burst-divider { width:100%; display:flex; align-items:center; justify-content:center; padding:20px 0; }
+
+/* MONET HERO */
+.monet-hero { position:relative; overflow:hidden; width:100%; aspect-ratio:21/8; background:#000; cursor:pointer; }
+.monet-hero img { width:100%; height:100%; object-fit:cover; object-position:center 40%; display:block; transition:transform 0.6s; }
+.monet-hero:hover img { transform:scale(1.02); }
+.monet-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(14,12,10,0.85) 0%,transparent 50%); opacity:0; transition:opacity 0.4s; display:flex; flex-direction:column; justify-content:flex-end; padding:40px 60px; }
+.monet-hero:hover .monet-overlay { opacity:1; }
+.monet-title { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:var(--off-white); margin-bottom:6px; }
+.monet-sub { font-size:1rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--marigold); }
+
+/* SECTION STRUCTURE */
+.section-inner { max-width:1200px; margin:0 auto; padding:80px 60px; }
+.section-label { font-size:1rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--marigold); margin-bottom:8px; }
+.section-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:700; line-height:1.1; color:var(--off-white); margin-bottom:16px; }
+.section-title em { font-style:italic; color:var(--marigold); font-weight:400; }
+.section-intro { font-size:1.2rem; color:rgba(242,237,228,0.7); max-width:700px; margin-bottom:48px; line-height:1.8; }
+.subsection-header { margin-top:80px; margin-bottom:40px; padding-bottom:20px; border-bottom:1px solid rgba(245,200,66,0.2); }
+.subsection-label { font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); margin-bottom:8px; }
+.subsection-title { font-family:'Playfair Display',serif; font-size:clamp(1.5rem,2.5vw,2rem); font-weight:700; color:var(--off-white); }
+.subsection-title em { color:var(--marigold); font-weight:400; font-style:italic; }
+
+/* PORTFOLIO GRIDS */
+.portfolio-grid { display:grid; gap:3px; }
+.portfolio-grid.cols-2 { grid-template-columns:repeat(2,1fr); }
+.portfolio-grid.cols-3 { grid-template-columns:repeat(3,1fr); }
+.portfolio-item { position:relative; overflow:hidden; background:#1a1714; cursor:pointer; }
+.portfolio-item.sq { aspect-ratio:1; }
+.portfolio-item.tall { aspect-ratio:3/4; }
+.portfolio-item.vert { aspect-ratio:2/3; }
+.portfolio-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.6s; }
+.portfolio-item:hover img { transform:scale(1.03); }
+.portfolio-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(14,12,10,0.92) 0%,transparent 55%); opacity:0; transition:opacity 0.4s; display:flex; flex-direction:column; justify-content:flex-end; padding:24px; z-index:3; }
+.portfolio-item:hover .portfolio-overlay { opacity:1; }
+.overlay-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--off-white); margin-bottom:4px; }
+.overlay-museum { font-size:1rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--marigold); }
+
+/* QUOTE STRIPS */
+.quote-strip { background:var(--rose-deep); padding:64px 60px; text-align:center; }
+.quote-strip p { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,3vw,2.2rem); font-style:italic; color:var(--off-white); line-height:1.5; max-width:800px; margin:0 auto 16px; }
+.quote-strip span { font-size:1rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(242,237,228,0.55); }
+
+/* ART TALKS */
+.talks-intro { font-size:1.2rem; line-height:2; color:rgba(242,237,228,0.85); max-width:820px; margin-bottom:64px; }
+.talks-intro em { font-style:italic; color:var(--off-white); }
+
+.talk-topics { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; margin-bottom:64px; }
+.talk-card { background:#141210; padding:36px 32px; border-top:2px solid rgba(245,200,66,0.2); transition:border-color 0.3s; }
+.talk-card:hover { border-top-color:var(--marigold); }
+.talk-card-title { font-family:'Playfair Display',serif; font-size:1.25rem; font-weight:700; color:var(--off-white); margin-bottom:12px; line-height:1.3; }
+.talk-card-desc { font-size:1.1rem; line-height:1.7; color:rgba(242,237,228,0.65); }
+
+/* WHAT I OFFER */
+.offer-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid rgba(245,200,66,0.15); margin-bottom:64px; }
+.offer-title { font-family:'Playfair Display',serif; font-size:1.2rem; font-style:italic; color:var(--marigold); padding:22px 40px 22px 0; border-bottom:1px solid rgba(245,200,66,0.1); }
+.offer-desc { font-size:1.1rem; color:rgba(242,237,228,0.7); padding:22px 0; border-bottom:1px solid rgba(245,200,66,0.1); line-height:1.6; }
+.offer-desc a { color:var(--marigold); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.3); transition:opacity 0.2s; }
+.offer-desc a:hover { opacity:0.7; }
+
+.talks-cta { text-align:center; padding:48px 0 0; }
+.talks-cta a { font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.4); padding-bottom:3px; transition:opacity 0.2s; }
+.talks-cta a:hover { opacity:0.7; }
+
+/* SHOWS — scrollable within fixed container */
+.shows-scroll-wrap { position:relative; }
+.shows-scroll { display:flex; flex-direction:column; gap:3px; max-height:520px; overflow-y:auto; scrollbar-width:thin; scrollbar-color:rgba(245,200,66,0.3) transparent; padding-right:8px; }
+.shows-scroll::-webkit-scrollbar { width:4px; }
+.shows-scroll::-webkit-scrollbar-track { background:transparent; }
+.shows-scroll::-webkit-scrollbar-thumb { background:rgba(245,200,66,0.3); border-radius:2px; }
+.show-card { position:relative; overflow:hidden; min-height:auto; background:#141210; border-left:2px solid rgba(245,200,66,0.15); transition:border-color 0.3s; flex-shrink:0; }
+.show-card:hover { border-left-color:var(--marigold); }
+.show-card-bg { display:none; }
+.show-card-content { padding:36px 40px; }
+.show-tag { font-size:1rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--marigold); margin-bottom:10px; }
+.show-title { font-family:'Playfair Display',serif; font-size:1.5rem; font-weight:700; color:var(--off-white); margin-bottom:16px; line-height:1.2; }
+.show-body { font-size:1.1rem; line-height:1.85; color:rgba(242,237,228,0.78); }
+.show-body em { color:rgba(242,237,228,0.5); font-size:1rem; font-style:italic; }
+.shows-scroll-hint { text-align:right; font-size:1rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--mid); margin-top:12px; }
+
+/* CURATED ENVIRONMENTS */
+.natural-gallery { columns:3; column-gap:3px; }
+.natural-item { break-inside:avoid; margin-bottom:3px; position:relative; overflow:hidden; background:#0e0c0a; cursor:pointer; }
+.natural-item img { width:100%; display:block; object-fit:contain; background:#0e0c0a; transition:transform 0.5s; }
+.natural-item:hover img { transform:scale(1.02); }
+.natural-overlay { position:absolute; inset:0; background:rgba(14,12,10,0); transition:background 0.4s; display:flex; align-items:flex-end; padding:20px; }
+.natural-item:hover .natural-overlay { background:rgba(14,12,10,0.85); }
+.natural-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; color:var(--off-white); opacity:0; transition:opacity 0.3s; }
+.natural-sub { font-size:1rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--marigold); opacity:0; transition:opacity 0.3s; margin-top:4px; }
+.natural-item:hover .natural-title, .natural-item:hover .natural-sub { opacity:1; }
+.natural-info { display:flex; flex-direction:column; }
+
+/* LMSB */
+.lmsb-strip { background:var(--black); text-align:center; padding:100px 40px; }
+.lmsb-main { font-family:'Playfair Display',serif; font-size:clamp(2rem,5.6vw,4rem); font-weight:900; color:var(--off-white); text-decoration:none; display:block; line-height:1; transition:opacity 0.3s; }
+.lmsb-main em { color:var(--marigold); font-style:italic; font-weight:400; }
+.lmsb-main:hover { opacity:0.8; }
+.lmsb-sub { margin-top:20px; font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); }
+
+.site-footer { background:var(--black); text-align:center; padding:32px 60px; border-top:1px solid rgba(245,200,66,0.08); }
+.footer-note { font-size:1rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--rose); }
+
+/* LIGHTBOX */
+.lightbox { display:none; position:fixed; inset:0; background:rgba(14,12,10,0.97); z-index:9999; flex-direction:column; align-items:center; justify-content:center; padding:20px; cursor:auto; }
+.lightbox.active { display:flex; }
+.lightbox-img-wrap { width:100%; flex:1; display:flex; align-items:center; justify-content:center; overflow:hidden; min-height:0; }
+.lightbox-img-wrap img { max-width:100%; max-height:70vh; object-fit:contain; display:block; }
+.lightbox-info { padding:12px 20px 0; text-align:center; flex-shrink:0; }
+.lightbox-title { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--off-white); margin-bottom:4px; }
+.lightbox-sub { font-size:0.95rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--marigold); }
+.lightbox-close { position:absolute; top:12px; right:16px; font-size:2rem; color:var(--off-white); cursor:pointer; background:none; border:none; opacity:0.75; line-height:1; padding:8px; min-width:44px; min-height:44px; display:flex; align-items:center; justify-content:center; }
+.lightbox-close:hover { opacity:1; }
+/* Nav arrows at bottom for mobile friendliness */
+.lightbox-nav-row { display:flex; gap:24px; justify-content:center; padding:16px 0 8px; flex-shrink:0; }
+.lightbox-nav { font-size:2rem; color:rgba(242,237,228,0.6); cursor:pointer; background:rgba(255,255,255,0.06); border:1px solid rgba(245,200,66,0.25); padding:0; width:52px; height:52px; display:flex; align-items:center; justify-content:center; transition:color 0.2s, border-color 0.2s; border-radius:0; }
+.lightbox-nav:hover { color:var(--marigold); border-color:var(--marigold); }
+
+/* BACK TO TOP */
+.back-to-top { position:fixed; bottom:32px; right:32px; width:44px; height:44px; background:rgba(14,12,10,0.85); border:1px solid rgba(245,200,66,0.3); color:var(--marigold); font-size:1.2rem; display:flex; align-items:center; justify-content:center; text-decoration:none; opacity:0; transition:opacity 0.3s, border-color 0.2s; z-index:500; }
+.back-to-top.visible { opacity:1; }
+.back-to-top:hover { border-color:var(--marigold); }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+.reveal { opacity:0; transform:translateY(40px); transition:opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+@media(max-width:900px) {
+  nav { padding:20px 24px; } .nav-links { display:none; }
+  .section-inner { padding:60px 24px; }
+  .page-hero { padding:40px 24px 0; }
+  .page-nav { padding:24px 24px 0; }
+  .page-nav a { font-size:0.78rem; padding:8px 12px; }
+  .portfolio-grid.cols-3 { grid-template-columns:1fr 1fr; }
+  .talk-topics { grid-template-columns:1fr 1fr; }
+  .offer-grid { grid-template-columns:1fr; }
+  .natural-gallery { columns:2; }
+  .monet-hero { aspect-ratio:4/3; }
+  .shows-scroll { max-height:none; overflow-y:visible; }
+}
+@media(max-width:600px) {
+  .talk-topics { grid-template-columns:1fr; }
+  .natural-gallery { columns:1; }
+}
+
+/* HAMBURGER MENU */
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; z-index:200; background:none; border:none; position:relative; }
+.hamburger span { display:block; width:24px; height:2px; background:var(--off-white); transition:transform 0.3s, opacity 0.3s; }
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+.mobile-menu { display:none; position:fixed; inset:0; background:rgba(14,12,10,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:center; gap:0; }
+.mobile-menu.open { display:flex; }
+.mobile-menu a { font-family:'Playfair Display',serif; font-size:clamp(1.6rem,6vw,2.4rem); font-style:italic; font-weight:400; color:var(--off-white); text-decoration:none; padding:16px 40px; letter-spacing:0.04em; transition:color 0.2s; border-bottom:1px solid rgba(245,200,66,0.08); width:100%; text-align:center; }
+.mobile-menu a:last-child { border-bottom:none; }
+.mobile-menu a:hover, .mobile-menu a.active { color:var(--marigold); }
+.mobile-menu-close { position:absolute; top:24px; right:24px; font-size:2rem; color:var(--off-white); background:none; border:none; cursor:pointer; padding:8px; opacity:0.7; line-height:1; }
+.mobile-menu-close:hover { opacity:1; color:var(--marigold); }
+@media(max-width:900px) { .hamburger { display:flex; } }
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+  <a href="index.html#about">About</a>
+  <a href="curation.html" class="active">Curation & Consult</a>
+  <a href="fashion.html">Fashion</a>
+  <a href="works.html">Creative Works</a>
+  <a href="pov.html">POV</a>
+  <a href="contact.html">Contact</a>
+</div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <div class="lightbox-img-wrap"><img id="lb-img" src="" alt=""></div>
+  <div class="lightbox-info">
+    <div class="lightbox-title" id="lb-title"></div>
+    <div class="lightbox-sub" id="lb-sub"></div>
+  </div>
+  <div class="lightbox-nav-row">
+    <button class="lightbox-nav" onclick="navLb(-1)">‹</button>
+    <button class="lightbox-nav" onclick="navLb(1)">›</button>
+  </div>
+</div>
+
+<!-- BACK TO TOP -->
+<a class="back-to-top" id="backTop" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Sunnie Anand</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="curation.html" class="active">Curation &amp; Consult</a></li>
+    <li><a href="fashion.html">Fashion</a></li>
+    <li><a href="works.html">Creative Works</a></li>
+    <li><a href="pov.html">POV</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <p class="page-eyebrow">Curation &amp; Consult</p>
+  <h1 class="page-title">Let's get it <em>together</em></h1>
+</div>
+
+<!-- IN-PAGE ANCHOR NAV -->
+<div class="page-nav">
+  <a href="#field-work">The Field Work</a>
+  <a href="#art-talks">Art Talks &amp; Art Walks</a>
+  <a href="#shows">Shows in Development</a>
+  <a href="#environments">Curated Environments</a>
+</div>
+
+<!-- BURST -->
+<div class="burst-divider" style="background:var(--black);">
+  <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="140" y1="16" x2="75" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="140" y1="16" x2="75" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="180" y1="16" x2="245" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="180" y1="16" x2="245" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/></svg>
+</div>
+
+<!-- MONET HERO -->
+<div class="monet-hero reveal" onclick="openLb(this)" data-title="Water Lilies, Monet" data-sub="L'Orangerie · Paris">
+  <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354974/20230526_154544_s9zyql.jpg" alt="Monet Water Lilies">
+  <div class="monet-overlay">
+    <div class="monet-title">Water Lilies, Monet</div>
+    <div class="monet-sub">L'Orangerie · Paris</div>
+  </div>
+</div>
+
+<!-- THE FIELD WORK -->
+<section style="background:var(--black);" id="field-work">
+  <div class="section-inner">
+    <div class="reveal" style="margin-bottom:48px;">
+      <div class="section-label">The Field Work</div>
+      <h2 class="section-title">80 museums and <em>counting</em></h2>
+      <p class="section-intro">80 museums and counting since 2023 — admiring, studying, buying, and gabbing about art.</p>
+    </div>
+
+    <!-- Row 1: 3 Paris pics -->
+    <div class="portfolio-grid cols-3 reveal" style="margin-bottom:3px;">
+      <div class="portfolio-item tall" onclick="openLb(this)" data-title="Venus de Milo" data-sub="The Louvre · Paris"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354975/20230208_152336_j70awk.jpg" alt="Louvre"><div class="portfolio-overlay"><div class="overlay-title">Venus de Milo</div><div class="overlay-museum">The Louvre · Paris</div></div></div>
+      <div class="portfolio-item tall" onclick="openLb(this)" data-title="Grand Salon" data-sub="Musée d'Orsay · Paris"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354977/20230525_132226_yknprj.jpg" alt="Orsay"><div class="portfolio-overlay"><div class="overlay-title">Grand Salon</div><div class="overlay-museum">Musée d'Orsay · Paris</div></div></div>
+      <div class="portfolio-item tall" onclick="openLb(this)" data-title="Azzedine Alaïa × Thierry Mugler" data-sub="Musée Azzedine Alaïa · Paris"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355116/Picsart_25-08-07_22-37-04-426_yfogtp.jpg" alt="Alaia Mugler"><div class="portfolio-overlay"><div class="overlay-title">Azzedine Alaïa × Thierry Mugler</div><div class="overlay-museum">Musée Azzedine Alaïa · Paris</div></div></div>
+    </div>
+
+    <!-- Row 2: Moon Phases + Wiley -->
+    <div class="portfolio-grid cols-2 reveal" style="margin-bottom:3px;">
+      <div class="portfolio-item sq" onclick="openLb(this)" data-title="Moon Phases · Artist Unknown" data-sub="Atlanta Contemporary Art Center · Atlanta"><img src="https://res.cloudinary.com/dndippf4k/image/upload/v1778355121/Screenshot_20260508_014929_Photos_a0xvnm.jpg" alt="Moon Phases"><div class="portfolio-overlay"><div class="overlay-title">Moon Phases · Artist Unknown</div><div class="overlay-museum">Atlanta Contemporary Art Center · Atlanta</div></div></div>
+      <div class="portfolio-item sq" onclick="openLb(this)" data-title="Kehinde Wiley" data-sub="Mint Museum · Charlotte NC"><img src="https://res.cloudinary.com/dndippf4k/image/upload/v1778355110/IMG-20260404-WA0057_dqvzzs.jpg" alt="Kehinde Wiley"><div class="portfolio-overlay"><div class="overlay-title">Kehinde Wiley</div><div class="overlay-museum">Mint Museum · Charlotte NC</div></div></div>
+    </div>
+
+    <!-- Row 3: Drexler, Columbia, Rothko -->
+    <div class="portfolio-grid cols-3 reveal" style="margin-bottom:3px;">
+      <div class="portfolio-item tall" onclick="openLb(this)" data-title="Untitled, Lynn Drexler" data-sub="Mint Museum · Charlotte NC"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355110/IMG-20260404-WA0047_c78yfk.jpg" alt="Lynn Drexler"><div class="portfolio-overlay"><div class="overlay-title">Untitled, Lynn Drexler</div><div class="overlay-museum">Mint Museum · Charlotte NC</div></div></div>
+      <div class="portfolio-item tall" onclick="openLb(this)" data-title="Salon Room" data-sub="Columbia Art Museum · Columbia SC"><img src="https://res.cloudinary.com/dndippf4k/image/upload/v1778355127/Screenshot_20260508_024151_Photos_y3izym.jpg" alt="Columbia"><div class="portfolio-overlay"><div class="overlay-title">Salon Room</div><div class="overlay-museum">Columbia Art Museum · Columbia SC</div></div></div>
+      <div class="portfolio-item tall" onclick="openLb(this)" data-title="Mark Rothko" data-sub="National Gallery of Art · Washington DC"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354979/20230715_162453_eysg4m.jpg" alt="Rothko"><div class="portfolio-overlay"><div class="overlay-title">Mark Rothko</div><div class="overlay-museum">National Gallery of Art · Washington DC</div></div></div>
+    </div>
+
+    <!-- Row 4: Art fairs + Leila Farhan -->
+    <div class="portfolio-grid cols-3 reveal">
+      <div class="portfolio-item vert" onclick="openLb(this)" data-title="Art Fair" data-sub="Supporting artists · In the room"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778477858/20230827_171448_1_f4gxzy.jpg" alt="Art fair 1" style="object-fit:contain;background:#0e0c0a;"><div class="portfolio-overlay"><div class="overlay-title">Art Fair</div><div class="overlay-museum">Supporting artists · In the room</div></div></div>
+      <div class="portfolio-item vert" onclick="openLb(this)" data-title="Art Fair" data-sub="Uplifting artists · In the room"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355105/Aug_19_2023_5_11_45_mnkfqh.jpg" alt="Art fair 2" style="object-fit:contain;background:#0e0c0a;"><div class="portfolio-overlay"><div class="overlay-title">Art Fair</div><div class="overlay-museum">Uplifting artists · In the room</div></div></div>
+      <div class="portfolio-item vert" onclick="openLb(this)" data-title="Leila Farhan" data-sub="Exhibition opening · Atlanta"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778476806/copy_of_20230603_221422_bdmgqza_b521fc.jpg" alt="Leila Farhan" style="object-fit:contain;background:#0e0c0a;"><div class="portfolio-overlay"><div class="overlay-title">Leila Farhan</div><div class="overlay-museum">Exhibition opening · Atlanta</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PULL QUOTE: You haven't been... -->
+<div class="quote-strip reveal">
+  <p>"You haven't been to a gallery until you've been with Sunnie. She will blow your mind."</p>
+  <span>— A fellow traveler, Paris art walks</span>
+</div>
+
+<!-- ART TALKS & ART WALKS -->
+<section style="background:var(--black);" id="art-talks">
+  <div class="section-inner">
+    <div class="reveal" style="margin-bottom:40px;">
+      <div class="section-label">Art Talks &amp; Art Walks</div>
+      <h2 class="section-title">Put me <em>in the room</em></h2>
+    </div>
+
+    <p class="talks-intro reveal">I have been called a lot of things in museums. Obsessive is not the least of them. I can hold a room — any room — on the relationship between 19th century French Impressionism and the American conservation movement, why Napoleon's looting campaigns still shape what we consider "canonical" art today, how urbanization in Paris gave rise to bohemian culture and changed art <em>forever</em>, and why the human hand making marks in traditional media is one of our most powerful responses to the rise of AI.<br><br>What I don't do is ask "how does this make you feel?" Asking better questions invites my audiences to carry the piece home with them (in their heart and sometimes in the car!) and change the way they witness art.</p>
+
+    <!-- Talk topics -->
+    <h4 style="font-family:'Playfair Display',serif;font-size:1.2rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--mid);margin-bottom:24px;font-weight:400;font-style:italic;">Sample Art Talk Topics</h4>
+    <div class="talk-topics reveal">
+      <div class="talk-card">
+        <div class="talk-card-title">The Impressionist Rupture</div>
+        <div class="talk-card-desc">How a group of rejected painters changed what art was allowed to be — and why it still matters.</div>
+      </div>
+      <div class="talk-card">
+        <div class="talk-card-title">Napoleon and the Canon</div>
+        <div class="talk-card-desc">What looting tells us about power, ownership, and whose stories get told — and what we can see happening now.</div>
+      </div>
+      <div class="talk-card">
+        <div class="talk-card-title">AI and the Human Hand</div>
+        <div class="talk-card-desc">Why making things by hand is a political act right now, and why the forecast of AI taking over is dark but not inevitable.</div>
+      </div>
+      <div class="talk-card">
+        <div class="talk-card-title">The Feminist Gaze</div>
+        <div class="talk-card-desc">Using the master's tools outside masculine constructs — from radical non-linear filmmaking of the 1970s to the female gaze turned back on itself.</div>
+      </div>
+      <div class="talk-card">
+        <div class="talk-card-title">Art and the Environment</div>
+        <div class="talk-card-desc">French Impressionism, American conservation, and the landscape as subject — a conversation that persists.</div>
+      </div>
+      <div class="talk-card">
+        <div class="talk-card-title">How to Look at Anything</div>
+        <div class="talk-card-desc">An interactive method for standing in front of work that stops you cold — with better questions than "how does this make you feel?"</div>
+      </div>
+    </div>
+
+    <!-- What I Offer -->
+    <!-- SUNNIE SALONS — featured CTA -->
+    <div class="reveal" style="margin-bottom:48px;">
+      <div style="border:1px solid var(--marigold);padding:48px 52px;position:relative;background:rgba(245,200,66,0.03);">
+        <div style="position:absolute;top:-1px;left:0;right:0;height:3px;background:var(--marigold);"></div>
+        <p style="font-size:1rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--marigold);margin-bottom:16px;">Now Accepting</p>
+        <h3 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:var(--off-white);margin-bottom:20px;line-height:1.1;">Sunnie <em style="color:var(--marigold);font-style:italic;font-weight:400;">Salons</em></h3>
+        <p style="font-size:1.2rem;line-height:1.9;color:rgba(242,237,228,0.8);max-width:620px;margin-bottom:36px;">An invitation-only gathering around art, ideas, and conversation. Unforgettable by design. Get on the list and I'll be in touch when the next one is announced.</p>
+        <a href="contact.html" style="display:inline-block;border:1px solid var(--marigold);color:var(--marigold);font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem;padding:16px 40px;text-decoration:none;transition:background 0.3s,color 0.3s;" onmouseover="this.style.background='#f5c842';this.style.color='#0e0c0a'" onmouseout="this.style.background='transparent';this.style.color='#f5c842'">Get on the list. →</a>
+      </div>
+    </div>
+
+    <div class="subsection-header reveal">
+      <div class="subsection-label">What I Offer</div>
+      <h3 class="subsection-title">Available for <em>your room</em></h3>
+    </div>
+    <div class="offer-grid reveal">
+      <div class="offer-title">Gallery Opening Talks</div>
+      <div class="offer-desc">A bespoke talk for your opening — contextual, engaging, calibrated to your audience.</div>
+      <div class="offer-title">Museum &amp; Gallery Tours</div>
+      <div class="offer-desc">Guided tours that go beyond the wall label. I connect, contextualize, and make the work land.</div>
+      <div class="offer-title">Art Walks</div>
+      <div class="offer-desc">Bringing loads of experience from Paris, London, New York, Atlanta. On foot, in the room, fully present.</div>
+      <div class="offer-title">Corporate &amp; Institutional Programming</div>
+      <div class="offer-desc">Art talks and workshops for organizations that want their people to think differently.</div>
+    </div>
+
+    <div class="talks-cta reveal">
+      <a href="contact.html">Book a talk, a tour, or a salon. →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWS IN DEVELOPMENT -->
+<div class="burst-divider" style="background:var(--black);">
+  <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/></svg>
+</div>
+
+<section style="background:var(--black);" id="shows">
+  <div class="section-inner">
+    <div class="reveal" style="margin-bottom:40px;">
+      <div class="section-label">Currently Curating</div>
+      <h2 class="section-title">Shows <em>in development</em></h2>
+    </div>
+    <div class="shows-scroll-wrap reveal">
+      <div class="shows-scroll">
+        <!-- Return of Gaia -->
+        <div class="show-card">
+          <div class="show-card-content">
+            <div class="show-tag">Exhibition in Development</div>
+            <div class="show-title">Return of Gaia</div>
+            <div class="show-body">We have spent centuries extracting from the earth as though she were a resource rather than a relative. This exhibition asks: what comes after? Not collapse — return. Return of Gaia brings together works that imagine the earth not as victim or backdrop but as active, generative, sovereign force reclaiming her place. The works span painting, sculpture, textile, and land-based installation, united by a shared insistence that nature is not waiting for our permission to reassert herself. She is always creating herself.<br><br><em>Origin work: "Nice Try," Sunnie Anand, 2026</em></div>
+          </div>
+        </div>
+        <!-- Beyond Wear -->
+        <div class="show-card">
+          <div class="show-card-content">
+            <div class="show-tag">Exhibition in Development</div>
+            <div class="show-title">Beyond Wear</div>
+            <div class="show-body">Textile has always carried a double burden — it must be useful, and it must be beautiful. This exhibition refuses the first requirement entirely. Beyond Wear presents textile works that exist purely as art objects: no body is implied, no function intended, no wearability required. What remains when cloth is freed from the body?<br><br>Form, memory, labor, politics, and an almost unbearable intimacy of materials.</div>
+          </div>
+        </div>
+        <!-- The Creator Caste -->
+        <div class="show-card">
+          <div class="show-card-content">
+            <div class="show-tag">Exhibition in Development</div>
+            <div class="show-title">The Creator Caste</div>
+            <div class="show-body">In many South Asian communities, the script for women is written before they arrive: study hard, marry well, hold the family together, and if something creative stirs inside you — manage it quietly. If she's in the US, the imported virtue of ladder climbing adds yet another life step: become a high-paid professional (I see you, Pharmacist sisters.)<br><br>This exhibition does not ask Desi women to abandon their roles. Instead, it recognizes those who chose to add themSelves to the list. The Creator Caste features works by South Asian women of the diaspora who have claimed creative selfhood — not necessarily as their primary identity, but certainly as a legitimate one. In communities where making art as a hobby is already a small revolution, this exhibition honors every point on the spectrum of that claiming: the woman who paints on Sunday mornings, the one who left her career, the one who never stopped despite all the other loads she was carrying. The works span painting, textile, mixed media, and photography, united by a single insistence — claiming the Self is a valid and radical act of courage and autonomy.</div>
+          </div>
+        </div>
+      </div>
+      <p class="shows-scroll-hint">scroll to read all three ↓</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE STRIP: Every shred -->
+<div class="quote-strip reveal">
+  <p>"Every shred of art is deserving says my heart."</p>
+  <span>— Sunnie</span>
+</div>
+
+<!-- CURATED ENVIRONMENTS -->
+<section style="background:var(--black);" id="environments">
+  <div class="section-inner">
+    <div class="reveal" style="margin-bottom:40px;">
+      <div class="section-label">Curated Environments</div>
+      <h2 class="section-title">This is what happens when a <em>collector moves in</em></h2>
+    </div>
+    <div class="natural-gallery reveal">
+      <div class="natural-item" onclick="openLbNat(this)" data-title="The Collection" data-sub="500+ works · Rotating hang">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778439004/20220923_223226_crop_mvctvw.jpg" alt="Gallery wall">
+        <div class="natural-overlay"><div class="natural-info"><div class="natural-title">The Collection</div><div class="natural-sub">500+ works · Rotating hang</div></div></div>
+      </div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Astar" data-sub="Large-scale original · Evening light">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778439024/20250903_115405_1_1_jdshxp.jpg" alt="Astar">
+        <div class="natural-overlay"><div class="natural-info"><div class="natural-title">Astar</div><div class="natural-sub">Large-scale original</div></div></div>
+      </div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="New Space, Same Eye" data-sub="Los Angeles · California">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778439027/20250509_182623_1_yrg4wc.jpg" alt="Red border canvas">
+        <div class="natural-overlay"><div class="natural-info"><div class="natural-title">New Space, Same Eye</div><div class="natural-sub">Los Angeles</div></div></div>
+      </div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="The Bedroom" data-sub="Yellow · Plum · Lavender">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778439020/20250919_130416_1_amgskq.jpg" alt="Bedroom">
+        <div class="natural-overlay"><div class="natural-info"><div class="natural-title">The Bedroom</div><div class="natural-sub">Yellow · Plum · Lavender</div></div></div>
+      </div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="The Vignette" data-sub="Fashion meets space">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778439017/Screenshot_20251012_182549_Nextdoor2_gyrle0.jpg" alt="Pink chair">
+        <div class="natural-overlay"><div class="natural-info"><div class="natural-title">The Vignette</div><div class="natural-sub">Fashion meets space</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LMSB -->
+<div class="burst-divider" style="background:var(--black);">
+  <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/></svg>
+</div>
+<div class="lmsb-strip">
+  <a href="contact.html" class="lmsb-main">Let's make something <em>beautiful.</em></a>
+  <a href="contact.html" style="display:block;margin-top:20px;font-size:1rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--marigold);text-decoration:none;">reach out →</a>
+</div>
+<footer class="site-footer"><p class="footer-note">SunnieAnand.com · 2026 · Los Angeles</p></footer>
+
+<script>
+// LIGHTBOX
+const lbItems = [];
+let lbIdx = 0;
+function buildLbIndex() {
+  if(lbItems.length === 0) {
+    document.querySelectorAll('.portfolio-item[onclick], .monet-hero[onclick], .natural-item[onclick]').forEach(i => lbItems.push(i));
+  }
+}
+function openLb(el) { buildLbIndex(); lbIdx = lbItems.indexOf(el); showLb(el.querySelector('img').src, el.dataset.title||'', el.dataset.sub||''); }
+function openLbNat(el) { buildLbIndex(); lbIdx = lbItems.indexOf(el); showLb(el.querySelector('img').src, el.dataset.title||'', el.dataset.sub||''); }
+function showLb(src, title, sub) {
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-title').textContent = title;
+  document.getElementById('lb-sub').textContent = sub;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('cursor').style.opacity = '0';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+  document.getElementById('cursor').style.opacity = '1';
+}
+function navLb(dir) {
+  buildLbIndex();
+  if(!lbItems.length) return;
+  lbIdx = (lbIdx + dir + lbItems.length) % lbItems.length;
+  const el = lbItems[lbIdx];
+  showLb(el.querySelector('img').src, el.dataset.title||'', el.dataset.sub||'');
+}
+document.getElementById('lightbox').addEventListener('click', e => { if(e.target === document.getElementById('lightbox')) closeLightbox(); });
+document.addEventListener('keydown', e => {
+  if(e.key==='Escape') closeLightbox();
+  if(e.key==='ArrowRight') navLb(1);
+  if(e.key==='ArrowLeft') navLb(-1);
+});
+// Swipe support for mobile
+let swipeStartX = 0;
+document.getElementById('lightbox').addEventListener('touchstart', e => { swipeStartX = e.touches[0].clientX; }, {passive:true});
+document.getElementById('lightbox').addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - swipeStartX;
+  if(Math.abs(dx) > 50) navLb(dx < 0 ? 1 : -1);
+}, {passive:true});
+
+// IN-PAGE NAV HIGHLIGHT
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.page-nav a');
+const secObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) navLinks.forEach(a => a.classList.toggle('current', a.getAttribute('href') === '#' + e.target.id));
+  });
+}, { threshold:0.25 });
+sections.forEach(s => secObs.observe(s));
+
+// BACK TO TOP
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => backTop.classList.toggle('visible', window.scrollY > 400));
+
+// CURSOR
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,.portfolio-item,.monet-hero,.natural-item,.talk-card,.show-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(245,200,66,0.8)';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(245,200,66,0.5)';});
+});
+
+// REVEAL
+const revObs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      e.target.querySelectorAll('.portfolio-item,.talk-card,.natural-item').forEach((c,i)=>{c.style.transitionDelay=`${i*0.07}s`;});
+    }
+  });
+},{threshold:0.06});
+document.querySelectorAll('.reveal').forEach(el=>revObs.observe(el));
+
+// HAMBURGER MENU
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburgerBtn').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.mobile-menu a').forEach(a => {
+  a.addEventListener('click', closeMobileMenu);
+});
+</script>
+</body>
+</html>

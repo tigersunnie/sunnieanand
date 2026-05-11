@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sunnie Studio — Creative Works</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root { --black:#0e0c0a; --off-white:#f2ede4; --marigold:#f5c842; --gold:#c9a84c; --rose:#e8917f; --rose-deep:#8c4a3f; --ink:#1c1814; --mid:#6b6259; }
+html { scroll-behavior:smooth; }
+body { background:var(--black); color:var(--off-white); font-family:'Jost',sans-serif; font-weight:300; font-size:1.2rem; line-height:1.8; overflow-x:hidden; cursor:none; }
+.cursor { width:8px; height:8px; background:var(--marigold); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; mix-blend-mode:screen; }
+.cursor-ring { width:32px; height:32px; border:1px solid rgba(245,200,66,0.5); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9998; transition:transform 0.4s ease, width 0.3s, height 0.3s, border-color 0.3s; }
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:1000; opacity:0.5; }
+
+/* NAV */
+nav { display:flex; justify-content:space-between; align-items:center; padding:28px 60px; position:relative; z-index:20; }
+.nav-logo { font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:1.1rem; letter-spacing:0.08em; color:var(--off-white); text-decoration:none; transition:color 0.2s; }
+.nav-logo:hover { color:var(--marigold); }
+.nav-links { display:flex; gap:28px; list-style:none; flex-wrap:wrap; align-items:center; }
+.nav-links a { font-size:0.9rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,237,228,0.75); text-decoration:none; transition:color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color:var(--marigold); }
+
+/* PAGE HERO */
+.page-hero { padding:64px 60px 0; text-align:center; }
+.page-eyebrow { font-size:1rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--marigold); margin-bottom:16px; opacity:0; animation:fadeUp 0.8s 0.2s forwards; }
+.page-title { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,7vw,5rem); font-weight:900; color:var(--off-white); line-height:1; opacity:0; animation:fadeUp 0.8s 0.4s forwards; }
+.page-title em { color:var(--marigold); font-style:italic; font-weight:400; }
+.page-subtitle { font-size:1.2rem; color:rgba(242,237,228,0.6); margin-top:16px; opacity:0; animation:fadeUp 0.8s 0.6s forwards; }
+
+/* IN-PAGE ANCHOR NAV */
+.page-nav { display:flex; justify-content:center; gap:0; padding:32px 60px 0; opacity:0; animation:fadeUp 0.8s 0.7s forwards; flex-wrap:wrap; }
+.page-nav a { font-size:0.88rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(242,237,228,0.5); text-decoration:none; padding:10px 24px; border-bottom:1px solid rgba(245,200,66,0.15); transition:color 0.2s, border-color 0.2s; white-space:nowrap; }
+.page-nav a:hover, .page-nav a.current { color:var(--marigold); border-bottom-color:var(--marigold); }
+
+/* BURST */
+.burst-divider { width:100%; display:flex; align-items:center; justify-content:center; padding:20px 0; }
+
+/* SECTION */
+.section-inner { max-width:1200px; margin:0 auto; padding:80px 60px; }
+.section-label { font-size:1rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--marigold); margin-bottom:8px; }
+.section-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:700; line-height:1.1; color:var(--off-white); margin-bottom:16px; }
+.section-title em { font-style:italic; color:var(--marigold); font-weight:400; }
+.subsection-header { margin-top:80px; margin-bottom:40px; padding-bottom:20px; border-bottom:1px solid rgba(245,200,66,0.2); }
+.subsection-label { font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); margin-bottom:8px; }
+.subsection-title { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,2.5vw,2rem); font-weight:700; color:var(--off-white); }
+.subsection-title em { color:var(--marigold); font-weight:400; font-style:italic; }
+
+/* ARTIST STATEMENT */
+.statement-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; margin-bottom:80px; }
+.statement-portrait { overflow:hidden; aspect-ratio:3/4; }
+.statement-portrait img { width:100%; height:100%; object-fit:cover; object-position:center 20%; }
+.statement-text p { font-size:1.2rem; line-height:2; color:rgba(242,237,228,0.85); margin-bottom:1.4em; }
+.statement-text p:last-child { margin-bottom:0; }
+.statement-text strong { color:var(--off-white); font-weight:700; }
+.statement-avail { margin-top:32px; padding-top:24px; border-top:1px solid rgba(245,200,66,0.2); font-size:1.2rem; color:rgba(242,237,228,0.6); }
+.statement-avail a { color:var(--marigold); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.3); }
+
+/* INSTALL HERO */
+.install-hero { position:relative; overflow:hidden; width:100%; background:#000; cursor:pointer; }
+.install-hero img { width:100%; display:block; object-fit:contain; background:#000; max-height:70vh; }
+.install-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(14,12,10,0.9) 0%,transparent 55%); opacity:0; transition:opacity 0.4s; display:flex; flex-direction:column; justify-content:flex-end; padding:36px; }
+.install-hero:hover .install-overlay { opacity:1; }
+.install-title { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:700; color:var(--off-white); margin-bottom:6px; }
+.install-sub { font-size:1rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--marigold); }
+
+/* FUN FACTS */
+.facts-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; margin:4px 0; }
+.fact-tile { background:#141210; padding:28px 24px; border-left:2px solid rgba(245,200,66,0.2); transition:border-color 0.3s; }
+.fact-tile:hover { border-left-color:var(--marigold); }
+.fact-value { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,2.5vw,1.8rem); font-weight:900; color:var(--marigold); line-height:1.1; margin-bottom:10px; }
+.fact-label { font-size:1.1rem; color:rgba(242,237,228,0.65); line-height:1.5; }
+
+/* PORTFOLIO GRIDS */
+.portfolio-grid { display:grid; gap:4px; }
+.portfolio-grid.cols-4 { grid-template-columns:repeat(4,1fr); }
+.portfolio-item { position:relative; overflow:hidden; aspect-ratio:1; background:#0e0c0a; cursor:pointer; }
+.portfolio-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.6s; }
+.portfolio-item:hover img { transform:scale(1.04); }
+.portfolio-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(14,12,10,0.92) 0%,transparent 55%); opacity:0; transition:opacity 0.4s; display:flex; flex-direction:column; justify-content:flex-end; padding:20px; z-index:3; }
+.portfolio-item:hover .portfolio-overlay { opacity:1; }
+.overlay-title { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; color:var(--off-white); margin-bottom:3px; }
+.overlay-sub { font-size:0.95rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--marigold); }
+
+/* NATURAL GALLERY */
+.natural-gallery { columns:3; column-gap:4px; }
+.natural-item { break-inside:avoid; margin-bottom:4px; position:relative; overflow:hidden; background:#0e0c0a; cursor:pointer; }
+.natural-item img { width:100%; display:block; object-fit:contain; background:#0e0c0a; transition:transform 0.5s; }
+.natural-item.pink-map img { /* extra column span via JS */ }
+.natural-item:hover img { transform:scale(1.02); }
+.natural-overlay { position:absolute; inset:0; background:rgba(14,12,10,0); transition:background 0.4s; display:flex; align-items:flex-end; padding:20px; }
+.natural-item:hover .natural-overlay { background:rgba(14,12,10,0.85); }
+.natural-info { display:flex; flex-direction:column; }
+.natural-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; color:var(--off-white); opacity:0; transition:opacity 0.3s; }
+.natural-medium { font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--marigold); opacity:0; transition:opacity 0.3s; margin-top:4px; }
+.natural-item:hover .natural-title, .natural-item:hover .natural-medium { opacity:1; }
+
+/* PHILOSOPHY */
+.philosophy-section { background:var(--rose-deep); }
+.philosophy-inner { max-width:800px; margin:0 auto; padding:100px 60px; text-align:center; }
+.philosophy-quote { font-family:'Playfair Display',serif; font-size:clamp(1.6rem,3.5vw,2.8rem); font-weight:400; font-style:italic; line-height:1.4; color:var(--off-white); margin-bottom:24px; }
+.philosophy-attr { font-size:1rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(242,237,228,0.55); }
+.philosophy-attr a { color:rgba(242,237,228,0.55); text-decoration:none; border-bottom:1px solid rgba(242,237,228,0.25); }
+
+/* COMMISSION */
+.commission-cta { text-align:center; margin-top:80px; padding-top:48px; border-top:1px solid rgba(245,200,66,0.2); }
+.commission-cta p { font-size:1.2rem; color:rgba(242,237,228,0.7); margin-bottom:20px; }
+.commission-cta a { font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.3); padding-bottom:2px; }
+
+/* LIGHTBOX — mobile friendly */
+.lightbox { display:none; position:fixed; inset:0; background:rgba(14,12,10,0.97); z-index:9999; flex-direction:column; align-items:center; justify-content:center; padding:20px; cursor:auto; }
+.lightbox.active { display:flex; }
+.lightbox-img-wrap { width:100%; flex:1; display:flex; align-items:center; justify-content:center; min-height:0; }
+.lightbox-img-wrap img { max-width:100%; max-height:70vh; object-fit:contain; display:block; }
+.lightbox-info { padding:12px 20px 0; text-align:center; flex-shrink:0; }
+.lightbox-title { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--off-white); margin-bottom:4px; }
+.lightbox-sub { font-size:0.95rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--marigold); }
+.lightbox-close { position:absolute; top:12px; right:16px; font-size:2rem; color:var(--off-white); cursor:pointer; background:none; border:none; opacity:0.75; padding:8px; min-width:44px; min-height:44px; display:flex; align-items:center; justify-content:center; }
+.lightbox-nav-row { display:flex; gap:24px; justify-content:center; padding:16px 0 8px; flex-shrink:0; }
+.lightbox-nav { font-size:2rem; color:rgba(242,237,228,0.6); cursor:pointer; background:rgba(255,255,255,0.06); border:1px solid rgba(245,200,66,0.25); width:52px; height:52px; display:flex; align-items:center; justify-content:center; transition:color 0.2s, border-color 0.2s; }
+.lightbox-nav:hover { color:var(--marigold); border-color:var(--marigold); }
+
+/* LMSB */
+.lmsb-strip { background:var(--black); text-align:center; padding:100px 40px; }
+.lmsb-main { font-family:'Playfair Display',serif; font-size:clamp(2rem,5.6vw,4rem); font-weight:900; color:var(--off-white); text-decoration:none; display:block; line-height:1; transition:opacity 0.3s; }
+.lmsb-main em { color:var(--marigold); font-style:italic; font-weight:400; }
+.lmsb-main:hover { opacity:0.8; }
+.lmsb-sub { display:block; margin-top:20px; font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); text-decoration:none; }
+
+/* BACK TO TOP */
+.back-to-top { position:fixed; bottom:32px; right:32px; width:44px; height:44px; background:rgba(14,12,10,0.85); border:1px solid rgba(245,200,66,0.3); color:var(--marigold); font-size:1.2rem; display:flex; align-items:center; justify-content:center; text-decoration:none; opacity:0; transition:opacity 0.3s; z-index:500; }
+.back-to-top.visible { opacity:1; }
+.back-to-top:hover { border-color:var(--marigold); }
+
+.site-footer { background:var(--black); text-align:center; padding:32px 60px; border-top:1px solid rgba(245,200,66,0.08); }
+.footer-note { font-size:1rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--rose); }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+.reveal { opacity:0; transform:translateY(40px); transition:opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+@media(max-width:900px) {
+  nav { padding:20px 24px; } .nav-links { display:none; }
+  .section-inner { padding:60px 24px; }
+  .page-hero { padding:40px 24px 0; }
+  .page-nav { padding:20px 24px 0; }
+  .page-nav a { font-size:0.78rem; padding:8px 12px; }
+  .statement-grid { grid-template-columns:1fr; }
+  .facts-grid { grid-template-columns:1fr 1fr; }
+  .portfolio-grid.cols-4 { grid-template-columns:1fr 1fr; }
+  .natural-gallery { columns:2; }
+}
+@media(max-width:500px) { .natural-gallery { columns:1; } .facts-grid { grid-template-columns:1fr; } }
+
+/* HAMBURGER MENU */
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; z-index:200; background:none; border:none; position:relative; }
+.hamburger span { display:block; width:24px; height:2px; background:var(--off-white); transition:transform 0.3s, opacity 0.3s; }
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+.mobile-menu { display:none; position:fixed; inset:0; background:rgba(14,12,10,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:center; gap:0; }
+.mobile-menu.open { display:flex; }
+.mobile-menu a { font-family:'Playfair Display',serif; font-size:clamp(1.6rem,6vw,2.4rem); font-style:italic; font-weight:400; color:var(--off-white); text-decoration:none; padding:16px 40px; letter-spacing:0.04em; transition:color 0.2s; border-bottom:1px solid rgba(245,200,66,0.08); width:100%; text-align:center; }
+.mobile-menu a:last-child { border-bottom:none; }
+.mobile-menu a:hover, .mobile-menu a.active { color:var(--marigold); }
+.mobile-menu-close { position:absolute; top:24px; right:24px; font-size:2rem; color:var(--off-white); background:none; border:none; cursor:pointer; padding:8px; opacity:0.7; line-height:1; }
+.mobile-menu-close:hover { opacity:1; color:var(--marigold); }
+@media(max-width:900px) { .hamburger { display:flex; } }
+</style>
+</head>
+<body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+  <a href="index.html#about">About</a>
+  <a href="curation.html">Curation & Consult</a>
+  <a href="fashion.html">Fashion</a>
+  <a href="works.html" class="active">Creative Works</a>
+  <a href="pov.html">POV</a>
+  <a href="contact.html">Contact</a>
+</div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <div class="lightbox-img-wrap"><img id="lb-img" src="" alt=""></div>
+  <div class="lightbox-info">
+    <div class="lightbox-title" id="lb-title"></div>
+    <div class="lightbox-sub" id="lb-sub"></div>
+  </div>
+  <div class="lightbox-nav-row">
+    <button class="lightbox-nav" onclick="navLb(-1)">‹</button>
+    <button class="lightbox-nav" onclick="navLb(1)">›</button>
+  </div>
+</div>
+
+<a class="back-to-top" id="backTop" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Sunnie Anand</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="curation.html">Curation &amp; Consult</a></li>
+    <li><a href="fashion.html">Fashion</a></li>
+    <li><a href="works.html" class="active">Creative Works</a></li>
+    <li><a href="pov.html">POV</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <p class="page-eyebrow">Studio Sunnie</p>
+  <h1 class="page-title">The <em>Works</em></h1>
+  <p class="page-subtitle">This is a daily practice. The studio is always open.</p>
+</div>
+
+<!-- IN-PAGE NAV -->
+<div class="page-nav">
+  <a href="#installation">Installation</a>
+  <a href="#daily-practice">Daily Practice</a>
+  <a href="#collage">Feminist Collage</a>
+</div>
+
+<!-- BURST -->
+<div class="burst-divider" style="background:var(--black);">
+  <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="140" y1="16" x2="75" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="140" y1="16" x2="75" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="180" y1="16" x2="245" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="180" y1="16" x2="245" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/></svg>
+</div>
+
+<!-- ARTIST STATEMENT -->
+<section style="background:var(--black);">
+  <div class="section-inner">
+    <div class="statement-grid reveal">
+      <div class="statement-portrait">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355116/Screenshot_20250121_114852_Drive_oeyscb.jpg" alt="Sunnie in the studio">
+      </div>
+      <div class="statement-text">
+        <p>Every morning: <strong>make art first.</strong> This is non-negotiable — not just because discipline demands it but because as the world crumbles and a new one is born, making something by hand is how I stay connected to what <strong>endures</strong> — the truth that the future is not written, and that human hands still get to write it. The studio is where I am most myself: a Venusian enthusiast with very strong opinions about color.</p>
+        <p>I work across almost all <strong>traditional</strong> mediums — acrylic, watercolor, ink, collage, oil pastel — because each one opens a different door. Some days I need the bleeding of ink. Some days only a large canvas will do. The <strong>feminist</strong> collage work is its own world: <strong>vintage found images,</strong> radical reassembly, the female gaze turned back on itself. What I have is a daily practice, a body of work that keeps growing, and a deep belief that beauty is not decorative, it's essential.</p>
+        <p>I'm always making. The studio is open, the water is warm. Come on in.</p>
+        <div class="statement-avail">Commissions, originals and prints available. &nbsp;<a href="contact.html">Inquire →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTALLATION -->
+<section style="background:var(--black);" id="installation">
+  <div class="section-inner">
+    <div class="reveal" style="margin-bottom:32px;">
+      <div class="section-label">Featured Installation</div>
+      <h2 class="section-title">Taj Mahal · <em>2005</em></h2>
+    </div>
+    <div class="install-hero reveal" onclick="openLb(this)" data-title="Taj Mahal — Installed" data-sub="Acrylic · 74 canvases · 15ft × 30ft · 2005">
+      <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778436288/2005-10-29_20.07.50_finalcrop_rfyaut.jpg" alt="Taj Mahal installed">
+      <div class="install-overlay"><div class="install-title">Taj Mahal — Installed</div><div class="install-sub">Acrylic · 74 canvases · 15ft × 30ft · 2005</div></div>
+    </div>
+    <div class="facts-grid reveal">
+      <div class="fact-tile"><div class="fact-value">2005</div><div class="fact-label">Year completed</div></div>
+      <div class="fact-tile"><div class="fact-value">15ft × 30ft</div><div class="fact-label">Final installed dimensions</div></div>
+      <div class="fact-tile"><div class="fact-value">74</div><div class="fact-label">Individual canvases on 4 plywood panels</div></div>
+      <div class="fact-tile"><div class="fact-value">First</div><div class="fact-label">Scaled painting ever made — more engineering than painting by the end</div></div>
+      <div class="fact-tile"><div class="fact-value">3 + 30</div><div class="fact-label">Months to design · Days to paint</div></div>
+      <div class="fact-tile"><div class="fact-value">5 · 20ft · 1</div><div class="fact-label">Installers · Ladder · Piano hinge</div></div>
+    </div>
+    <div class="portfolio-grid cols-4 reveal" style="margin-top:4px;margin-bottom:64px;">
+      <div class="portfolio-item" onclick="openLb(this)" data-title="Before the Hang" data-sub="Folded · Ready"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354965/2005-10-29_18.58.07_qdkhxn.jpg" alt="Before hang"><div class="portfolio-overlay"><div class="overlay-title">Before the Hang</div><div class="overlay-sub">Folded · Ready</div></div></div>
+      <div class="portfolio-item" onclick="openLb(this)" data-title="On the Ladder" data-sub="Installation day"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778378353/CIMG0154_u9ugy8.jpg" alt="On ladder"><div class="portfolio-overlay"><div class="overlay-title">On the Ladder</div><div class="overlay-sub">Installation day</div></div></div>
+      <div class="portfolio-item" onclick="openLb(this)" data-title="Going Up" data-sub="2 stories · Many hands"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354969/2005-10-29_21.27.57_g1ug2a.jpg" alt="Going up"><div class="portfolio-overlay"><div class="overlay-title">Going Up</div><div class="overlay-sub">2 stories · Many hands</div></div></div>
+      <div class="portfolio-item" onclick="openLb(this)" data-title="Almost There" data-sub="Final placement"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354969/2005-10-29_21.29.09_fib2as.jpg" alt="Almost there"><div class="portfolio-overlay"><div class="overlay-title">Almost There</div><div class="overlay-sub">Final placement</div></div></div>
+    </div>
+    <!-- Ladder hero — natural height -->
+    <div class="reveal">
+      <div class="natural-item" onclick="openLbNat(this)" data-title="On the Ladder" data-medium="Large scale · Acrylic · Wall" style="max-height:90vh;overflow:hidden;">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355120/Screenshot_20260417_021205_Keep_Notes_m1fnas.jpg" alt="Sunnie on ladder" style="max-height:90vh;object-fit:contain;">
+        <div class="natural-overlay"><div class="natural-info"><div class="natural-title">On the Ladder</div><div class="natural-medium">Large scale · Acrylic · Wall</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY 1 -->
+<section class="philosophy-section">
+  <div class="philosophy-inner reveal">
+    <p class="philosophy-quote">"You can just... do that?"</p>
+    <p class="philosophy-attr"><a href="pov.html">On Adolph Gottlieb's Duet →</a></p>
+  </div>
+</section>
+
+<!-- DAILY PRACTICE -->
+<section style="background:var(--black);" id="daily-practice">
+  <div class="section-inner">
+    <div class="subsection-header reveal">
+      <div class="subsection-label">Daily Practice</div>
+      <h3 class="subsection-title">Paintings, ink, watercolor, <em>mixed media</em></h3>
+    </div>
+    <div class="natural-gallery reveal">
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Birdman" data-medium="Acrylic · Canvas"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355115/Screenshot_20250209_212759_WhatsAppBusiness_hiyej5.jpg" alt="Birdman"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Birdman</div><div class="natural-medium">Acrylic · Canvas</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Galaxy Girl" data-medium="Watercolor · Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355113/Screenshot_20221010_131537_qnhbs1.jpg" alt="Galaxy Girl"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Galaxy Girl</div><div class="natural-medium">Watercolor · Collage</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Joy" data-medium="Acrylic · 24×36"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440906/IMG_20240107_022432_305_kauvxp.jpg" alt="Joy"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Joy</div><div class="natural-medium">Acrylic · 24×36</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Acrylic · 24×36"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440909/IMG_20240826_112612_603_km8sfg.heic" alt="Untitled"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Acrylic · 24×36</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Duality" data-medium="Acrylic · Large Scale"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778360160/Screenshot_20260508_021604_Photos_crop_ml0dig.jpg" alt="Duality"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Duality</div><div class="natural-medium">Acrylic · Large Scale</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Kemet + Bharat" data-medium="Ink · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355116/20260422_233559_fcrzsu.jpg" alt="Kemet Bharat"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Kemet + Bharat</div><div class="natural-medium">Ink · Mixed Media</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Ink · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355117/Screenshot_20250430_124903_Instagram_x2mjjm.jpg" alt="Ink mixed"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Ink · Mixed Media</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Ink Orb" data-medium="Ink · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355125/Screenshot_20250430_124741_Instagram_dajfrn.jpg" alt="Ink Orb"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Ink Orb</div><div class="natural-medium">Ink · Paper</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Abstract Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441649/20230912_013119_2_rahege.jpg" alt="Abstract ink"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Abstract Ink</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Abstract Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440894/20231130_001404_yogqsk.jpg" alt="Abstract ink 2"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Abstract Ink</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Mandarins" data-medium="Ink · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440892/20231124_175403_chkmut.jpg" alt="Mandarins"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Mandarins</div><div class="natural-medium">Ink · Paper</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Cat" data-medium="Ink · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440897/20231130_094922_gyxdkr.jpg" alt="Cat"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Cat</div><div class="natural-medium">Ink · Paper</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Ink Flamingo" data-medium="Ink · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355104/20260327_171422_mij5en.jpg" alt="Flamingo"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Ink Flamingo</div><div class="natural-medium">Ink · Paper</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Mini Tiger" data-medium="Ink · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355111/IMG-20260408-WA0001_ghpqgw.jpg" alt="Mini Tiger"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Mini Tiger</div><div class="natural-medium">Ink · Paper</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Line Drawing" data-medium="Ink · Study"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355122/Screenshot_20260508_015018_Photos_emkr9e.jpg" alt="Line Drawing"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Line Drawing</div><div class="natural-medium">Ink · Study</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Abstract Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354973/20230225_161753_ftnuke.jpg" alt="Abstract ink 3"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Abstract Ink</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Abstract Watercolor and Ink" data-medium="Watercolor · Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440887/BlueWatercolor_z0sahp.jpg" alt="Watercolor"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Abstract Watercolor and Ink</div><div class="natural-medium">Watercolor · Ink</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Watercolor Pothos" data-medium="Watercolor · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355109/IMG_20231103_000947_433_weeolz.jpg" alt="Pothos"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Watercolor Pothos</div><div class="natural-medium">Watercolor</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Strawberries" data-medium="Watercolor · Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354989/20231107_075929_lvpxl4.jpg" alt="Strawberries"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Strawberries</div><div class="natural-medium">Watercolor · Ink</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Leopard" data-medium="Watercolor · Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355014/20250207_223114_eleelh.jpg" alt="Leopard"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Leopard</div><div class="natural-medium">Watercolor · Ink</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Green Ink Bleeding" data-medium="Ink · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355110/IMG_20231205_011118_749_rfd8ub.heic" alt="Green ink"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Green Ink Bleeding</div><div class="natural-medium">Ink · Paper</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Oil Pastel Abstract" data-medium="Oil Pastel"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440900/20231229_235040_idwi4h.jpg" alt="Oil pastel abstract"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Oil Pastel Abstract</div><div class="natural-medium">Oil Pastel</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Oil Pastel Garden" data-medium="Oil Pastel"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440902/IMG_20231231_022153_317_un6aqd.jpg" alt="Oil pastel garden"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Oil Pastel Garden</div><div class="natural-medium">Oil Pastel</div></div></div></div>
+      <!-- Pink Map — featured larger via 2-col span using a wrapper -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Pink Map" data-medium="Acrylic · Mixed Media · Canvas · 60×48in"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355125/Screenshot_20260508_021518_Photos_xgcn5c.jpg" alt="Pink Map"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Pink Map</div><div class="natural-medium">Acrylic · Mixed Media · Canvas · 60×48in</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Maps" data-medium="Painting · Caulk"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354998/20240923_021818_bx6baa.jpg" alt="Maps"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Maps</div><div class="natural-medium">Painting · Caulk</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Oil and Water" data-medium="Collage · Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441654/20231029_144125_2_kgg48d.jpg" alt="Oil and Water"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Oil and Water</div><div class="natural-medium">Collage · Ink</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Android" data-medium="Ink · Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441652/20231029_144059_2_squscr.jpg" alt="Android"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Android</div><div class="natural-medium">Ink · Collage</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Midas" data-medium="Collage · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355104/20260418_115849_1_ryhdk9.jpg" alt="Midas"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Midas</div><div class="natural-medium">Collage · Mixed Media</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Beauty" data-medium="Collage · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355106/20260401_160545_cmt0dx.jpg" alt="Beauty"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Beauty</div><div class="natural-medium">Collage · Mixed Media</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Play" data-medium="Collage · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440929/20260130_115106_tvv2nq.jpg" alt="Play"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Play</div><div class="natural-medium">Collage · Mixed Media</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Lion" data-medium="Collage · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440931/20260501_234250_hogvuc.jpg" alt="Lion"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Lion</div><div class="natural-medium">Collage · Mixed Media</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="For Palestine" data-medium="Collage · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355110/IMG_20231107_205026_891_rlm6dc.heic" alt="For Palestine"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">For Palestine</div><div class="natural-medium">Collage · Mixed Media</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Self Portrait" data-medium="Oil Pastel · Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440876/Screenshot_20230908_124804_Instagram_dpvpin.jpg" alt="Self Portrait"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Self Portrait</div><div class="natural-medium">Oil Pastel · Collage</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Cahiers in Paris" data-medium="Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354980/20230527_175049_e2mlk1.jpg" alt="Cahiers in Paris"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Cahiers in Paris</div><div class="natural-medium">Mixed Media</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Abstract Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440872/20220721_072522_gry6de.jpg" alt="Abstract ink"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Abstract Ink</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Painting · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355004/20241117_233358_kollnq.jpg" alt="Untitled painting"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Painting · Mixed Media</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY 2 -->
+<section class="philosophy-section">
+  <div class="philosophy-inner reveal">
+    <p class="philosophy-quote">"Art is Love. Love is All."</p>
+    <p class="philosophy-attr">— Sunnie</p>
+  </div>
+</section>
+
+<!-- FEMINIST COLLAGE -->
+<section style="background:var(--black);" id="collage">
+  <div class="section-inner">
+    <div class="subsection-header reveal">
+      <div class="subsection-label">Feminist Collage</div>
+      <h3 class="subsection-title">Found material · <em>radical assemblage</em></h3>
+    </div>
+    <!-- Tiger Woman wide feature -->
+    <div class="reveal" style="margin-bottom:4px;">
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Tiger Woman" data-medium="Collage · Found Image · Ink on Black">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355015/20250426_183901_rf2kgr.jpg" alt="Tiger Woman" style="max-height:70vh;object-fit:contain;">
+        <div class="natural-overlay"><div class="natural-info"><div class="natural-title">Tiger Woman</div><div class="natural-medium">Collage · Found Image · Ink on Black</div></div></div>
+      </div>
+    </div>
+    <div class="natural-gallery reveal">
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Emergence" data-medium="Butterfly · Found Image"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355004/20241117_233008_aiij0t.jpg" alt="Emergence"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Emergence</div><div class="natural-medium">Butterfly · Found Image</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="The Watcher" data-medium="Monocle · Gaze"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355105/20260409_184942_rt6flb.jpg" alt="The Watcher"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">The Watcher</div><div class="natural-medium">Monocle · Gaze</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Venus in the Jurassic" data-medium="Oracle Series"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355125/Screenshot_20260508_015155_Photos_mbksuu.jpg" alt="Venus Jurassic"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Venus in the Jurassic</div><div class="natural-medium">Oracle Series</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Rose Head" data-medium="Found Image · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355124/Screenshot_20260508_015146_Photos_hvxswl.jpg" alt="Rose Head"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Rose Head</div><div class="natural-medium">Found Image</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Ascendant" data-medium="Mixed Media · Watercolor"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355113/Screenshot_20230908_092854_Instagram_m0wudk.jpg" alt="Ascendant"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Ascendant</div><div class="natural-medium">Mixed Media · Watercolor</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Possession" data-medium="Collage · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354988/20231202_012928_bmhshp.jpg" alt="Possession"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Possession</div><div class="natural-medium">Collage · Mixed Media</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Witness" data-medium="Two Women · Doves"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355119/Screenshot_20260225_222101_Photos_xdwxxx.jpg" alt="Witness"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Witness</div><div class="natural-medium">Two Women · Doves</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Nice Try, 2026" data-medium="Origin work · Return of Gaia"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778381193/20260402_115414_itd63y.jpg" alt="Nice Try"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Nice Try, 2026</div><div class="natural-medium">Origin work · Return of Gaia</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Fragmentation" data-medium="Feminist Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440869/20220727_225805_olhm3i.jpg" alt="Fragmentation"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Fragmentation</div><div class="natural-medium">Feminist Collage</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Lost" data-medium="Feminist Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440879/20231008_181837_sdvbox.jpg" alt="Lost"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Lost</div><div class="natural-medium">Feminist Collage</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Warrior" data-medium="Feminist Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440889/IMG_20231119_175921_032_j456ww.jpg" alt="Warrior"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Warrior</div><div class="natural-medium">Feminist Collage</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Dance" data-medium="Feminist Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441824/20260506_121353_jtdzca.jpg" alt="Dance"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Dance</div><div class="natural-medium">Feminist Collage</div></div></div></div>
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Feminist Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355124/Screenshot_20260508_015124_Photos_urfhmj.jpg" alt="Feminist collage"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Feminist Collage</div></div></div></div>
+    </div>
+    <div class="commission-cta reveal">
+      <p>Commissions, originals and prints available.</p>
+      <a href="contact.html">Inquire →</a>
+    </div>
+  </div>
+</section>
+
+<!-- LMSB -->
+<div class="burst-divider" style="background:var(--black);">
+  <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/></svg>
+</div>
+<div class="lmsb-strip">
+  <a href="contact.html" class="lmsb-main">Let's make something <em>beautiful.</em></a>
+  <a href="contact.html" class="lmsb-sub">reach out →</a>
+</div>
+<footer class="site-footer"><p class="footer-note">SunnieAnand.com · 2026 · Los Angeles</p></footer>
+
+<script>
+// Build unified lightbox index from all clickable items
+const lbItems = [];
+let lbIdx = 0;
+function buildIdx() {
+  if(!lbItems.length) {
+    document.querySelectorAll('.portfolio-item[onclick], .install-hero[onclick], .natural-item[onclick]').forEach(i => lbItems.push(i));
+  }
+}
+function openLb(el) { buildIdx(); lbIdx=lbItems.indexOf(el); showLb(el.querySelector('img').src, el.dataset.title||'', el.dataset.sub||''); }
+function openLbNat(el) { buildIdx(); lbIdx=lbItems.indexOf(el); showLb(el.querySelector('img').src, el.dataset.title||'', el.dataset.medium||''); }
+function showLb(src, title, sub) {
+  document.getElementById('lb-img').src=src;
+  document.getElementById('lb-title').textContent=title;
+  document.getElementById('lb-sub').textContent=sub;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow='hidden';
+  document.getElementById('cursor').style.opacity='0';
+}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); document.body.style.overflow=''; document.getElementById('cursor').style.opacity='1'; }
+function navLb(dir) { buildIdx(); if(!lbItems.length) return; lbIdx=(lbIdx+dir+lbItems.length)%lbItems.length; const el=lbItems[lbIdx]; showLb(el.querySelector('img').src, el.dataset.title||'', el.dataset.sub||el.dataset.medium||''); }
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))closeLightbox();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e.key==='ArrowRight')navLb(1);if(e.key==='ArrowLeft')navLb(-1);});
+let swipeX=0;
+document.getElementById('lightbox').addEventListener('touchstart',e=>{swipeX=e.touches[0].clientX;},{passive:true});
+document.getElementById('lightbox').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-swipeX;if(Math.abs(dx)>50)navLb(dx<0?1:-1);},{passive:true});
+
+// IN-PAGE NAV HIGHLIGHT
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('.page-nav a');
+const secObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)navLinks.forEach(a=>a.classList.toggle('current',a.getAttribute('href')==='#'+e.target.id));});},{threshold:0.2});
+sections.forEach(s=>secObs.observe(s));
+
+// BACK TO TOP
+const backTop=document.getElementById('backTop');
+window.addEventListener('scroll',()=>backTop.classList.toggle('visible',window.scrollY>400));
+
+// CURSOR
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;});
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,.portfolio-item,.natural-item,.install-hero,.fact-tile').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(245,200,66,0.8)';});el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(245,200,66,0.5)';});});
+
+// REVEAL
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');e.target.querySelectorAll('.portfolio-item,.fact-tile,.natural-item').forEach((c,i)=>{c.style.transitionDelay=`${i*0.05}s`;});}});},{threshold:0.05});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// HAMBURGER MENU
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const btn = document.getElementById('hamburgerBtn');
+  menu.classList.toggle('open');
+  btn.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburgerBtn').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.mobile-menu a').forEach(a => {
+  a.addEventListener('click', closeMobileMenu);
+});
+</script>
+</body>
+</html>
