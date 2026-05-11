@@ -3,39 +3,83 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fashion &amp; Fabrics — Sunnie Anand</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Jost:ital,wght@0,200;0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
 :root { --black:#0e0c0a; --off-white:#f2ede4; --marigold:#f5c842; --gold:#c9a84c; --rose:#e8917f; --rose-deep:#8c4a3f; --ink:#1c1814; --mid:#6b6259; }
-html { scroll-behavior:smooth; }
+html { scroll-behavior:smooth; overflow-x:hidden; }
 body { background:var(--black); color:var(--off-white); font-family:'Jost',sans-serif; font-weight:300; font-size:1.2rem; line-height:1.8; overflow-x:hidden; cursor:none; }
 .cursor { width:8px; height:8px; background:var(--marigold); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; mix-blend-mode:screen; }
 .cursor-ring { width:32px; height:32px; border:1px solid rgba(245,200,66,0.5); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9998; transition:transform 0.4s ease, width 0.3s, height 0.3s, border-color 0.3s; }
 body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:1000; opacity:0.5; }
 
-nav { display:flex; justify-content:space-between; align-items:center; padding:28px 60px; position:relative; z-index:10; }
+/* NAV */
+nav { display:flex; justify-content:space-between; align-items:center; padding:28px 60px; position:relative; z-index:20; }
 .nav-logo { font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:1.1rem; letter-spacing:0.08em; color:var(--off-white); text-decoration:none; transition:color 0.2s; }
 .nav-logo:hover { color:var(--marigold); }
 .nav-links { display:flex; gap:28px; list-style:none; flex-wrap:wrap; align-items:center; }
 .nav-links a { font-size:0.9rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,237,228,0.75); text-decoration:none; transition:color 0.2s; }
 .nav-links a:hover, .nav-links a.active { color:var(--marigold); }
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; z-index:200; background:none; border:none; }
+.hamburger span { display:block; width:24px; height:2px; background:var(--off-white); transition:transform 0.3s, opacity 0.3s; }
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+.mobile-menu { display:none; position:fixed; inset:0; background:rgba(14,12,10,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:center; }
+.mobile-menu.open { display:flex; }
+.mobile-menu a { font-family:'Playfair Display',serif; font-size:clamp(1.6rem,6vw,2.4rem); font-style:italic; color:var(--off-white); text-decoration:none; padding:16px 40px; letter-spacing:0.04em; transition:color 0.2s; border-bottom:1px solid rgba(245,200,66,0.08); width:100%; text-align:center; }
+.mobile-menu a:last-child { border-bottom:none; }
+.mobile-menu a:hover, .mobile-menu a.active { color:var(--marigold); }
+.mobile-menu-close { position:absolute; top:24px; right:24px; font-size:2rem; color:var(--off-white); background:none; border:none; cursor:pointer; padding:8px; opacity:0.7; line-height:1; }
+@media(max-width:900px) { nav { padding:20px 24px; } .nav-links { display:none; } .hamburger { display:flex; } }
 
+/* PAGE HERO */
+.page-hero { padding:64px 60px 0; text-align:center; }
+.page-eyebrow { font-size:1rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--marigold); margin-bottom:16px; opacity:0; animation:fadeUp 0.8s 0.2s forwards; }
+.page-title { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,7vw,5rem); font-weight:900; color:var(--off-white); line-height:1; opacity:0; animation:fadeUp 0.8s 0.4s forwards; }
+.page-title em { color:var(--marigold); font-style:italic; font-weight:400; }
+.page-anchor-cta { margin-top:20px; opacity:0; animation:fadeUp 0.8s 0.6s forwards; }
+.page-anchor-cta a { font-family:'Playfair Display',serif; font-style:italic; font-size:1.1rem; color:rgba(242,237,228,0.6); text-decoration:none; border-bottom:1px solid rgba(242,237,228,0.2); padding-bottom:2px; transition:color 0.2s, border-color 0.2s; }
+.page-anchor-cta a:hover { color:var(--marigold); border-color:var(--marigold); }
+
+/* BURST */
+.burst-divider { width:100%; display:flex; align-items:center; justify-content:center; padding:20px 0; }
+
+/* SECTION */
 .section-inner { max-width:1200px; margin:0 auto; padding:80px 60px; }
 .subsection-header { margin-top:80px; margin-bottom:40px; padding-bottom:20px; border-bottom:1px solid rgba(245,200,66,0.2); }
 .subsection-label { font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); margin-bottom:8px; }
 .subsection-title { font-family:'Playfair Display',serif; font-size:clamp(1.5rem,2.5vw,2rem); font-weight:700; color:var(--off-white); }
 .subsection-title em { color:var(--marigold); font-weight:400; font-style:italic; }
 
-/* INTRO */
+/* INTRO GRID */
 .fashion-intro-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; margin-bottom:64px; }
 .fashion-portrait { overflow:hidden; aspect-ratio:3/4; }
 .fashion-portrait img { width:100%; height:100%; object-fit:cover; object-position:center top; }
 .fashion-text p { font-size:1.2rem; line-height:2; color:rgba(242,237,228,0.85); margin-bottom:1.4em; }
 .fashion-text p:last-child { margin-bottom:0; }
-.producer-line { font-family:'Playfair Display',serif; font-size:clamp(1.1rem,1.8vw,1.35rem); font-style:italic; color:var(--marigold); padding:24px 28px; border-left:3px solid var(--marigold); margin:28px 0; line-height:1.6; background:rgba(245,200,66,0.05); }
+
+/* PRODUCER CALLOUT — Jost italic */
+.producer-callout { background:#141210; border-top:2px solid var(--marigold); padding:32px 36px; margin:28px 0; }
+.producer-callout p { font-family:'Jost',sans-serif; font-style:italic; font-weight:300; font-size:1.25rem; line-height:1.9; color:rgba(242,237,228,0.92); }
+.producer-callout strong { color:var(--marigold); font-weight:700; font-style:italic; }
+
+/* SUSTAINABILITY */
 .sustainability-line { font-size:1.2rem; line-height:2; color:rgba(242,237,228,0.85); margin-top:8px; }
-.sustainability-line a { color:var(--marigold); text-decoration:none; font-size:1.2rem; margin-left:8px; transition:opacity 0.2s; }
+.sustainability-line a { color:var(--marigold); text-decoration:none; margin-left:8px; transition:opacity 0.2s; }
 .sustainability-line a:hover { opacity:0.7; }
+
+/* WORK WITH ME */
+.offer-section { background:#0a0907; border-top:1px solid rgba(245,200,66,0.15); border-bottom:1px solid rgba(245,200,66,0.15); padding:64px 60px; }
+.offer-inner { max-width:1200px; margin:0 auto; }
+.offer-intro { font-size:1.2rem; line-height:1.9; color:rgba(242,237,228,0.75); max-width:700px; margin-bottom:48px; }
+.offer-list { display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid rgba(245,200,66,0.15); }
+.offer-title { font-family:'Playfair Display',serif; font-size:1.2rem; font-style:italic; color:var(--marigold); padding:20px 40px 20px 0; border-bottom:1px solid rgba(245,200,66,0.1); }
+.offer-desc { font-size:1.1rem; color:rgba(242,237,228,0.7); padding:20px 0; border-bottom:1px solid rgba(245,200,66,0.1); line-height:1.6; }
+.offer-cta { margin-top:48px; }
+.offer-cta a { font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.3); padding-bottom:3px; transition:opacity 0.2s; }
+.offer-cta a:hover { opacity:0.7; }
+@media(max-width:900px) { .offer-list { grid-template-columns:1fr; } .offer-section { padding:48px 24px; } }
 
 /* PORTFOLIO */
 .portfolio-grid { display:grid; gap:3px; }
@@ -51,22 +95,18 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .overlay-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; color:var(--off-white); margin-bottom:4px; }
 .overlay-sub { font-size:1rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--marigold); }
 
-/* LIGHTBOX — mobile friendly */
-.lightbox { display:none; position:fixed; inset:0; background:rgba(14,12,10,0.97); z-index:9999; flex-direction:column; align-items:center; justify-content:center; padding:20px; cursor:auto; }
+/* LIGHTBOX */
+.lightbox { display:none; position:fixed; inset:0; background:rgba(14,12,10,0.97); z-index:9999; flex-direction:column; align-items:center; justify-content:center; padding:20px; }
 .lightbox.active { display:flex; }
 .lightbox-img-wrap { width:100%; flex:1; display:flex; align-items:center; justify-content:center; min-height:0; }
 .lightbox-img-wrap img { max-width:100%; max-height:70vh; object-fit:contain; display:block; }
 .lightbox-info { padding:12px 20px 0; text-align:center; flex-shrink:0; }
 .lightbox-title { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--off-white); margin-bottom:4px; }
 .lightbox-sub { font-size:0.95rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--marigold); }
-.lightbox-close { position:absolute; top:12px; right:16px; font-size:2rem; color:var(--off-white); cursor:pointer; background:none; border:none; opacity:0.75; line-height:1; padding:8px; min-width:44px; min-height:44px; display:flex; align-items:center; justify-content:center; }
-.lightbox-close:hover { opacity:1; }
+.lightbox-close { position:absolute; top:12px; right:16px; font-size:2rem; color:var(--off-white); cursor:pointer; background:none; border:none; opacity:0.75; padding:8px; min-width:44px; min-height:44px; display:flex; align-items:center; justify-content:center; }
 .lightbox-nav-row { display:flex; gap:24px; justify-content:center; padding:16px 0 8px; flex-shrink:0; }
 .lightbox-nav { font-size:2rem; color:rgba(242,237,228,0.6); cursor:pointer; background:rgba(255,255,255,0.06); border:1px solid rgba(245,200,66,0.25); width:52px; height:52px; display:flex; align-items:center; justify-content:center; transition:color 0.2s, border-color 0.2s; }
 .lightbox-nav:hover { color:var(--marigold); border-color:var(--marigold); }
-
-/* BURST */
-.burst-divider { width:100%; display:flex; align-items:center; justify-content:center; padding:20px 0; }
 
 /* LMSB */
 .lmsb-strip { background:var(--black); text-align:center; padding:100px 40px; }
@@ -76,10 +116,9 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .lmsb-sub { display:block; margin-top:20px; font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); text-decoration:none; }
 
 /* BACK TO TOP */
-.back-to-top { position:fixed; bottom:32px; right:32px; width:44px; height:44px; background:rgba(14,12,10,0.85); border:1px solid rgba(245,200,66,0.3); color:var(--marigold); font-size:1.2rem; display:flex; align-items:center; justify-content:center; text-decoration:none; opacity:0; transition:opacity 0.3s, border-color 0.2s; z-index:500; }
+.back-to-top { position:fixed; bottom:32px; right:32px; width:44px; height:44px; background:rgba(14,12,10,0.85); border:1px solid rgba(245,200,66,0.3); color:var(--marigold); font-size:1.2rem; display:flex; align-items:center; justify-content:center; text-decoration:none; opacity:0; transition:opacity 0.3s; z-index:500; }
 .back-to-top.visible { opacity:1; }
 .back-to-top:hover { border-color:var(--marigold); }
-
 .site-footer { background:var(--black); text-align:center; padding:32px 60px; border-top:1px solid rgba(245,200,66,0.08); }
 .footer-note { font-size:1rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--rose); }
 
@@ -88,41 +127,15 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .reveal.visible { opacity:1; transform:translateY(0); }
 
 @media(max-width:900px) {
-  nav { padding:20px 24px; } .nav-links { display:none; }
   .section-inner { padding:60px 24px; }
+  .page-hero { padding:40px 24px 0; }
   .fashion-intro-grid { grid-template-columns:1fr; }
   .portfolio-grid.cols-3 { grid-template-columns:1fr 1fr; }
   .portfolio-item.double-tall { grid-row:span 1; aspect-ratio:3/4; }
 }
-
-/* HAMBURGER MENU */
-.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; z-index:200; background:none; border:none; position:relative; }
-.hamburger span { display:block; width:24px; height:2px; background:var(--off-white); transition:transform 0.3s, opacity 0.3s; }
-.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity:0; }
-.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-.mobile-menu { display:none; position:fixed; inset:0; background:rgba(14,12,10,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:center; gap:0; }
-.mobile-menu.open { display:flex; }
-.mobile-menu a { font-family:'Playfair Display',serif; font-size:clamp(1.6rem,6vw,2.4rem); font-style:italic; font-weight:400; color:var(--off-white); text-decoration:none; padding:16px 40px; letter-spacing:0.04em; transition:color 0.2s; border-bottom:1px solid rgba(245,200,66,0.08); width:100%; text-align:center; }
-.mobile-menu a:last-child { border-bottom:none; }
-.mobile-menu a:hover, .mobile-menu a.active { color:var(--marigold); }
-.mobile-menu-close { position:absolute; top:24px; right:24px; font-size:2rem; color:var(--off-white); background:none; border:none; cursor:pointer; padding:8px; opacity:0.7; line-height:1; }
-.mobile-menu-close:hover { opacity:1; color:var(--marigold); }
-@media(max-width:900px) { .hamburger { display:flex; } }
 </style>
 </head>
 <body>
-
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
-  <a href="index.html#about">About</a>
-  <a href="curation.html">Curation & Consult</a>
-  <a href="fashion.html" class="active">Fashion</a>
-  <a href="works.html">Creative Works</a>
-  <a href="pov.html">POV</a>
-  <a href="contact.html">Contact</a>
-</div>
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
@@ -140,6 +153,17 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
   </div>
 </div>
 
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+  <a href="index.html#about">About</a>
+  <a href="curation.html">Curation &amp; Consult</a>
+  <a href="fashion.html" class="active">Fashion</a>
+  <a href="works.html">Creative Works</a>
+  <a href="pov.html">POV</a>
+  <a href="contact.html">Contact</a>
+</div>
+
 <a class="back-to-top" id="backTop" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
 
 <nav>
@@ -152,33 +176,77 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
     <li><a href="pov.html">POV</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<div style="background:var(--black);padding:80px 60px 0;text-align:center;">
-  <p style="font-size:1rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--marigold);margin-bottom:20px;opacity:0;animation:fadeUp 0.8s 0.2s forwards;">Fashion &amp; Fabrics</p>
-  <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.5rem,7vw,5rem);font-weight:900;color:var(--off-white);line-height:1;opacity:0;animation:fadeUp 0.8s 0.4s forwards;">Let's slow it <em style="color:var(--marigold);font-weight:400;">down</em></h1>
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <p class="page-eyebrow">Fashion &amp; Fabrics</p>
+  <h1 class="page-title">Let's slow it <em>down</em></h1>
+  <div class="page-anchor-cta">
+    <a href="#offer">Work with me →</a>
+  </div>
+</div>
+
+<!-- BURST -->
+<div class="burst-divider" style="background:var(--black);">
+  <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="140" y1="16" x2="75" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="140" y1="16" x2="75" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="180" y1="16" x2="245" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="180" y1="16" x2="245" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/></svg>
 </div>
 
 <section style="background:var(--black);">
   <div class="section-inner">
-
-    <!-- INTRO: text left, portrait right -->
     <div class="fashion-intro-grid reveal">
       <div class="fashion-text">
-        <p>In fashion, I sew, I construct, I rework. I work as a tailor, wardrobe and character designer, and a stylist with repeat clients. I've sold over $20k in personal styling, worked boutiques, film sets, and private consults — and I have a talent for the thrift that borders on the supernatural. What can I say? The pieces just find me.</p>
-        <p>I've taken friends on styling and thrifting trips across Paris, Italy, Mexico, London, and beyond, always with hauls that border on the unforgettable.</p>
-        <div style="background:#141210;border-top:2px solid var(--marigold);padding:28px 32px;margin:28px 0;">
-          <p style="font-family:'Playfair Display',serif;font-size:clamp(1.1rem,1.8vw,1.3rem);font-weight:400;font-style:normal;color:var(--off-white);line-height:1.8;">If the right producer is reading this, hear me out on a series with serious potential: eight episodes streaming, four continents, and <strong style="color:var(--marigold);">Me</strong>, going thrifting. I take the viewer with me into the sophisticated showrooms, the occasional Goodwill, the vintage markets of Paris and Mexico City — all while my fashion fairies whisper in my ear and lead me straight to the good finds. It could be absolutely <strong style="color:var(--marigold);">fabulous</strong>. Call me. 😉</p>
+        <p>In fashion, I sew, I construct, I pattern-make, I source, and I style. I am a former corporate operator who knows how to build systems, solve logistics problems, and see the big picture — which means I can dress you and help you run the back end of your label. I've sold over $20k in styling, worked boutiques, film sets, and private consults — and I have a talent for the thrift that borders on the supernatural. What can I say? The pieces just find me.</p>
+        <p>I've taken friends thrifting across Paris, Italy, Mexico, and London — always with hauls that border on the unforgettable.</p>
+
+        <!-- PRODUCER CALLOUT — Jost italic -->
+        <div class="producer-callout">
+          <p>To the right producer reading this, my secret is <strong>fashion fairies</strong>. They whisper in my ear and lead me straight to the good finds in every market. My private list of the world's best thrift stores spans multiple continents and is, frankly, a gold mine. Hear me out on this hit show concept: eight episodes, four continents, and <strong>Me</strong>, going thrifting — with a brief, a budget, and a client — through the sophisticated showrooms, the vintage markets of Paris and Mexico City, the occasional Goodwill. It could be absolutely <strong>fabulous</strong>. Call me. 😉</p>
         </div>
+
         <p class="sustainability-line">We are the only species that creates waste it cannot absorb back into itself. Let's stop acting like sick people and start Being the Creators we are and build a better world. Join me.<a href="contact.html">→</a></p>
       </div>
       <div class="fashion-portrait">
         <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355122/Screenshot_20260508_015001_Photos_wzaki3.jpg" alt="Sunnie in the sewing studio">
       </div>
     </div>
+  </div>
+</section>
 
-    <!-- QUILTED JACKET -->
+<!-- WORK WITH ME -->
+<section class="offer-section" id="offer">
+  <div class="offer-inner">
+    <div class="reveal" style="margin-bottom:40px;">
+      <div style="font-size:1rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--marigold);margin-bottom:12px;">Work With Me</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:var(--off-white);line-height:1.2;">Let's source it, sew it, style it <em style="color:var(--marigold);font-style:italic;font-weight:400;">sustainably</em></h2>
+    </div>
+    <p class="offer-intro reveal">I'm available across the full spectrum of fashion work — from garment construction and vintage sourcing to production logistics and beyond. Whether you're a label, a designer, a film production, or someone who needs the right eye and the right hands in the room — and yes, personal styling, merchandising, and staging too. Let's talk.</p>
+    <div class="offer-list reveal">
+      <div class="offer-title">Pattern Making &amp; Garment Construction</div>
+      <div class="offer-desc">Bespoke construction from concept to finished garment — tailoring, reworking, and slow fashion builds.</div>
+      <div class="offer-title">Material Sourcing &amp; Procurement</div>
+      <div class="offer-desc">Strong believer in deadstock and secondhand materials — sustainable sourcing without sacrificing quality or vision.</div>
+      <div class="offer-title">Thrifting &amp; Vintage Sourcing</div>
+      <div class="offer-desc">Local and international thrift sourcing with a curated private list spanning multiple continents. A genuine gold mine.</div>
+      <div class="offer-title">Production Logistics &amp; Operations</div>
+      <div class="offer-desc">Former corporate operator available for fashion house support — systems building, operations, and big-picture problem solving.</div>
+      <div class="offer-title">Character &amp; Costume Design</div>
+      <div class="offer-desc">Film, TV, and theatre costume design and character-driven wardrobe for productions of any scale.</div>
+      <div class="offer-title">Personal Styling, Merchandising &amp; Staging</div>
+      <div class="offer-desc">Styling consults, wardrobe builds, visual merchandising, and staging for clients and brands who want to look exactly right.</div>
+    </div>
+    <div class="offer-cta reveal">
+      <a href="contact.html">Let's talk about what you need. →</a>
+    </div>
+  </div>
+</section>
+
+<!-- QUILTED JACKET -->
+<section style="background:var(--black);">
+  <div class="section-inner">
     <div class="subsection-header reveal">
       <div class="subsection-label">Case Study · Slow Fashion</div>
       <h3 class="subsection-title">An $8 Goodwill find, <em>transformed</em></h3>
@@ -187,7 +255,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 
     <div class="portfolio-grid cols-3 reveal" style="margin-bottom:3px;">
       <div class="portfolio-item double-tall" onclick="openLb(this)" data-title="Finished" data-sub="$8 Goodwill · Fully Reconstructed">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355107/file_000000008a1871fbac0c0d75baa0532d_aqd51r.png" alt="Quilted jacket finished">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355107/file_000000008a1871fbac0c0d75baa0532d_aqd51r.png" alt="Finished jacket">
         <div class="portfolio-overlay"><div class="overlay-title">Finished</div><div class="overlay-sub">$8 Goodwill · Fully Reconstructed</div></div>
       </div>
       <div class="portfolio-item" onclick="openLb(this)" data-title="Sourced" data-sub="Vintage Fabric · $8">
@@ -199,7 +267,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
         <div class="portfolio-overlay"><div class="overlay-title">In Progress</div><div class="overlay-sub">Cutting · Fitting</div></div>
       </div>
       <div class="portfolio-item" onclick="openLb(this)" data-title="Hand-Painted Buttons" data-sub="Detail work · Custom">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355088/20260123_010346_vphs6e.jpg" alt="Hand-Painted Buttons">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355088/20260123_010346_vphs6e.jpg" alt="Buttons">
         <div class="portfolio-overlay"><div class="overlay-title">Hand-Painted Buttons</div><div class="overlay-sub">Detail work · Custom</div></div>
       </div>
       <div class="portfolio-item" onclick="openLb(this)" data-title="Complete" data-sub="From thrift to treasure">
@@ -228,11 +296,11 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
         <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778379990/file_0000000061fc71f58fc8967f07ae519a_ift8nw.png" alt="Blazer">
         <div class="portfolio-overlay"><div class="overlay-title">Blazer</div><div class="overlay-sub">Self-Constructed · Tailored</div></div>
       </div>
-      <div class="portfolio-item tall" onclick="openLb(this)" data-title="Galaxy Two-Piece" data-sub="Iridescent Brocade · Constructed">
+      <div class="portfolio-item tall" onclick="openLb(this)" data-title="Galaxy Two-Piece" data-sub="Iridescent Brocade">
         <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355109/file_00000000a5b071fb97414db3468e1a6a_pc0je3.png" alt="Galaxy Two-Piece">
         <div class="portfolio-overlay"><div class="overlay-title">Galaxy Two-Piece</div><div class="overlay-sub">Iridescent Brocade</div></div>
       </div>
-      <div class="portfolio-item tall" onclick="openLb(this)" data-title="Pink Tulle Dress" data-sub="Brocade · Tulle · Constructed">
+      <div class="portfolio-item tall" onclick="openLb(this)" data-title="Pink Tulle Dress" data-sub="Brocade · Tulle">
         <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355109/file_00000000c5dc71fbb29d7fec49853e6c_a1tnv5.png" alt="Pink Tulle Dress">
         <div class="portfolio-overlay"><div class="overlay-title">Pink Tulle Dress</div><div class="overlay-sub">Brocade · Tulle</div></div>
       </div>
@@ -242,7 +310,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
         <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355237/20250718_101821_mcsnza.jpg" alt="Houndstooth">
         <div class="portfolio-overlay"><div class="overlay-title">Houndstooth</div><div class="overlay-sub">Pattern · Process</div></div>
       </div>
-      <div class="portfolio-item" onclick="openLb(this)" data-title="At the Juki" data-sub="Industrial Machine · Focus">
+      <div class="portfolio-item" onclick="openLb(this)" data-title="At the Juki" data-sub="Industrial Machine">
         <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355025/20250505_182406_whmf7c.jpg" alt="At the Juki">
         <div class="portfolio-overlay"><div class="overlay-title">At the Juki</div><div class="overlay-sub">Industrial Machine</div></div>
       </div>
@@ -258,14 +326,15 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
         <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355033/20250709_183558_rdaazt.jpg" alt="In the Studio">
         <div class="portfolio-overlay"><div class="overlay-title">In the Studio</div><div class="overlay-sub">Tweed Vest · Worn</div></div>
       </div>
-      <div class="portfolio-item" onclick="openLb(this)" data-title="Quilted Jacket" data-sub="$8 · Transformed · Worn">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778395843/20250719_163542_1_viba3o.jpg" alt="Quilted Jacket worn">
-        <div class="portfolio-overlay"><div class="overlay-title">Quilted Jacket</div><div class="overlay-sub">$8 · Transformed · Worn</div></div>
+      <div class="portfolio-item" onclick="openLb(this)" data-title="Plaid Kimono Top · Construction" data-sub="Upcycled · Reworked">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778395843/20250719_163542_1_viba3o.jpg" alt="Plaid Kimono Top">
+        <div class="portfolio-overlay"><div class="overlay-title">Plaid Kimono Top · Construction</div><div class="overlay-sub">Upcycled · Reworked</div></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- LMSB -->
 <div class="burst-divider" style="background:var(--black);">
   <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/></svg>
 </div>
@@ -276,53 +345,30 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 <footer class="site-footer"><p class="footer-note">SunnieAnand.com · 2026 · Los Angeles</p></footer>
 
 <script>
-const lbItems = [];
-let lbIdx = 0;
-function buildIdx() { if(!lbItems.length) document.querySelectorAll('.portfolio-item[onclick]').forEach(i=>lbItems.push(i)); }
-function openLb(el) { buildIdx(); lbIdx=lbItems.indexOf(el); showLb(el.querySelector('img').src, el.dataset.title||'', el.dataset.sub||''); }
-function showLb(src,title,sub) {
-  document.getElementById('lb-img').src=src;
-  document.getElementById('lb-title').textContent=title;
-  document.getElementById('lb-sub').textContent=sub;
-  document.getElementById('lightbox').classList.add('active');
-  document.body.style.overflow='hidden';
-  document.getElementById('cursor').style.opacity='0';
-}
-function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); document.body.style.overflow=''; document.getElementById('cursor').style.opacity='1'; }
-function navLb(dir) { buildIdx(); if(!lbItems.length) return; lbIdx=(lbIdx+dir+lbItems.length)%lbItems.length; const el=lbItems[lbIdx]; showLb(el.querySelector('img').src,el.dataset.title||'',el.dataset.sub||''); }
+const lbItems=[];let lbIdx=0;
+function buildIdx(){if(!lbItems.length)document.querySelectorAll('.portfolio-item[onclick]').forEach(i=>lbItems.push(i));}
+function openLb(el){buildIdx();lbIdx=lbItems.indexOf(el);showLb(el.querySelector('img').src,el.dataset.title||'',el.dataset.sub||'');}
+function showLb(src,title,sub){document.getElementById('lb-img').src=src;document.getElementById('lb-title').textContent=title;document.getElementById('lb-sub').textContent=sub;document.getElementById('lightbox').classList.add('active');document.body.style.overflow='hidden';document.getElementById('cursor').style.opacity='0';}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('active');document.body.style.overflow='';document.getElementById('cursor').style.opacity='1';}
+function navLb(dir){buildIdx();lbIdx=(lbIdx+dir+lbItems.length)%lbItems.length;const el=lbItems[lbIdx];showLb(el.querySelector('img').src,el.dataset.title||'',el.dataset.sub||'');}
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))closeLightbox();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e.key==='ArrowRight')navLb(1);if(e.key==='ArrowLeft')navLb(-1);});
 let swipeX=0;
 document.getElementById('lightbox').addEventListener('touchstart',e=>{swipeX=e.touches[0].clientX;},{passive:true});
 document.getElementById('lightbox').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-swipeX;if(Math.abs(dx)>50)navLb(dx<0?1:-1);},{passive:true});
-
+function toggleMobileMenu(){const menu=document.getElementById('mobileMenu'),btn=document.getElementById('hamburgerBtn');menu.classList.toggle('open');btn.classList.toggle('open');document.body.style.overflow=menu.classList.contains('open')?'hidden':'';}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburgerBtn').classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',closeMobileMenu));
+const backTop=document.getElementById('backTop');
+window.addEventListener('scroll',()=>backTop.classList.toggle('visible',window.scrollY>400));
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;});
 function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;requestAnimationFrame(animRing);}
 animRing();
 document.querySelectorAll('a,.portfolio-item').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(245,200,66,0.8)';});el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(245,200,66,0.5)';});});
-const backTop=document.getElementById('backTop');
-window.addEventListener('scroll',()=>backTop.classList.toggle('visible',window.scrollY>400));
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');e.target.querySelectorAll('.portfolio-item').forEach((c,i)=>{c.style.transitionDelay=`${i*0.07}s`;});}});},{threshold:0.06});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-// HAMBURGER MENU
-function toggleMobileMenu() {
-  const menu = document.getElementById('mobileMenu');
-  const btn = document.getElementById('hamburgerBtn');
-  menu.classList.toggle('open');
-  btn.classList.toggle('open');
-  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
-}
-function closeMobileMenu() {
-  document.getElementById('mobileMenu').classList.remove('open');
-  document.getElementById('hamburgerBtn').classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.querySelectorAll('.mobile-menu a').forEach(a => {
-  a.addEventListener('click', closeMobileMenu);
-});
 </script>
 </body>
 </html>
