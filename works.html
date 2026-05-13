@@ -26,7 +26,6 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .page-eyebrow { font-size:1rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--marigold); margin-bottom:16px; opacity:0; animation:fadeUp 0.8s 0.2s forwards; }
 .page-title { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,7vw,5rem); font-weight:900; color:var(--off-white); line-height:1; opacity:0; animation:fadeUp 0.8s 0.4s forwards; }
 .page-title em { color:var(--marigold); font-style:italic; font-weight:400; }
-.page-subtitle { font-size:1.2rem; color:rgba(242,237,228,0.6); margin-top:16px; opacity:0; animation:fadeUp 0.8s 0.6s forwards; }
 
 /* IN-PAGE ANCHOR NAV */
 .page-nav { display:flex; justify-content:center; gap:0; padding:32px 60px 0; opacity:0; animation:fadeUp 0.8s 0.7s forwards; flex-wrap:wrap; }
@@ -46,6 +45,10 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .subsection-title { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,2.5vw,2rem); font-weight:700; color:var(--off-white); }
 .subsection-title em { color:var(--marigold); font-weight:400; font-style:italic; }
 
+/* CURATORIAL NOTE */
+.curatorial-note { max-width:780px; margin:0 auto 0; padding:64px 60px 0; }
+.curatorial-note p { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(1.2rem,2.2vw,1.5rem); line-height:1.75; color:rgba(242,237,228,0.9); }
+
 /* ARTIST STATEMENT */
 .statement-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; margin-bottom:80px; }
 .statement-portrait { overflow:hidden; aspect-ratio:3/4; }
@@ -53,7 +56,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .statement-text p { font-size:1.2rem; line-height:2; color:rgba(242,237,228,0.85); margin-bottom:1.4em; }
 .statement-text p:last-child { margin-bottom:0; }
 .statement-text strong { color:var(--off-white); font-weight:700; }
-.statement-avail { margin-top:32px; padding-top:24px; border-top:1px solid rgba(245,200,66,0.2); font-size:1.2rem; color:rgba(242,237,228,0.6); }
+.statement-avail { margin-top:32px; padding-top:24px; border-top:1px solid rgba(245,200,66,0.2); font-size:1.1rem; color:rgba(242,237,228,0.6); }
 .statement-avail a { color:var(--marigold); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.3); }
 
 /* INSTALL HERO */
@@ -71,6 +74,17 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .fact-value { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,2.5vw,1.8rem); font-weight:900; color:var(--marigold); line-height:1.1; margin-bottom:10px; }
 .fact-label { font-size:1.1rem; color:rgba(242,237,228,0.65); line-height:1.5; }
 
+/* CURATED GRID — 4 col square cards with 3-line hover */
+.curated-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; }
+.curated-item { position:relative; overflow:hidden; aspect-ratio:1; background:#0e0c0a; cursor:pointer; }
+.curated-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.6s; }
+.curated-item:hover img { transform:scale(1.04); }
+.curated-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(14,12,10,0.95) 0%,transparent 60%); opacity:0; transition:opacity 0.4s; display:flex; flex-direction:column; justify-content:flex-end; padding:18px; z-index:3; }
+.curated-item:hover .curated-overlay { opacity:1; }
+.curated-title { font-family:'Playfair Display',serif; font-size:1rem; font-style:italic; color:var(--off-white); margin-bottom:3px; }
+.curated-details { font-size:0.82rem; letter-spacing:0.08em; color:var(--marigold); margin-bottom:4px; font-weight:300; }
+.curated-avail { font-size:0.8rem; color:var(--mid); font-weight:300; }
+
 /* PORTFOLIO GRIDS */
 .portfolio-grid { display:grid; gap:4px; }
 .portfolio-grid.cols-4 { grid-template-columns:repeat(4,1fr); }
@@ -86,14 +100,22 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .natural-gallery { columns:3; column-gap:4px; }
 .natural-item { break-inside:avoid; margin-bottom:4px; position:relative; overflow:hidden; background:#0e0c0a; cursor:pointer; }
 .natural-item img { width:100%; display:block; object-fit:contain; background:#0e0c0a; transition:transform 0.5s; }
-.natural-item.pink-map img { /* extra column span via JS */ }
 .natural-item:hover img { transform:scale(1.02); }
 .natural-overlay { position:absolute; inset:0; background:rgba(14,12,10,0); transition:background 0.4s; display:flex; align-items:flex-end; padding:20px; }
 .natural-item:hover .natural-overlay { background:rgba(14,12,10,0.85); }
 .natural-info { display:flex; flex-direction:column; }
 .natural-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; color:var(--off-white); opacity:0; transition:opacity 0.3s; }
-.natural-medium { font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--marigold); opacity:0; transition:opacity 0.3s; margin-top:4px; }
-.natural-item:hover .natural-title, .natural-item:hover .natural-medium { opacity:1; }
+.natural-details { font-size:0.82rem; color:var(--marigold); opacity:0; transition:opacity 0.3s; margin-top:3px; font-weight:300; }
+.natural-avail { font-size:0.8rem; color:var(--mid); opacity:0; transition:opacity 0.3s; margin-top:2px; font-weight:300; }
+.natural-item:hover .natural-title,
+.natural-item:hover .natural-details,
+.natural-item:hover .natural-avail { opacity:1; }
+
+/* DEEP DIVE CTA */
+.deep-dive-cta { text-align:center; padding:60px 0 20px; }
+.deep-dive-cta p { font-size:1.1rem; color:rgba(242,237,228,0.6); margin-bottom:16px; }
+.deep-dive-cta a { font-family:'Playfair Display',serif; font-style:italic; font-size:1.3rem; color:var(--marigold); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.3); padding-bottom:2px; transition:border-color 0.2s; }
+.deep-dive-cta a:hover { border-color:var(--marigold); }
 
 /* PHILOSOPHY */
 .philosophy-section { background:var(--rose-deep); }
@@ -107,7 +129,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .commission-cta p { font-size:1.2rem; color:rgba(242,237,228,0.7); margin-bottom:20px; }
 .commission-cta a { font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.3); padding-bottom:2px; }
 
-/* LIGHTBOX — mobile friendly */
+/* LIGHTBOX */
 .lightbox { display:none; position:fixed; inset:0; background:rgba(14,12,10,0.97); z-index:9999; flex-direction:column; align-items:center; justify-content:center; padding:20px; cursor:auto; }
 .lightbox.active { display:flex; }
 .lightbox-img-wrap { width:100%; flex:1; display:flex; align-items:center; justify-content:center; min-height:0; }
@@ -145,12 +167,14 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
   .page-hero { padding:40px 24px 0; }
   .page-nav { padding:20px 24px 0; }
   .page-nav a { font-size:0.78rem; padding:8px 12px; }
+  .curatorial-note { padding:40px 24px 0; }
   .statement-grid { grid-template-columns:1fr; }
   .facts-grid { grid-template-columns:1fr 1fr; }
+  .curated-grid { grid-template-columns:1fr 1fr; }
   .portfolio-grid.cols-4 { grid-template-columns:1fr 1fr; }
   .natural-gallery { columns:2; }
 }
-@media(max-width:500px) { .natural-gallery { columns:1; } .facts-grid { grid-template-columns:1fr; } }
+@media(max-width:500px) { .natural-gallery { columns:1; } .facts-grid { grid-template-columns:1fr; } .curated-grid { grid-template-columns:1fr 1fr; } }
 
 /* HAMBURGER MENU */
 .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; z-index:200; background:none; border:none; position:relative; }
@@ -174,7 +198,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 <div class="mobile-menu" id="mobileMenu">
   <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
   <a href="index.html#about">About</a>
-  <a href="curation.html">Curation & Consult</a>
+  <a href="curation.html">Curation &amp; Consult</a>
   <a href="fashion.html">Fashion</a>
   <a href="works.html" class="active">Creative Works</a>
   <a href="pov.html">POV</a>
@@ -217,7 +241,6 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 <div class="page-hero">
   <p class="page-eyebrow">Studio Sunnie</p>
   <h1 class="page-title">The <em>Works</em></h1>
-  <p class="page-subtitle">This is a daily practice. The studio is always open.</p>
 </div>
 
 <!-- IN-PAGE NAV -->
@@ -225,11 +248,17 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
   <a href="#installation">Installation</a>
   <a href="#daily-practice">Daily Practice</a>
   <a href="#collage">Feminist Collage</a>
+  <a href="dive.html">Deep Dive</a>
 </div>
 
 <!-- BURST -->
 <div class="burst-divider" style="background:var(--black);">
   <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="140" y1="16" x2="75" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="140" y1="16" x2="75" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="180" y1="16" x2="245" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="180" y1="16" x2="245" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/></svg>
+</div>
+
+<!-- CURATORIAL NOTE -->
+<div class="curatorial-note reveal">
+  <p>"I am a Venusian enthusiast with very strong opinions about color. What you're about to see is the result of showing up every morning, across every medium, for years. Something in here was made for you."</p>
 </div>
 
 <!-- ARTIST STATEMENT -->
@@ -243,7 +272,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
         <p>Every morning: <strong>make art first.</strong> This is non-negotiable — not just because discipline demands it but because as the world crumbles and a new one is born, making something by hand is how I stay connected to what <strong>endures</strong> — the truth that the future is not written, and that human hands still get to write it. The studio is where I am most myself: a Venusian enthusiast with very strong opinions about color.</p>
         <p>I work across almost all <strong>traditional</strong> mediums — acrylic, watercolor, ink, collage, oil pastel — because each one opens a different door. Some days I need the bleeding of ink. Some days only a large canvas will do. The <strong>feminist</strong> collage work is its own world: <strong>vintage found images,</strong> radical reassembly, the female gaze turned back on itself. What I have is a daily practice, a body of work that keeps growing, and a deep belief that beauty is not decorative, it's essential.</p>
         <p>I'm always making. The studio is open, the water is warm. Come on in.</p>
-        <div class="statement-avail">Commissions, originals and prints available. &nbsp;<a href="contact.html">Inquire →</a></div>
+        <div class="statement-avail">Prints from $45 · Originals from $250 · Commissions available. &nbsp;<a href="contact.html">Inquire →</a></div>
       </div>
     </div>
   </div>
@@ -258,7 +287,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
     </div>
     <div class="install-hero reveal" onclick="openLb(this)" data-title="Taj Mahal — Installed" data-sub="Acrylic · 74 canvases · 15ft × 30ft · 2005">
       <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778436288/2005-10-29_20.07.50_finalcrop_rfyaut.jpg" alt="Taj Mahal installed">
-      <div class="install-overlay"><div class="install-title">Taj Mahal — Installed</div><div class="install-sub">Acrylic · 74 canvases · 15ft × 30ft · 2005</div></div>
+      <div class="install-overlay"><div class="install-title">Taj Mahal — Installed</div><div class="install-sub">Acrylic · 74 canvases · 15ft × 30ft · Private commission</div></div>
     </div>
     <div class="facts-grid reveal">
       <div class="fact-tile"><div class="fact-value">2005</div><div class="fact-label">Year completed</div></div>
@@ -284,71 +313,201 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
     <p class="philosophy-attr"><a href="pov.html">On Adolph Gottlieb's Duet →</a></p>
   </div>
 </section>
-<!-- Ladder hero — natural height -->
-    <div class="reveal">
-      <div class="natural-item" onclick="openLbNat(this)" data-title="On the Ladder" data-medium="Large scale · Acrylic · Wall" style="max-height:90vh;overflow:hidden;">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355120/Screenshot_20260417_021205_Keep_Notes_m1fnas.jpg" alt="Sunnie on ladder" style="max-height:90vh;object-fit:contain;">
-        <div class="natural-overlay"><div class="natural-info"><div class="natural-title">On the Ladder</div><div class="natural-medium">Large scale · Acrylic · Wall</div></div></div>
-      </div>
-    </div>
 
-<!-- BEHEMOTH TEXT -->
-<div id="daily-practice" style="background:var(--black);padding:48px 60px 0;">
-  <div style="max-width:900px;margin:0 auto;" class="reveal">
-    <div style="border:1px solid var(--marigold);padding:36px 40px;position:relative;background:rgba(245,200,66,0.04);">
-      <div style="position:absolute;top:-1px;left:0;right:0;height:3px;background:var(--marigold);"></div>
-      <p style="font-family:'Jost',sans-serif;font-style:italic;font-weight:300;font-size:1.25rem;color:rgba(242,237,228,0.92);line-height:1.9;">Consider yourself warned: this is a <strong style="color:var(--marigold);font-style:italic;">behemoth</strong> of a portfolio. Over 60 pieces and growing across traditional media — painting, ink, watercolor, collage, and oil pastel. Because when you make art every single morning, it adds up. Take your time. Something in here was made for you. Originals, prints, and commissions available. <a href="#daily-practice-gallery" style="color:var(--marigold);text-decoration:none;border-bottom:1px solid rgba(245,200,66,0.3);">Dive in →</a></p>
-    </div>
+<!-- LADDER HERO -->
+<div class="reveal">
+  <div class="natural-item" onclick="openLbNat(this)" data-title="On the Ladder" data-medium="Large scale · Acrylic · Wall" style="max-height:90vh;overflow:hidden;">
+    <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355120/Screenshot_20260417_021205_Keep_Notes_m1fnas.jpg" alt="Sunnie on ladder" style="max-height:90vh;object-fit:contain;">
+    <div class="natural-overlay"><div class="natural-info"><div class="natural-title">On the Ladder</div><div class="natural-details">Large scale · Acrylic · Wall</div></div></div>
   </div>
 </div>
 
-<!-- DAILY PRACTICE -->
-<section style="background:var(--black);">
+<!-- DAILY PRACTICE — COLLECTOR'S SELECTION -->
+<section style="background:var(--black);" id="daily-practice">
   <div class="section-inner">
     <div class="subsection-header reveal">
       <div class="subsection-label">Daily Practice</div>
-      <h3 class="subsection-title">Paintings, ink, watercolor, <em>mixed media</em></h3>
+      <h3 class="subsection-title">Collector's <em>Selection</em></h3>
     </div>
-    <div id="daily-practice-gallery"></div>
-    <div class="natural-gallery reveal">
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Birdman" data-medium="Acrylic · Canvas"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355115/Screenshot_20250209_212759_WhatsAppBusiness_hiyej5.jpg" alt="Birdman"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Birdman</div><div class="natural-medium">Acrylic · Canvas</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Galaxy Girl" data-medium="Watercolor · Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355113/Screenshot_20221010_131537_qnhbs1.jpg" alt="Galaxy Girl"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Galaxy Girl</div><div class="natural-medium">Watercolor · Collage</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Joy" data-medium="Acrylic · 24×36"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440906/IMG_20240107_022432_305_kauvxp.jpg" alt="Joy"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Joy</div><div class="natural-medium">Acrylic · 24×36</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Acrylic · 24×36"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440909/IMG_20240826_112612_603_km8sfg.heic" alt="Untitled"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Acrylic · 24×36</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Duality" data-medium="Acrylic · Large Scale"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778360160/Screenshot_20260508_021604_Photos_crop_ml0dig.jpg" alt="Duality"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Duality</div><div class="natural-medium">Acrylic · Large Scale</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Kemet + Bharat" data-medium="Ink · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355116/20260422_233559_fcrzsu.jpg" alt="Kemet Bharat"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Kemet + Bharat</div><div class="natural-medium">Ink · Mixed Media</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Ink · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355117/Screenshot_20250430_124903_Instagram_x2mjjm.jpg" alt="Ink mixed"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Ink · Mixed Media</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Ink Orb" data-medium="Ink · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355125/Screenshot_20250430_124741_Instagram_dajfrn.jpg" alt="Ink Orb"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Ink Orb</div><div class="natural-medium">Ink · Paper</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Abstract Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441649/20230912_013119_2_rahege.jpg" alt="Abstract ink"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Abstract Ink</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Abstract Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440894/20231130_001404_yogqsk.jpg" alt="Abstract ink 2"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Abstract Ink</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Mandarins" data-medium="Ink · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440892/20231124_175403_chkmut.jpg" alt="Mandarins"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Mandarins</div><div class="natural-medium">Ink · Paper</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Cat" data-medium="Ink · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440897/20231130_094922_gyxdkr.jpg" alt="Cat"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Cat</div><div class="natural-medium">Ink · Paper</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Ink Flamingo" data-medium="Ink · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355104/20260327_171422_mij5en.jpg" alt="Flamingo"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Ink Flamingo</div><div class="natural-medium">Ink · Paper</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Mini Tiger" data-medium="Ink · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355111/IMG-20260408-WA0001_ghpqgw.jpg" alt="Mini Tiger"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Mini Tiger</div><div class="natural-medium">Ink · Paper</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Line Drawing" data-medium="Ink · Study"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355122/Screenshot_20260508_015018_Photos_emkr9e.jpg" alt="Line Drawing"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Line Drawing</div><div class="natural-medium">Ink · Study</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Abstract Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354973/20230225_161753_ftnuke.jpg" alt="Abstract ink 3"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Abstract Ink</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Abstract Watercolor and Ink" data-medium="Watercolor · Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440887/BlueWatercolor_z0sahp.jpg" alt="Watercolor"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Abstract Watercolor and Ink</div><div class="natural-medium">Watercolor · Ink</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Watercolor Pothos" data-medium="Watercolor · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355109/IMG_20231103_000947_433_weeolz.jpg" alt="Pothos"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Watercolor Pothos</div><div class="natural-medium">Watercolor</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Strawberries" data-medium="Watercolor · Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354989/20231107_075929_lvpxl4.jpg" alt="Strawberries"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Strawberries</div><div class="natural-medium">Watercolor · Ink</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Leopard" data-medium="Watercolor · Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355014/20250207_223114_eleelh.jpg" alt="Leopard"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Leopard</div><div class="natural-medium">Watercolor · Ink</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Green Ink Bleeding" data-medium="Ink · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355110/IMG_20231205_011118_749_rfd8ub.heic" alt="Green ink"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Green Ink Bleeding</div><div class="natural-medium">Ink · Paper</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Oil Pastel Abstract" data-medium="Oil Pastel"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440900/20231229_235040_idwi4h.jpg" alt="Oil pastel abstract"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Oil Pastel Abstract</div><div class="natural-medium">Oil Pastel</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Oil Pastel Garden" data-medium="Oil Pastel"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440902/IMG_20231231_022153_317_un6aqd.jpg" alt="Oil pastel garden"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Oil Pastel Garden</div><div class="natural-medium">Oil Pastel</div></div></div></div>
-      <!-- Pink Map — featured larger via 2-col span using a wrapper -->
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Pink Map" data-medium="Acrylic · Mixed Media · Canvas · 60×48in"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355125/Screenshot_20260508_021518_Photos_xgcn5c.jpg" alt="Pink Map"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Pink Map</div><div class="natural-medium">Acrylic · Mixed Media · Canvas · 60×48in</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Maps" data-medium="Painting · Caulk"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354998/20240923_021818_bx6baa.jpg" alt="Maps"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Maps</div><div class="natural-medium">Painting · Caulk</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Oil and Water" data-medium="Collage · Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441654/20231029_144125_2_kgg48d.jpg" alt="Oil and Water"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Oil and Water</div><div class="natural-medium">Collage · Ink</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Android" data-medium="Ink · Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441652/20231029_144059_2_squscr.jpg" alt="Android"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Android</div><div class="natural-medium">Ink · Collage</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Midas" data-medium="Collage · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355104/20260418_115849_1_ryhdk9.jpg" alt="Midas"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Midas</div><div class="natural-medium">Collage · Mixed Media</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Beauty" data-medium="Collage · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355106/20260401_160545_cmt0dx.jpg" alt="Beauty"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Beauty</div><div class="natural-medium">Collage · Mixed Media</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Play" data-medium="Collage · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440929/20260130_115106_tvv2nq.jpg" alt="Play"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Play</div><div class="natural-medium">Collage · Mixed Media</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Lion" data-medium="Collage · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440931/20260501_234250_hogvuc.jpg" alt="Lion"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Lion</div><div class="natural-medium">Collage · Mixed Media</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="For Palestine" data-medium="Collage · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355110/IMG_20231107_205026_891_rlm6dc.heic" alt="For Palestine"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">For Palestine</div><div class="natural-medium">Collage · Mixed Media</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Self Portrait" data-medium="Oil Pastel · Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440876/Screenshot_20230908_124804_Instagram_dpvpin.jpg" alt="Self Portrait"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Self Portrait</div><div class="natural-medium">Oil Pastel · Collage</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Cahiers in Paris" data-medium="Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354980/20230527_175049_e2mlk1.jpg" alt="Cahiers in Paris"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Cahiers in Paris</div><div class="natural-medium">Mixed Media</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Abstract Ink"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440872/20220721_072522_gry6de.jpg" alt="Abstract ink"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Abstract Ink</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Painting · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355004/20241117_233358_kollnq.jpg" alt="Untitled painting"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Painting · Mixed Media</div></div></div></div>
+
+    <div class="curated-grid reveal">
+
+      <!-- #2 Birdman -->
+      <div class="curated-item" onclick="openCurated(this)"
+        data-title="Birdman"
+        data-details="2024 · Acrylic · 24×36in"
+        data-avail="Prints available"
+        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355115/Screenshot_20250209_212759_WhatsAppBusiness_hiyej5.jpg">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778355115/Screenshot_20250209_212759_WhatsAppBusiness_hiyej5.jpg" alt="Birdman">
+        <div class="curated-overlay">
+          <div class="curated-title">Birdman</div>
+          <div class="curated-details">2024 · Acrylic · 24×36in</div>
+          <div class="curated-avail">Prints available</div>
+        </div>
+      </div>
+
+      <!-- #3 Galaxy Girl -->
+      <div class="curated-item" onclick="openCurated(this)"
+        data-title="Galaxy Girl"
+        data-details="2022 · Mixed media, watercolor + collage · 9×11in"
+        data-avail="Prints available"
+        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355113/Screenshot_20221010_131537_qnhbs1.jpg">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778355113/Screenshot_20221010_131537_qnhbs1.jpg" alt="Galaxy Girl">
+        <div class="curated-overlay">
+          <div class="curated-title">Galaxy Girl</div>
+          <div class="curated-details">2022 · Mixed media, watercolor + collage · 9×11in</div>
+          <div class="curated-avail">Prints available</div>
+        </div>
+      </div>
+
+      <!-- #5 Halo -->
+      <div class="curated-item" onclick="openCurated(this)"
+        data-title="Halo"
+        data-details="2024 · Acrylic · 18×24in"
+        data-avail="Available"
+        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440909/IMG_20240826_112612_603_km8sfg.heic">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778440909/IMG_20240826_112612_603_km8sfg.heic" alt="Halo">
+        <div class="curated-overlay">
+          <div class="curated-title">Halo</div>
+          <div class="curated-details">2024 · Acrylic · 18×24in</div>
+          <div class="curated-avail">Available</div>
+        </div>
+      </div>
+
+      <!-- #9 Ink Orb -->
+      <div class="curated-item" onclick="openCurated(this)"
+        data-title="Ink Orb"
+        data-details="2024 · Watercolor, ink, gold furniture paint, collage · 9×12in"
+        data-avail="Prints available"
+        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355125/Screenshot_20250430_124741_Instagram_dajfrn.jpg">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778355125/Screenshot_20250430_124741_Instagram_dajfrn.jpg" alt="Ink Orb">
+        <div class="curated-overlay">
+          <div class="curated-title">Ink Orb</div>
+          <div class="curated-details">2024 · Watercolor, ink, gold furniture paint, collage · 9×12in</div>
+          <div class="curated-avail">Prints available</div>
+        </div>
+      </div>
+
+      <!-- #10 Rootball -->
+      <div class="curated-item" onclick="openCurated(this)"
+        data-title="Rootball"
+        data-details="2021 · Pen and ink · 11×14in"
+        data-avail="Prints available"
+        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441649/20230912_013119_2_rahege.jpg">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778441649/20230912_013119_2_rahege.jpg" alt="Rootball">
+        <div class="curated-overlay">
+          <div class="curated-title">Rootball</div>
+          <div class="curated-details">2021 · Pen and ink · 11×14in</div>
+          <div class="curated-avail">Prints available</div>
+        </div>
+      </div>
+
+      <!-- #15 Mini Tiger -->
+      <div class="curated-item" onclick="openCurated(this)"
+        data-title="Mini Tiger"
+        data-details="2023 · Ink, gold furniture paint, collage · 5×7in"
+        data-avail="Prints available"
+        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355111/IMG-20260408-WA0001_ghpqgw.jpg">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778355111/IMG-20260408-WA0001_ghpqgw.jpg" alt="Mini Tiger">
+        <div class="curated-overlay">
+          <div class="curated-title">Mini Tiger</div>
+          <div class="curated-details">2023 · Ink, gold furniture paint, collage · 5×7in</div>
+          <div class="curated-avail">Prints available</div>
+        </div>
+      </div>
+
+      <!-- #19 Watercolor Pothos -->
+      <div class="curated-item" onclick="openCurated(this)"
+        data-title="Watercolor Pothos"
+        data-details="2019 · Watercolor and ink · 4×6in"
+        data-avail="Prints available"
+        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355109/IMG_20231103_000947_433_weeolz.jpg">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778355109/IMG_20231103_000947_433_weeolz.jpg" alt="Watercolor Pothos">
+        <div class="curated-overlay">
+          <div class="curated-title">Watercolor Pothos</div>
+          <div class="curated-details">2019 · Watercolor and ink · 4×6in</div>
+          <div class="curated-avail">Prints available</div>
+        </div>
+      </div>
+
+      <!-- #24 Oil Pastel Garden -->
+      <div class="curated-item" onclick="openCurated(this)"
+        data-title="Oil Pastel Garden"
+        data-details="2024 · Oil pastel · 8.5×11in"
+        data-avail="Available"
+        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440902/IMG_20231231_022153_317_un6aqd.jpg">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778440902/IMG_20231231_022153_317_un6aqd.jpg" alt="Oil Pastel Garden">
+        <div class="curated-overlay">
+          <div class="curated-title">Oil Pastel Garden</div>
+          <div class="curated-details">2024 · Oil pastel · 8.5×11in</div>
+          <div class="curated-avail">Available</div>
+        </div>
+      </div>
+
+      <!-- #25 7th Dimension (Map) -->
+      <div class="curated-item" onclick="openCurated(this)"
+        data-title="7th Dimension (Map)"
+        data-details="2025 · Acrylic paint, house paint, caulk · 60×48in"
+        data-avail="NFS"
+        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355125/Screenshot_20260508_021518_Photos_xgcn5c.jpg">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778355125/Screenshot_20260508_021518_Photos_xgcn5c.jpg" alt="7th Dimension Map">
+        <div class="curated-overlay">
+          <div class="curated-title">7th Dimension (Map)</div>
+          <div class="curated-details">2025 · Acrylic paint, house paint, caulk · 60×48in</div>
+          <div class="curated-avail">NFS</div>
+        </div>
+      </div>
+
+      <!-- #27 Oil and Water -->
+      <div class="curated-item" onclick="openCurated(this)"
+        data-title="Oil and Water"
+        data-details="2020 · Collage and ink · 6×9in"
+        data-avail="Prints available"
+        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441654/20231029_144125_2_kgg48d.jpg">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778441654/20231029_144125_2_kgg48d.jpg" alt="Oil and Water">
+        <div class="curated-overlay">
+          <div class="curated-title">Oil and Water</div>
+          <div class="curated-details">2020 · Collage and ink · 6×9in</div>
+          <div class="curated-avail">Prints available</div>
+        </div>
+      </div>
+
+      <!-- #36 Stones -->
+      <div class="curated-item" onclick="openCurated(this)"
+        data-title="Stones"
+        data-details="2023 · Ink · 9×11in"
+        data-avail="Prints available"
+        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440872/20220721_072522_gry6de.jpg">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778440872/20220721_072522_gry6de.jpg" alt="Stones">
+        <div class="curated-overlay">
+          <div class="curated-title">Stones</div>
+          <div class="curated-details">2023 · Ink · 9×11in</div>
+          <div class="curated-avail">Prints available</div>
+        </div>
+      </div>
+
+      <!-- Aster -->
+      <div class="curated-item" onclick="openCurated(this)"
+        data-title="Aster"
+        data-details="2024 · Acrylic and house paint · 60×48in"
+        data-avail="Available"
+        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778565984/Screenshot_20221225_231848_Gallery_1_b6sdcq.jpg">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778565984/Screenshot_20221225_231848_Gallery_1_b6sdcq.jpg" alt="Aster">
+        <div class="curated-overlay">
+          <div class="curated-title">Aster</div>
+          <div class="curated-details">2024 · Acrylic and house paint · 60×48in</div>
+          <div class="curated-avail">Available</div>
+        </div>
+      </div>
+
+    </div><!-- end curated-grid -->
+
+    <!-- DEEP DIVE CTA -->
+    <div class="deep-dive-cta reveal">
+      <p>Hungry for more?</p>
+      <a href="dive.html">Deep Dive here →</a>
     </div>
+
   </div>
 </section>
 
@@ -367,28 +526,190 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
       <div class="subsection-label">Feminist Collage</div>
       <h3 class="subsection-title">Found material · <em>radical assemblage</em></h3>
     </div>
-    <!-- Tiger Woman wide feature -->
-    <div class="reveal" style="margin-bottom:4px;">
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Tiger Woman" data-medium="Collage · Found Image · Ink on Black">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355015/20250426_183901_rf2kgr.jpg" alt="Tiger Woman" style="max-height:70vh;object-fit:contain;">
-        <div class="natural-overlay"><div class="natural-info"><div class="natural-title">Tiger Woman</div><div class="natural-medium">Collage · Found Image · Ink on Black</div></div></div>
-      </div>
-    </div>
     <div class="natural-gallery reveal">
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Emergence" data-medium="Butterfly · Found Image"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355004/20241117_233008_aiij0t.jpg" alt="Emergence"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Emergence</div><div class="natural-medium">Butterfly · Found Image</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="The Watcher" data-medium="Monocle · Gaze"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355105/20260409_184942_rt6flb.jpg" alt="The Watcher"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">The Watcher</div><div class="natural-medium">Monocle · Gaze</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Venus in the Jurassic" data-medium="Oracle Series"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355125/Screenshot_20260508_015155_Photos_mbksuu.jpg" alt="Venus Jurassic"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Venus in the Jurassic</div><div class="natural-medium">Oracle Series</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Rose Head" data-medium="Found Image · Paper"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355124/Screenshot_20260508_015146_Photos_hvxswl.jpg" alt="Rose Head"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Rose Head</div><div class="natural-medium">Found Image</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Ascendant" data-medium="Mixed Media · Watercolor"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355113/Screenshot_20230908_092854_Instagram_m0wudk.jpg" alt="Ascendant"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Ascendant</div><div class="natural-medium">Mixed Media · Watercolor</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Possession" data-medium="Collage · Mixed Media"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354988/20231202_012928_bmhshp.jpg" alt="Possession"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Possession</div><div class="natural-medium">Collage · Mixed Media</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Witness" data-medium="Two Women · Doves"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355119/Screenshot_20260225_222101_Photos_xdwxxx.jpg" alt="Witness"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Witness</div><div class="natural-medium">Two Women · Doves</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Nice Try, 2026" data-medium="Origin work · Return of Gaia"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778381193/20260402_115414_itd63y.jpg" alt="Nice Try"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Nice Try, 2026</div><div class="natural-medium">Origin work · Return of Gaia</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Fragmentation" data-medium="Feminist Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440869/20220727_225805_olhm3i.jpg" alt="Fragmentation"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Fragmentation</div><div class="natural-medium">Feminist Collage</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Lost" data-medium="Feminist Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440879/20231008_181837_sdvbox.jpg" alt="Lost"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Lost</div><div class="natural-medium">Feminist Collage</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Warrior" data-medium="Feminist Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440889/IMG_20231119_175921_032_j456ww.jpg" alt="Warrior"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Warrior</div><div class="natural-medium">Feminist Collage</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Dance" data-medium="Feminist Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441824/20260506_121353_jtdzca.jpg" alt="Dance"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Dance</div><div class="natural-medium">Feminist Collage</div></div></div></div>
-      <div class="natural-item" onclick="openLbNat(this)" data-title="Untitled" data-medium="Feminist Collage"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355124/Screenshot_20260508_015124_Photos_urfhmj.jpg" alt="Feminist collage"><div class="natural-overlay"><div class="natural-info"><div class="natural-title">Untitled</div><div class="natural-medium">Feminist Collage</div></div></div></div>
-    </div>
+
+      <!-- #38 Tiger Woman — first in grid, blended in -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Tiger Woman" data-details="2023 · Collage, ink, gouache · 9×11in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355015/20250426_183901_rf2kgr.jpg" alt="Tiger Woman">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Tiger Woman</div>
+          <div class="natural-details">2023 · Collage, ink, gouache · 9×11in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #39 Emergence -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Emergence" data-details="2020 · Collage, ink · 8×10in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355004/20241117_233008_aiij0t.jpg" alt="Emergence">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Emergence</div>
+          <div class="natural-details">2020 · Collage, ink · 8×10in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #40 The Watcher -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="The Watcher" data-details="2026 · Collage, paint · 4×6in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355105/20260409_184942_rt6flb.jpg" alt="The Watcher">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">The Watcher</div>
+          <div class="natural-details">2026 · Collage, paint · 4×6in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #41 Venus in the Jurassic -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Venus in the Jurassic" data-details="2026 · Collage · 4×6in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355125/Screenshot_20260508_015155_Photos_mbksuu.jpg" alt="Venus in the Jurassic">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Venus in the Jurassic</div>
+          <div class="natural-details">2026 · Collage · 4×6in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #42 Rose Head -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Rose Head" data-details="2026 · Collage · 4×6in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355124/Screenshot_20260508_015146_Photos_hvxswl.jpg" alt="Rose Head">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Rose Head</div>
+          <div class="natural-details">2026 · Collage · 4×6in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #43 Ascendant -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Ascendant" data-details="2021 · Collage, watercolor, ink · 8×10in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355113/Screenshot_20230908_092854_Instagram_m0wudk.jpg" alt="Ascendant">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Ascendant</div>
+          <div class="natural-details">2021 · Collage, watercolor, ink · 8×10in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #44 Possession -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Possession" data-details="2023 · Collage, ink · 3×2in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354988/20231202_012928_bmhshp.jpg" alt="Possession">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Possession</div>
+          <div class="natural-details">2023 · Collage, ink · 3×2in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #45 Witness -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Witness" data-details="2023 · Collage, ink, watercolor · 9×11in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355119/Screenshot_20260225_222101_Photos_xdwxxx.jpg" alt="Witness">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Witness</div>
+          <div class="natural-details">2023 · Collage, ink, watercolor · 9×11in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #46 Nice Try -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Nice Try" data-details="2026 · Collage · 6×6in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778381193/20260402_115414_itd63y.jpg" alt="Nice Try">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Nice Try</div>
+          <div class="natural-details">2026 · Collage · 6×6in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #47 Fragmentation -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Fragmentation" data-details="2022 · Collage, watercolor, ink · 9×12in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440869/20220727_225805_olhm3i.jpg" alt="Fragmentation">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Fragmentation</div>
+          <div class="natural-details">2022 · Collage, watercolor, ink · 9×12in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #48 Lost -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Lost" data-details="2023 · Ink, collage · 5×7in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440879/20231008_181837_sdvbox.jpg" alt="Lost">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Lost</div>
+          <div class="natural-details">2023 · Ink, collage · 5×7in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #49 Warrior -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Warrior" data-details="2020 · Collage · 9×11in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440889/IMG_20231119_175921_032_j456ww.jpg" alt="Warrior">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Warrior</div>
+          <div class="natural-details">2020 · Collage · 9×11in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #50 Dance -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Dance" data-details="2026 · Collage · 4×6in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441824/20260506_121353_jtdzca.jpg" alt="Dance">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Dance</div>
+          <div class="natural-details">2026 · Collage · 4×6in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #51 Oysters -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Oysters" data-details="2025 · Collage · 5×7in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355124/Screenshot_20260508_015124_Photos_urfhmj.jpg" alt="Oysters">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Oysters</div>
+          <div class="natural-details">2025 · Collage · 5×7in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #30 Beauty -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Beauty" data-details="2026 · Collage · 4×6in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355106/20260401_160545_cmt0dx.jpg" alt="Beauty">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Beauty</div>
+          <div class="natural-details">2026 · Collage · 4×6in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #33 For Palestine -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="For Palestine" data-details="2024 · Collage · 9×11in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355110/IMG_20231107_205026_891_rlm6dc.heic" alt="For Palestine">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">For Palestine</div>
+          <div class="natural-details">2024 · Collage · 9×11in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #34 Self Portrait -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Self Portrait" data-details="2020 · Collage, pastel, ink · 18×24in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440876/Screenshot_20230908_124804_Instagram_dpvpin.jpg" alt="Self Portrait">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Self Portrait</div>
+          <div class="natural-details">2020 · Collage, pastel, ink · 18×24in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+      <!-- #35 Cahiers in Paris -->
+      <div class="natural-item" onclick="openLbNat(this)" data-title="Cahiers in Paris" data-details="2024 · Collage and vellum paper · 5×7in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354980/20230527_175049_e2mlk1.jpg" alt="Cahiers in Paris">
+        <div class="natural-overlay"><div class="natural-info">
+          <div class="natural-title">Cahiers in Paris</div>
+          <div class="natural-details">2024 · Collage and vellum paper · 5×7in</div>
+          <div class="natural-avail">Prints available</div>
+        </div></div>
+      </div>
+
+    </div><!-- end natural-gallery -->
+
     <div class="commission-cta reveal">
       <p>Commissions, originals and prints available.</p>
       <a href="contact.html">Inquire →</a>
@@ -407,53 +728,73 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 <footer class="site-footer"><p class="footer-note">SunnieAnand.com · 2026 · Los Angeles</p></footer>
 
 <script>
-// Build unified lightbox index from all clickable items
+// CURATED LIGHTBOX (uses same lightbox element)
+function openCurated(el) {
+  buildIdx();
+  lbIdx = lbItems.indexOf(el);
+  showLb(el.dataset.img, el.dataset.title || '', el.dataset.details || '');
+}
+
+// Build unified lightbox index
 const lbItems = [];
 let lbIdx = 0;
 function buildIdx() {
-  if(!lbItems.length) {
-    document.querySelectorAll('.portfolio-item[onclick], .install-hero[onclick], .natural-item[onclick]').forEach(i => lbItems.push(i));
+  if (!lbItems.length) {
+    document.querySelectorAll('.curated-item[onclick], .portfolio-item[onclick], .install-hero[onclick], .natural-item[onclick]').forEach(i => lbItems.push(i));
   }
 }
-function openLb(el) { buildIdx(); lbIdx=lbItems.indexOf(el); showLb(el.querySelector('img').src, el.dataset.title||'', el.dataset.sub||''); }
-function openLbNat(el) { buildIdx(); lbIdx=lbItems.indexOf(el); showLb(el.querySelector('img').src, el.dataset.title||'', el.dataset.medium||''); }
+function openLb(el) { buildIdx(); lbIdx = lbItems.indexOf(el); showLb(el.querySelector('img').src, el.dataset.title || '', el.dataset.sub || ''); }
+function openLbNat(el) { buildIdx(); lbIdx = lbItems.indexOf(el); showLb(el.querySelector('img').src, el.dataset.title || '', el.dataset.details || ''); }
 function showLb(src, title, sub) {
-  document.getElementById('lb-img').src=src;
-  document.getElementById('lb-title').textContent=title;
-  document.getElementById('lb-sub').textContent=sub;
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-title').textContent = title;
+  document.getElementById('lb-sub').textContent = sub;
   document.getElementById('lightbox').classList.add('active');
-  document.body.style.overflow='hidden';
-  document.getElementById('cursor').style.opacity='0';
+  document.body.style.overflow = 'hidden';
+  document.getElementById('cursor').style.opacity = '0';
 }
-function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); document.body.style.overflow=''; document.getElementById('cursor').style.opacity='1'; }
-function navLb(dir) { buildIdx(); if(!lbItems.length) return; lbIdx=(lbIdx+dir+lbItems.length)%lbItems.length; const el=lbItems[lbIdx]; showLb(el.querySelector('img').src, el.dataset.title||'', el.dataset.sub||el.dataset.medium||''); }
-document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))closeLightbox();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e.key==='ArrowRight')navLb(1);if(e.key==='ArrowLeft')navLb(-1);});
-let swipeX=0;
-document.getElementById('lightbox').addEventListener('touchstart',e=>{swipeX=e.touches[0].clientX;},{passive:true});
-document.getElementById('lightbox').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-swipeX;if(Math.abs(dx)>50)navLb(dx<0?1:-1);},{passive:true});
+function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); document.body.style.overflow = ''; document.getElementById('cursor').style.opacity = '1'; }
+function navLb(dir) {
+  buildIdx();
+  if (!lbItems.length) return;
+  lbIdx = (lbIdx + dir + lbItems.length) % lbItems.length;
+  const el = lbItems[lbIdx];
+  if (el.classList.contains('curated-item')) {
+    showLb(el.dataset.img, el.dataset.title || '', el.dataset.details || '');
+  } else {
+    showLb(el.querySelector('img').src, el.dataset.title || '', el.dataset.sub || el.dataset.details || '');
+  }
+}
+document.getElementById('lightbox').addEventListener('click', e => { if (e.target === document.getElementById('lightbox')) closeLightbox(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); if (e.key === 'ArrowRight') navLb(1); if (e.key === 'ArrowLeft') navLb(-1); });
+let swipeX = 0;
+document.getElementById('lightbox').addEventListener('touchstart', e => { swipeX = e.touches[0].clientX; }, { passive: true });
+document.getElementById('lightbox').addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - swipeX; if (Math.abs(dx) > 50) navLb(dx < 0 ? 1 : -1); }, { passive: true });
 
 // IN-PAGE NAV HIGHLIGHT
-const sections=document.querySelectorAll('section[id]');
-const navLinks=document.querySelectorAll('.page-nav a');
-const secObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)navLinks.forEach(a=>a.classList.toggle('current',a.getAttribute('href')==='#'+e.target.id));});},{threshold:0.2});
-sections.forEach(s=>secObs.observe(s));
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.page-nav a');
+const secObs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) navLinks.forEach(a => a.classList.toggle('current', a.getAttribute('href') === '#' + e.target.id)); }); }, { threshold: 0.2 });
+sections.forEach(s => secObs.observe(s));
 
 // BACK TO TOP
-const backTop=document.getElementById('backTop');
-window.addEventListener('scroll',()=>backTop.classList.toggle('visible',window.scrollY>400));
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => backTop.classList.toggle('visible', window.scrollY > 400));
 
 // CURSOR
-const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;});
-function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;requestAnimationFrame(animRing);}
+const cursor = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.transform = `translate(${mx - 4}px,${my - 4}px)`; });
+function animRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.transform = `translate(${rx - 16}px,${ry - 16}px)`; requestAnimationFrame(animRing); }
 animRing();
-document.querySelectorAll('a,.portfolio-item,.natural-item,.install-hero,.fact-tile').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(245,200,66,0.8)';});el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(245,200,66,0.5)';});});
+document.querySelectorAll('a,.curated-item,.portfolio-item,.natural-item,.install-hero,.fact-tile').forEach(el => {
+  el.addEventListener('mouseenter', () => { ring.style.width = '52px'; ring.style.height = '52px'; ring.style.borderColor = 'rgba(245,200,66,0.8)'; });
+  el.addEventListener('mouseleave', () => { ring.style.width = '32px'; ring.style.height = '32px'; ring.style.borderColor = 'rgba(245,200,66,0.5)'; });
+});
 
 // REVEAL
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');e.target.querySelectorAll('.portfolio-item,.fact-tile,.natural-item').forEach((c,i)=>{c.style.transitionDelay=`${i*0.05}s`;});}});},{threshold:0.05});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+const obs = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); e.target.querySelectorAll('.curated-item,.portfolio-item,.fact-tile,.natural-item').forEach((c, i) => { c.style.transitionDelay = `${i * 0.05}s`; }); } }); }, { threshold: 0.05 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
 // HAMBURGER MENU
 function toggleMobileMenu() {
@@ -468,9 +809,7 @@ function closeMobileMenu() {
   document.getElementById('hamburgerBtn').classList.remove('open');
   document.body.style.overflow = '';
 }
-document.querySelectorAll('.mobile-menu a').forEach(a => {
-  a.addEventListener('click', closeMobileMenu);
-});
+document.querySelectorAll('.mobile-menu a').forEach(a => { a.addEventListener('click', closeMobileMenu); });
 </script>
 </body>
 </html>
