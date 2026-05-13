@@ -66,7 +66,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .essay-hint { font-size:1rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(245,200,66,0.5); margin-top:12px; transition:opacity 0.3s; }
 .essay-card.open .essay-hint { opacity:0; height:0; overflow:hidden; }
 .essay-body { font-size:1.2rem; line-height:1.9; color:rgba(242,237,228,0.85); max-height:0; overflow:hidden; transition:max-height 0.6s ease, opacity 0.4s; opacity:0; }
-.essay-card.open .essay-body { max-height:700px; opacity:1; }
+.essay-card.open .essay-body { max-height:20000px; opacity:1; overflow-y:auto; }
 .essay-body em { color:var(--off-white); font-style:italic; }
 .essay-body a { color:var(--marigold); font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; border-bottom:1px solid rgba(245,200,66,0.4); text-decoration:none; display:inline-block; margin-top:16px; }
 
@@ -102,6 +102,25 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
   .essay-content { padding:32px 28px; }
   .quote-strip { padding:48px 24px; }
 }
+
+/* ESSAY MODAL */
+.essay-modal { display:none; position:fixed; inset:0; z-index:8000; background:rgba(14,12,10,0.97); overflow-y:auto; padding:60px 40px; }
+.essay-modal.active { display:block; }
+.essay-modal-inner { max-width:760px; margin:0 auto; }
+.essay-modal-close { position:fixed; top:24px; right:28px; font-size:2rem; color:var(--off-white); background:none; border:none; cursor:pointer; opacity:0.7; padding:8px; z-index:8001; line-height:1; transition:opacity 0.2s; }
+.essay-modal-close:hover { opacity:1; }
+.essay-modal-label { font-size:1rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--marigold); margin-bottom:16px; }
+.essay-modal-title { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,4vw,3rem); font-weight:700; color:var(--off-white); line-height:1.15; margin-bottom:48px; padding-bottom:28px; border-bottom:1px solid rgba(245,200,66,0.2); }
+.essay-modal-body p { font-size:1.2rem; line-height:2; color:rgba(242,237,228,0.88); margin-bottom:1.6em; }
+.essay-modal-body p:last-child { margin-bottom:0; }
+.essay-modal-footer { margin-top:48px; padding-top:28px; border-top:1px solid rgba(245,200,66,0.2); }
+.essay-modal-footer p { font-size:1rem; color:rgba(242,237,228,0.5); font-style:italic; line-height:1.8; margin-bottom:16px; }
+.essay-modal-footer-links { display:flex; gap:24px; flex-wrap:wrap; }
+.essay-modal-footer-links a { font-size:1rem; letter-spacing:0.15em; text-transform:uppercase; text-decoration:none; border-bottom:1px solid; padding-bottom:2px; }
+.essay-modal-footer-links a:first-child { color:var(--marigold); border-color:rgba(245,200,66,0.4); }
+.essay-modal-footer-links a:last-child { color:rgba(242,237,228,0.6); border-color:rgba(242,237,228,0.2); }
+@media(max-width:600px) { .essay-modal { padding:48px 24px; } }
+
 </style>
 </head>
 <body>
@@ -158,21 +177,9 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
   <div style="max-width:1400px;margin:0 auto;padding:4px 0 0;">
     <div class="essays-grid reveal">
 
-      <!-- On Art -->
-      <div class="essay-card" onclick="toggleEssay(this)">
-        <div class="essay-bg"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778378011/20260416_131107_qpgir6.jpg" alt="On Art"></div>
-        <div class="essay-gradient"></div>
-        <div class="essay-content">
-          <div class="essay-label">Essay · On Art</div>
-          <div class="essay-title">Every shred of art deserves to exist</div>
-          <p class="essay-hint">Click to read →</p>
-          <div class="essay-body">My appreciation of art is a barometer for unconditional love and acceptance in my own life. When I witness a piece — any piece — I am simply grateful it exists. The classically critiqued dot on a canvas. The cacophonous unknowable sound. The mythology in marble. All of it deserves to emerge into this 3D plane for the joy of existing.<br><br>You will rarely find me argue against a piece of art.<br><br>And so art has become my teacher. If I can receive a stranger's creative act with that quality of openness — what else might I receive that way? I try to apply it to all of existence. People different from me or the same. This table. That tree. We all deserve to be loved for the simple reason that we exist. The rest is details.</div>
-        </div>
-      </div>
-
       <!-- On Slow Fashion -->
-      <div class="essay-card" id="fashion-essay" onclick="toggleEssay(this)">
-        <div class="essay-bg"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778377908/https___replicate.delivery_czjl_oOrBsXLJwdYbJFxR35OEcmcdAyDAeMxCel43KFKLoy5HO80TA_tmpxldz9suc_xq7wse.jpg" alt="Slow Fashion"></div>
+      <div class="essay-card" id="fashion-essay" onclick="openFashionEssay(event)">
+        <div class="essay-bg"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355025/20250514_190639_axlxhq.jpg" alt="Slow Fashion"></div>
         <div class="essay-gradient"></div>
         <div class="essay-content">
           <div class="essay-label">Essay · On Fashion &amp; Slow Style</div>
@@ -222,6 +229,18 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
   </div>
 </div>
           </div>
+        </div>
+      </div>
+
+      <!-- On Art -->
+      <div class="essay-card" onclick="toggleEssay(this)">
+        <div class="essay-bg"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778378011/20260416_131107_qpgir6.jpg" alt="On Art"></div>
+        <div class="essay-gradient"></div>
+        <div class="essay-content">
+          <div class="essay-label">Essay · On Art</div>
+          <div class="essay-title">Every shred of art deserves to exist</div>
+          <p class="essay-hint">Click to read →</p>
+          <div class="essay-body">My appreciation of art is a barometer for unconditional love and acceptance in my own life. When I witness a piece — any piece — I am simply grateful it exists. The classically critiqued dot on a canvas. The cacophonous unknowable sound. The mythology in marble. All of it deserves to emerge into this 3D plane for the joy of existing.<br><br>You will rarely find me argue against a piece of art.<br><br>And so art has become my teacher. If I can receive a stranger's creative act with that quality of openness — what else might I receive that way? I try to apply it to all of existence. People different from me or the same. This table. That tree. We all deserve to be loved for the simple reason that we exist. The rest is details.</div>
         </div>
       </div>
 
@@ -285,6 +304,20 @@ function toggleEssay(card) {
   document.querySelectorAll('.essay-card.open').forEach(c => c.classList.remove('open'));
   if(!isOpen) card.classList.add('open');
 }
+
+function openFashionEssay(e) {
+  e.stopPropagation();
+  document.getElementById('fashionEssayModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeFashionEssay() {
+  document.getElementById('fashionEssayModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeFashionEssay();
+});
+
 function toggleMobileMenu() {
   const menu = document.getElementById('mobileMenu');
   const btn = document.getElementById('hamburgerBtn');
@@ -311,5 +344,60 @@ document.querySelectorAll('a,.essay-card,.essay-placeholder').forEach(el=>{el.ad
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
+
+<!-- FASHION ESSAY MODAL -->
+<div class="essay-modal" id="fashionEssayModal">
+  <button class="essay-modal-close" onclick="closeFashionEssay()">×</button>
+  <div class="essay-modal-inner">
+    <div class="essay-modal-label">Essay · On Fashion &amp; Slow Style</div>
+    <h2 class="essay-modal-title">On Style, Sustainability, and the Art of Dressing Your True Self</h2>
+    <div class="essay-modal-body">
+<p>I get stopped on the street six days a week. (On Sundays I stay home.)</p>
+<p>The other six days I move through the world in a way that apparently makes people stop mid-sentence. The question is always some version of: where did you get that? And the honest answer is usually: Paris. Atlanta. A bin. An estate sale. My own hands on a beginner Singer at two in the morning.</p>
+<p>It starts in my closet. Which is small, extremely well organized, and — I should mention — has framed art hanging in it, because even getting dressed happens in beauty's company for me.</p>
+<p>Getting dressed is the act of preparing the version of myself I feel like presenting that day. It's always me — but I have a lot of Me's to choose from and most of them happen to love being fabulous. Some mornings it's the patterned wide leg pant with a logo tee, long pearl necklace, big hair. Other mornings it's a hot pink blazer on literally everything. Almost always there's a statement piece anchored with something simple — black jeans, a basic tee. Black eyeliner. Red lipstick. Gold hoops that are logging serious miles. Eyeliner and lip are days a week, with little exception. And almost always there's one hidden luxury touch. I wear my Poshmarked Gucci sneakers a lot, not gonna lie. But always with a subtle nod — I'm not that flashy with brands. I just love the thing itself.</p>
+<p>This is not a performance, but a practice. It's one of the ways I feel most alive.</p>
+<p>Fashion, for most of the industry, is about reaching for a different identity. Becoming someone else. Fast fashion has built an entire economic model on that premise — it keeps changing the narrative so your wardrobe feels outdated, so you feel incomplete, so you buy more. The story shifts every season. The void never fills.</p>
+<p>My approach is the opposite. Dress your true self. Let your style be an extension of who you actually are — not a replacement for it. You are not a blank canvas waiting for a trend to tell you who to be. You are already someone specific and extraordinary. The job of getting dressed is to let that person show up.</p>
+<p>Let's be ourselves. There is genuinely no one else like me, and that is the most interesting thing I could possibly put on.</p>
+<p>Some background: I have a Master's in environmental science and natural resource management. I spent years in corporate sustainability managing large-scale platforms for a global operation across multiple continents. I came into that work as a lifelong environmentalist during the 80's proselytization of recycling-as-world-saving, and an empowered undergrad who thought of herself as fundamentally part of the solution in the aughts.</p>
+<p>And then somewhere after graduate school I started to feel something shift.</p>
+<p>The environmental movement — and I say this with love, genuinely, from deep inside it — had become very good at critique and very bad at creation. It was judgmental in a way that left no room for beauty, for making, for the human impulse to adorn and construct and imagine. There was space to dismantle systems and point at what was broken, which I'm all about because, as the line goes, it's not that the systems are broken, they were built this way. But, I found myself disillusioned with the statistics on climate change, the state of health of Mother Earth, and on top of it, there was very little space to build something better. I found I couldn't breathe in that space anymore.</p>
+<p>So I quietly stepped out.</p>
+<p>I didn't announce it. I didn't write a manifesto about it — at least not then. I just stopped identifying with the movement and started composting at home. Which sounds small but it wasn't. Composting connected me back to the cycles of the earth in a way that felt generative rather than corrective. Death and life. Making and unmaking. I was participating in a creative process, not just critiquing a destructive one. I was part of something that turned waste back into abundance. That felt like something I could actually live inside.</p>
+<p>From there I stepped into thrift markets. Got out of big box stores and two-day shipping. Started finding things — beautiful, specific, one-of-a-kind things — that already existed and just needed someone with the right eye to recognize them.</p>
+<p>Which brings me to the supernatural thrift ability.</p>
+<p>The pieces just find me. I don't entirely know how to explain it except that I show up, I'm present, and something always appears.</p>
+<p>I once found a mint condition Burberry coin dress — couture, off the runway, never worn after that first outing — at an estate market in Atlanta of all places.</p>
+<p>I found a simple black and gold sweater in a Paris bargain bin that gets compliments every single time I wear it. And it is genuinely one of my favorite things to say: I thrifted it…In Paris! (I'm convinced I'm from Paris in another lifetime, I'm genuinely in love with the place for no obvious reasons about my heritage and very obvious reasons about the city's commitment to appreciation of aesthetics and arts).</p>
+<p>I have been thrifting across Paris, Italy, Mexico, and London, taken friends too, always with unforgettable hauls. I have a private list of the world's best thrift sources spanning multiple continents that is, frankly, a gold mine. People have asked me to share it. I haven't yet. But I'm thinking about it.</p>
+<p>To the right producer reading this, my secret is fashion fairies. They whisper in my ear and lead me straight to the good finds in every market. My private list of the world's best thrift stores spans multiple continents and is, frankly, a gold mine. Hear me out on this hit show concept: eight episodes, four continents, and Me, going thrifting — with a brief, a budget, and a client — through the sophisticated showrooms, the vintage markets of Paris and Mexico City, the occasional Goodwill. It could be absolutely fabulous. Call me. 😉</p>
+<p>This is what sustainability looks like when it stops being a critique and becomes a creative practice. You develop an eye. You learn to see what's already there. You stop looking for what's new and start looking for what's right in front of you. The Earth doesn't need you to buy less of the wrong thing. It needs you to appreciate the now moment and fall in love with what already exists.</p>
+<p>I am in conversation, aesthetically, with a specific set of people.</p>
+<p>Fully aware that it's a little cliche, I'm going to admit that Alessandro Michele's Gucci rocked my world. That maximalism, that eclecticism, the way he heavily references one of my favorite fashion eras (the 70's) combined with the fact that I'm a sucker for a pussy bow blouse made his era irresistible to me. Fashion can be a kind of scholarship. As a love letter to everything that came before. I also have a lot to say about luxury brands and appropriation — I'm an Indian American and have seen first hand how Indian designers and artisans are regularly dismissed and erased from fashion history. Stay tuned for a future essay on that in the POV section of this site.</p>
+<p>Alaïa for construction. Unmatched. The way a garment fits a body, the way it moves with a body rather than imposing on it — that's engineering as much as it is art and Alaïa understood both at the highest level simultaneously.</p>
+<p>Masaba Gupta and Mary Katrantzou for prints. Bold, specific, unapologetic. Prints that are making an argument and nail a perspective and aesthetic.</p>
+<p>And then below all of that — the Impressionists, actually. They came in like a wrecking ball to challenge all of (European) art history's notions and conventions. I find that group of artists (and their immediate precedents, the Realists) to be amongst the biggest rule breakers of all time and inspirational. Don't get me started on the Impressionists if we're short on time — but you can definitely learn more about my passion at an upcoming Art Talk.</p>
+<p>What's next? I am building a label, Sunnie Darling. Slowly, intentionally, the way everything worth doing gets built.</p>
+<p>Limited pieces. Single designs. Sustainably sourced almost entirely from what already exists — deadstock, vintage and/or found material. Where the provenance is part of the object, and my pieces will pay deep homage to my Indian roots and the lineage of women sewists I come from and are back in my homeland striving in competitive global markets.</p>
+<p>I am either going to work toward it at night alongside everything else I am making and curating and building, or go back to school to advance the craft further. Probably both, knowing me.</p>
+<p>The vision is clear: slow fashion as a genuine practice, not a marketing term. Not a price point or an aesthetic or a brand positioning exercise. A real commitment to making things with care, sourcing things with intention, wearing things for a long time, and passing them on when the time comes.</p>
+<p>The opposite of everything the industry currently is, and proud to be fitting right in with teams of forward-thinking Los Angeles based designers.</p>
+<p>What I want people to feel when they see me coming is simply this: that it's possible.</p>
+<p>That you can move through the world fully as yourself — maximalist, opinionated, adorned, alive — and that it doesn't cost the earth to do it. That beauty and sustainability are not opposites. That getting dressed can be a creative act, a political act, a joyful act, all at once.</p>
+<p>That the most radical thing you can do in a world built on manufactured inadequacy is to show up exactly as yourself, in something you found or made or fell in love with, and refuse to apologize for any of it.</p>
+<p>And maybe — if I've done my job right — that they want to go home and look at their own closet a little differently.</p>
+<p>The studio is open.</p>
+    </div>
+    <div class="essay-modal-footer">
+      <p>Sunnie Anand is a slow fashion advocate, garment constructor, art curator, and collector based in Los Angeles. She is available for sustainable fashion consulting, production logistics, and sourcing. Her label is coming.</p>
+      <div class="essay-modal-footer-links">
+        <a href="contact.html">Work with me →</a>
+        <a href="fashion.html">Back to Fashion →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
