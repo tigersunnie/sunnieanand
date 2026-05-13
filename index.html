@@ -14,14 +14,12 @@ body { background:var(--black); color:var(--off-white); font-family:'Jost',sans-
 body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:1000; opacity:0.5; }
 
 /* NAV */
-nav { display:flex; justify-content:space-between; align-items:center; padding:28px 60px; position:relative; z-index:20; animation:slideDown 0.8s ease forwards; }
+nav { display:flex; justify-content:space-between; align-items:center; padding:28px 60px; position:absolute; top:0; left:0; right:0; z-index:20; }
 .nav-logo { font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:1.1rem; letter-spacing:0.08em; color:var(--off-white); text-decoration:none; transition:color 0.2s; }
 .nav-logo:hover { color:var(--marigold); }
 .nav-links { display:flex; gap:28px; list-style:none; flex-wrap:wrap; align-items:center; }
 .nav-links a { font-size:0.9rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,237,228,0.75); text-decoration:none; transition:color 0.2s; }
 .nav-links a:hover { color:var(--marigold); }
-
-/* HAMBURGER */
 .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; z-index:200; background:none; border:none; }
 .hamburger span { display:block; width:24px; height:2px; background:var(--off-white); transition:transform 0.3s, opacity 0.3s; }
 .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
@@ -35,11 +33,29 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .mobile-menu-close { position:absolute; top:24px; right:24px; font-size:2rem; color:var(--off-white); background:none; border:none; cursor:pointer; padding:8px; opacity:0.7; line-height:1; }
 @media(max-width:900px) { nav { padding:20px 24px; } .nav-links { display:none; } .hamburger { display:flex; } }
 
-/* LMSB HERO */
-.lmsb-hero { text-align:center; padding:60px 40px 32px; }
-.lmsb-hero a { font-family:'Playfair Display',serif; font-size:clamp(2rem,5.6vw,4rem); font-weight:900; color:var(--off-white); text-decoration:none; display:block; line-height:1; transition:opacity 0.3s; }
-.lmsb-hero a em { color:var(--marigold); font-style:italic; font-weight:400; }
-.lmsb-hero a:hover { opacity:0.8; }
+/* HERO */
+.hero { position:relative; min-height:100vh; display:flex; flex-direction:column; overflow:hidden; }
+.hero-bg { position:absolute; inset:0; z-index:0; }
+.hero-bg img { width:100%; height:100%; object-fit:cover; object-position:center 30%; display:block; filter:brightness(0.32) saturate(0.65); }
+.hero-bg::after { content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(14,12,10,0.88) 0%, rgba(14,12,10,0.15) 50%, rgba(14,12,10,0.55) 100%); }
+.hero-content { position:relative; z-index:10; flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:120px 40px 80px; }
+.hero-eyebrow { font-size:1rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--marigold); margin-bottom:28px; opacity:0; animation:fadeUp 1s 0.3s ease forwards; }
+.hero-name { font-family:'Playfair Display',serif; font-size:clamp(5rem,14vw,11rem); font-weight:900; line-height:0.9; letter-spacing:-0.02em; opacity:0; animation:fadeUp 1s 0.5s ease forwards; }
+.hero-name .sun { color:#f5c842; font-style:normal; font-weight:900; }
+.hero-name .nie { color:#f2ede4; font-style:italic; font-weight:400; }
+.hero-tagline { margin-top:36px; max-width:640px; opacity:0; animation:fadeUp 1s 0.7s ease forwards; }
+.hero-tagline .line1 { font-size:clamp(1rem,1.8vw,1.25rem); color:var(--off-white); line-height:1.8; display:block; }
+.hero-tagline .line2 { font-size:clamp(1rem,1.8vw,1.25rem); color:var(--rose); display:block; margin-top:4px; }
+
+/* BURST */
+.burst-divider { width:100%; display:flex; align-items:center; justify-content:center; padding:20px 0; }
+
+/* LMSB */
+.lmsb-hero { text-align:center; padding:60px 40px 28px; }
+.lmsb-hero a.main { font-family:'Playfair Display',serif; font-size:clamp(2rem,5.6vw,4rem); font-weight:900; color:var(--off-white); text-decoration:none; display:block; line-height:1; transition:opacity 0.3s; }
+.lmsb-hero a.main em { color:var(--marigold); font-style:italic; font-weight:400; }
+.lmsb-hero a.main:hover { opacity:0.8; }
+.lmsb-hero a.reach { display:block; margin-top:16px; font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); text-decoration:none; }
 
 /* CTA ROW */
 .cta-row { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; padding:28px 40px 0; max-width:1100px; margin:0 auto; }
@@ -54,7 +70,8 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .quote-strip p { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,3vw,2.2rem); font-style:italic; color:var(--off-white); line-height:1.5; max-width:760px; margin:0 auto 16px; padding:0 40px; }
 .quote-strip span { font-size:1rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(242,237,228,0.55); }
 
-/* TILES */
+/* NAV TILES */
+.tiles-section { background:var(--black); padding:64px 60px 0; }
 .tiles-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:3px; max-width:1100px; margin:0 auto; }
 .tile { position:relative; background:var(--black); border:1px solid rgba(245,200,66,0.12); display:flex; flex-direction:column; align-items:center; justify-content:center; text-decoration:none; overflow:hidden; transition:border-color 0.3s; padding:28px 20px; text-align:center; cursor:none; }
 .tile::before { content:''; position:absolute; inset:0; background:var(--marigold); transform:scaleY(0); transform-origin:bottom; transition:transform 0.35s ease; z-index:0; }
@@ -66,7 +83,11 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .tile:hover .tile-sub { color:rgba(14,12,10,0.6); }
 .tile-arrow { position:absolute; bottom:14px; right:18px; font-size:1rem; color:rgba(245,200,66,0.35); transition:color 0.3s, transform 0.3s; z-index:1; }
 .tile:hover .tile-arrow { color:rgba(14,12,10,0.4); transform:translate(3px,-3px); }
-@media(max-width:900px) { .tiles-grid { grid-template-columns:repeat(2,1fr); } }
+.not-sure { text-align:center; padding:28px 0 0; }
+.not-sure a { font-family:'Playfair Display',serif; font-style:italic; font-size:1.1rem; color:rgba(242,237,228,0.55); text-decoration:none; transition:color 0.2s; }
+.not-sure a span { color:var(--marigold); }
+.not-sure a:hover { color:var(--off-white); }
+@media(max-width:900px) { .tiles-grid { grid-template-columns:repeat(2,1fr); } .tiles-section { padding:48px 24px 0; } }
 
 /* ABOUT */
 .about-two-col { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
@@ -78,13 +99,11 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .love-lead { text-decoration:underline; text-decoration-color:#c9a84c; text-underline-offset:4px; text-decoration-thickness:2px; }
 .about-text a { color:var(--rose-deep); text-decoration:none; border-bottom:1px solid rgba(140,74,63,0.3); transition:opacity 0.2s; }
 .about-text a:hover { opacity:0.7; }
-
-/* NAV CALLOUT — Jost italic dark card */
 .about-nav-callout { background:var(--rose-deep); border-top:2px solid rgba(242,237,228,0.25); padding:24px 28px; margin:24px 0; }
 .about-nav-callout p { font-family:'Jost',sans-serif; font-style:italic; font-weight:300; font-size:1.15rem; line-height:2; color:var(--off-white); }
 .about-nav-callout a { color:var(--off-white); text-decoration:none; border-bottom:1px solid rgba(242,237,228,0.5); transition:opacity 0.2s; }
-.about-nav-callout a:hover { opacity:0.7; }
-.about-close { font-family:'Playfair Display',serif !important; font-size:1.2rem !important; font-style:italic !important; color:var(--ink) !important; }
+.about-nav-callout a:hover { opacity:0.75; }
+.about-close { font-family:'Playfair Display',serif; font-size:1.2rem; font-style:italic; color:var(--ink); margin-top:8px; }
 
 /* STATS */
 .about-bottom { display:grid; grid-template-columns:1fr 1fr; gap:3px; margin-top:64px; }
@@ -96,8 +115,10 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .stat-label { font-size:1rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--mid); margin-top:8px; line-height:1.4; }
 .about-portrait-secondary { overflow:hidden; }
 .about-portrait-secondary img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+.stats-note { font-size:1.15rem; line-height:1.9; color:#3a3028; margin-top:40px; padding-top:32px; border-top:1px solid rgba(14,12,10,0.1); max-width:800px; }
+.stats-note a { color:var(--rose-deep); text-decoration:none; border-bottom:1px solid rgba(140,74,63,0.3); }
 
-/* ART STRIP — 1x3 */
+/* ART STRIP */
 .art-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:4px; max-width:1200px; margin:0 auto; }
 .art-strip-item { position:relative; overflow:hidden; aspect-ratio:1; background:#0e0c0a; cursor:pointer; touch-action:manipulation; }
 .art-strip-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.5s; }
@@ -119,11 +140,8 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .lightbox-nav { font-size:2rem; color:rgba(242,237,228,0.6); cursor:pointer; background:rgba(255,255,255,0.06); border:1px solid rgba(245,200,66,0.25); width:52px; height:52px; display:flex; align-items:center; justify-content:center; transition:color 0.2s, border-color 0.2s; }
 .lightbox-nav:hover { color:var(--marigold); border-color:var(--marigold); }
 
-/* BURST */
-.burst-divider { width:100%; display:flex; align-items:center; justify-content:center; padding:20px 0; }
-
-/* LMSB BOTTOM */
-.lmsb-strip { background:var(--black); text-align:center; padding:100px 40px; width:100%; }
+/* FOOTER LMSB */
+.lmsb-strip { background:var(--black); text-align:center; padding:100px 40px; }
 .lmsb-main { font-family:'Playfair Display',serif; font-size:clamp(2rem,5.6vw,4rem); font-weight:900; color:var(--off-white); text-decoration:none; display:block; line-height:1; transition:opacity 0.3s; }
 .lmsb-main em { color:var(--marigold); font-style:italic; font-weight:400; }
 .lmsb-main:hover { opacity:0.8; }
@@ -135,13 +153,11 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .back-to-top { position:fixed; bottom:32px; right:32px; width:44px; height:44px; background:rgba(14,12,10,0.85); border:1px solid rgba(245,200,66,0.3); color:var(--marigold); font-size:1.2rem; display:flex; align-items:center; justify-content:center; text-decoration:none; opacity:0; transition:opacity 0.3s; z-index:500; }
 .back-to-top.visible { opacity:1; }
 .back-to-top:hover { border-color:var(--marigold); }
-
 .site-footer { background:var(--black); text-align:center; padding:32px 60px; border-top:1px solid rgba(245,200,66,0.08); }
 .footer-note { font-size:1rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--rose); }
 
 @keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
-@keyframes slideDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
 .reveal { opacity:0; transform:translateY(40px); transition:opacity 0.8s ease, transform 0.8s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
 
@@ -181,10 +197,10 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 
 <a class="back-to-top" id="backTop" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
 
-<!-- HERO -->
-<div style="min-height:100vh;display:grid;grid-template-rows:auto 1fr auto;position:relative;overflow:hidden;">
-  <div style="position:absolute;inset:0;z-index:0;">
-    <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355116/Screenshot_20250121_114852_Drive_oeyscb.jpg" alt="" style="width:100%;height:100%;object-fit:cover;object-position:center 45%;opacity:0.18;filter:saturate(0.4);">
+<!-- 1. HERO -->
+<div class="hero">
+  <div class="hero-bg">
+    <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778436288/2005-10-29_20.07.50_finalcrop_rfyaut.jpg" alt="Taj Mahal installation">
   </div>
   <nav>
     <a href="index.html" class="nav-logo">Sunnie Anand</a>
@@ -200,59 +216,69 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
       <span></span><span></span><span></span>
     </button>
   </nav>
-  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;position:relative;z-index:10;">
-    <p style="font-size:1rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--marigold);margin-bottom:28px;opacity:0;animation:fadeUp 1s 0.3s ease forwards;">Creator · Collector · Curator</p>
-    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(5rem,14vw,11rem);font-weight:900;line-height:0.9;letter-spacing:-0.02em;opacity:0;animation:fadeUp 1s 0.5s ease forwards;">
-      <span style="color:#f5c842;font-weight:900;">Sun</span><span style="color:#f2ede4;font-style:italic;font-weight:400;">nie</span>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Creator · Collector · Curator</p>
+    <h1 class="hero-name">
+      <span class="sun">Sun</span><span class="nie">nie</span>
     </h1>
-    <p style="margin-top:32px;font-size:clamp(1rem,2vw,1.2rem);color:var(--off-white);max-width:600px;line-height:2;opacity:0;animation:fadeUp 1s 0.7s ease forwards;">
-      Old world knowledge, new world sensibilities.<br>
-      <span style="color:var(--rose);">Stylist for the ages and collector of an alarming number of museum receipts.</span>
-    </p>
-  </div>
-  <div style="display:flex;justify-content:center;padding-bottom:48px;opacity:0;animation:fadeIn 1s 1.2s ease forwards;position:relative;z-index:10;">
-    <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="140" y1="16" x2="75" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="140" y1="16" x2="75" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="180" y1="16" x2="245" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="180" y1="16" x2="245" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/></svg>
+    <div class="hero-tagline">
+      <span class="line1">Art Advisor. Slow fashion designer. Feminist sensibility.</span>
+      <span class="line2">A truly alarming number of museum receipts.</span>
+    </div>
   </div>
 </div>
 
-<!-- LMSB HERO -->
+<!-- 2. BURST -->
+<div class="burst-divider" style="background:var(--black);">
+  <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="140" y1="16" x2="75" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="140" y1="16" x2="75" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="180" y1="16" x2="245" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="180" y1="16" x2="245" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/></svg>
+</div>
+
+<!-- 3. LMSB -->
 <div class="lmsb-hero reveal">
-  <a href="contact.html">Let's make something <em>beautiful.</em></a>
+  <a href="contact.html" class="main">Let's make something <em>beautiful.</em></a>
+  <a href="contact.html" class="reach">reach out →</a>
 </div>
 
-<!-- CTA ROW -->
+<!-- 4. CTA ROW -->
 <div style="background:var(--black);padding:0 0 64px;">
   <div class="cta-row reveal">
     <a href="curation.html#art-talks" class="cta-btn">See art like never before →</a>
-    <a href="curation.html#sunnie-salons" class="cta-btn primary">The list you want to be on →</a>
+    <a href="contact.html#salons" class="cta-btn primary">The list you want to be on →</a>
     <a href="curation.html#offer" class="cta-btn">The curator your gallery needs →</a>
     <a href="fashion.html#offer" class="cta-btn">Your fashion problem, solved →</a>
     <a href="works.html" class="cta-btn">Your walls deserve this →</a>
   </div>
 </div>
 
-<!-- QUOTE 1 — rose strip -->
+<!-- 5. QUOTE STRIP -->
 <div class="quote-strip reveal">
   <p>"In the absence of people, Art has been a very old friend — one I've known for lifetimes."</p>
   <span>— Sunnie</span>
 </div>
 
-<!-- 4 TILES -->
-<section style="background:var(--black);padding:64px 60px;" class="reveal">
+<!-- 6. NAV TILES -->
+<div class="tiles-section reveal">
   <div class="tiles-grid">
     <a href="curation.html" class="tile"><span class="tile-title">Art Curation<br>&amp; Consult</span><span class="tile-sub">Eye · Experience · Ideas</span><span class="tile-arrow">↗</span></a>
     <a href="fashion.html" class="tile"><span class="tile-title">Fashion<br>&amp; Fabrics</span><span class="tile-sub">Design · Construct · Style</span><span class="tile-arrow">↗</span></a>
     <a href="works.html" class="tile"><span class="tile-title">Creative<br>Works</span><span class="tile-sub">Paintings · Collage · Mixed Media</span><span class="tile-arrow">↗</span></a>
     <a href="pov.html" class="tile"><span class="tile-title">POV</span><span class="tile-sub">Essays · Point of View</span><span class="tile-arrow">↗</span></a>
   </div>
-</section>
+</div>
 
-<!-- BURST → ABOUT -->
+<!-- 7. NOT SURE CTA — below tiles -->
+<div style="background:var(--black);padding:28px 40px 80px;">
+  <div class="not-sure reveal">
+    <a href="contact.html">Not sure where to start? <span>Let's talk →</span></a>
+  </div>
+</div>
+
+<!-- 8. BURST → ABOUT -->
 <div class="burst-divider" style="background:var(--warm-white);">
   <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="140" y1="16" x2="75" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="140" y1="16" x2="75" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="180" y1="16" x2="245" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="180" y1="16" x2="245" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/></svg>
 </div>
 
-<!-- ABOUT -->
+<!-- 9. ABOUT -->
 <section style="background:var(--warm-white);color:var(--ink);" id="about">
   <div style="max-width:1200px;margin:0 auto;padding:100px 60px;">
     <div style="margin-bottom:64px;" class="reveal">
@@ -260,49 +286,43 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
       <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;line-height:1.1;color:var(--ink);">A life <em style="font-style:italic;color:var(--marigold);font-weight:400;">spent</em> in beauty's company</h2>
     </div>
     <div class="about-two-col reveal">
-      <div class="about-portrait">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355118/Picsart_23-07-21_14-11-09-411_o5joha.jpg" alt="Sunnie">
-      </div>
+      <div class="about-portrait"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355118/Picsart_23-07-21_14-11-09-411_o5joha.jpg" alt="Sunnie"></div>
       <div class="about-text">
         <p>Welcome. I'm so glad you're here. I am a <strong>Beautifier</strong> — it's the closest word I have for what I do — adorning walls, bodies, tables, spaces, moments. In art, I found a soulmate, a lifetimes-old companion. A <strong>force</strong> that has been with me through the darkest seasons of my life and kept the channel to my inner world open when everything else was noise. Since my <a href="works.html#installation">first painting</a>, I've cultivated myself in the arts and I'm a bona fide <strong>Venusian enthusiast</strong>.</p>
-
         <div class="about-nav-callout">
           <p>Now that you're here, <a href="curation.html#offer">check out how we can work together</a>, poke around in my <a href="fashion.html">fashion world</a>, read about my <a href="curation.html#shows">upcoming show ideas</a>, or <a href="pov.html">intellectualize</a> with me about classical art and the world we live in. Before you leave, be sure to peruse my <a href="works.html">enormous body of work</a> — you're sure to find something you like, and you can <a href="contact.html">reach out</a> about buying a piece.</p>
         </div>
-
         <p>Beyond the seen, what I'm actually motivated by is how to <strong>Be Love</strong>. I believe that's what gets humanity to its next point. Inner peace first. Then community. Then a world built by people who <strong><span class="love-lead">let love lead.</span></strong> <a href="contact.html">Join me →</a></p>
-
         <p class="about-close">The studio is open. Let's make something beautiful.</p>
       </div>
     </div>
 
-    <!-- STATS -->
+    <!-- 10. STATS -->
     <div class="about-bottom reveal">
       <div class="stat-grid">
         <div class="stat-box"><div class="stat-num">500+</div><div class="stat-label">Original works in personal collection</div></div>
         <div class="stat-box"><div class="stat-num">80+</div><div class="stat-label">World-class museums in 3 years</div></div>
-        <div class="stat-box"><div class="stat-num">$20k</div><div class="stat-label">In styling sales as personal stylist</div></div>
+        <div class="stat-box"><div class="stat-num">20</div><div class="stat-label">Years of making art</div></div>
         <div class="stat-box"><div class="stat-num">4</div><div class="stat-label">Continents of thrifting, sourcing &amp; research</div></div>
       </div>
-      <div class="about-portrait-secondary">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354977/20230512_230129_guvdds.jpg" alt="Sunnie">
-      </div>
+      <div class="about-portrait-secondary"><img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778354977/20230512_230129_guvdds.jpg" alt="Sunnie"></div>
     </div>
+    <p class="stats-note reveal">Yes, this is all one person. I'm living my most fabulous Venus-inspired life — and I always have room for the right conversation. <a href="contact.html">Get in touch, I'd love to hear from you. →</a></p>
   </div>
 </section>
 
-<!-- QUOTE 2 -->
+<!-- 11. QUOTE STRIP -->
 <div class="quote-strip reveal">
   <p>"All the world is a stage and a miracle if we have eyes to see it."</p>
   <span>— Sunnie</span>
 </div>
 
-<!-- BURST → ART STRIP -->
+<!-- 12. BURST → ART STRIP -->
 <div class="burst-divider" style="background:var(--black);">
   <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/></svg>
 </div>
 
-<!-- 1×3 ART STRIP -->
+<!-- 13. ART STRIP -->
 <section style="background:var(--black);padding:0 0 80px;">
   <div class="art-strip reveal">
     <div class="art-strip-item" onclick="openLb(this)" data-title="Mini Tiger · Ink on Paper">
@@ -323,51 +343,39 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
   </div>
 </section>
 
-<!-- LMSB BOTTOM -->
+<!-- 14. BURST -->
 <div class="burst-divider" style="background:var(--black);">
   <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/></svg>
 </div>
+
+<!-- 15. FOOTER LMSB -->
 <div class="lmsb-strip">
   <a href="contact.html" class="lmsb-main">Let's make something <em>beautiful.</em></a>
   <a href="contact.html" class="lmsb-reach">reach out →</a>
   <a href="mailto:hello@sunnieanand.com" class="lmsb-email">hello@sunnieanand.com</a>
 </div>
+
+<!-- 16. FOOTER -->
 <footer class="site-footer"><p class="footer-note">SunnieAnand.com · 2026 · Los Angeles</p></footer>
 
 <script>
 // LIGHTBOX
-const lbItems = [];
-let lbIdx = 0;
-function buildIdx() { if(!lbItems.length) document.querySelectorAll('.art-strip-item[onclick]').forEach(i=>lbItems.push(i)); }
-function openLb(el) { buildIdx(); lbIdx=lbItems.indexOf(el); showLb(el.querySelector('img').src, el.dataset.title||''); }
-function showLb(src, title) {
-  document.getElementById('lb-img').src=src;
-  document.getElementById('lb-title').textContent=title;
-  document.getElementById('lightbox').classList.add('active');
-  document.body.style.overflow='hidden';
-}
-function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); document.body.style.overflow=''; }
-function navLb(dir) { buildIdx(); lbIdx=(lbIdx+dir+lbItems.length)%lbItems.length; const el=lbItems[lbIdx]; showLb(el.querySelector('img').src, el.dataset.title||''); }
+const lbItems=[];let lbIdx=0;
+function buildIdx(){if(!lbItems.length)document.querySelectorAll('.art-strip-item[onclick]').forEach(i=>lbItems.push(i));}
+function openLb(el){buildIdx();lbIdx=lbItems.indexOf(el);showLb(el.querySelector('img').src,el.dataset.title||'');}
+function showLb(src,title){document.getElementById('lb-img').src=src;document.getElementById('lb-title').textContent=title;document.getElementById('lightbox').classList.add('active');document.body.style.overflow='hidden';}
+function closeLightbox(){document.getElementById('lightbox').classList.remove('active');document.body.style.overflow='';}
+function navLb(dir){buildIdx();lbIdx=(lbIdx+dir+lbItems.length)%lbItems.length;const el=lbItems[lbIdx];showLb(el.querySelector('img').src,el.dataset.title||'');}
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))closeLightbox();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();if(e.key==='ArrowRight')navLb(1);if(e.key==='ArrowLeft')navLb(-1);});
 let swipeX=0;
 document.getElementById('lightbox').addEventListener('touchstart',e=>{swipeX=e.touches[0].clientX;},{passive:true});
 document.getElementById('lightbox').addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-swipeX;if(Math.abs(dx)>50)navLb(dx<0?1:-1);},{passive:true});
-document.querySelectorAll('.art-strip-item').forEach(el=>{
-  el.addEventListener('touchend',function(e){e.preventDefault();openLb(this);},{passive:false});
-});
+document.querySelectorAll('.art-strip-item').forEach(el=>{el.addEventListener('touchend',function(e){e.preventDefault();openLb(this);},{passive:false});});
 
 // HAMBURGER
-function toggleMobileMenu() {
-  const menu=document.getElementById('mobileMenu'),btn=document.getElementById('hamburgerBtn');
-  menu.classList.toggle('open');btn.classList.toggle('open');
-  document.body.style.overflow=menu.classList.contains('open')?'hidden':'';
-}
-function closeMobileMenu() {
-  document.getElementById('mobileMenu').classList.remove('open');
-  document.getElementById('hamburgerBtn').classList.remove('open');
-  document.body.style.overflow='';
-}
+function toggleMobileMenu(){const menu=document.getElementById('mobileMenu'),btn=document.getElementById('hamburgerBtn');menu.classList.toggle('open');btn.classList.toggle('open');document.body.style.overflow=menu.classList.contains('open')?'hidden':'';}
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');document.getElementById('hamburgerBtn').classList.remove('open');document.body.style.overflow='';}
 document.querySelectorAll('.mobile-menu a').forEach(a=>a.addEventListener('click',closeMobileMenu));
 
 // BACK TO TOP
@@ -380,13 +388,10 @@ let mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;});
 function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;requestAnimationFrame(animRing);}
 animRing();
-document.querySelectorAll('a,button,.tile,.art-strip-item,.stat-box').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(245,200,66,0.8)';});
-  el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(245,200,66,0.5)';});
-});
+document.querySelectorAll('a,button,.tile,.art-strip-item,.stat-box').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(245,200,66,0.8)';});el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(245,200,66,0.5)';});});
 
 // REVEAL
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');e.target.querySelectorAll('.stat-box,.tile,.art-strip-item').forEach((c,i)=>{c.style.transitionDelay=`${i*0.08}s`;});}});},{threshold:0.06});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');e.target.querySelectorAll('.stat-box,.tile,.art-strip-item').forEach((c,i)=>{c.style.transitionDelay=`${i*0.06}s`;});}});},{threshold:0.06});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
