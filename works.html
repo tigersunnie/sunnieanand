@@ -74,16 +74,19 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .fact-value { font-family:'Playfair Display',serif; font-size:clamp(1.3rem,2.5vw,1.8rem); font-weight:900; color:var(--marigold); line-height:1.1; margin-bottom:10px; }
 .fact-label { font-size:1.1rem; color:rgba(242,237,228,0.65); line-height:1.5; }
 
-/* CURATED GRID — 4 col square cards with 3-line hover */
-.curated-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:4px; }
-.curated-item { position:relative; overflow:hidden; aspect-ratio:1; background:#0e0c0a; cursor:pointer; }
-.curated-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.6s; }
-.curated-item:hover img { transform:scale(1.04); }
-.curated-overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(14,12,10,0.95) 0%,transparent 60%); opacity:0; transition:opacity 0.4s; display:flex; flex-direction:column; justify-content:flex-end; padding:18px; z-index:3; }
-.curated-item:hover .curated-overlay { opacity:1; }
-.curated-title { font-family:'Playfair Display',serif; font-size:1rem; font-style:italic; color:var(--off-white); margin-bottom:3px; }
-.curated-details { font-size:0.82rem; letter-spacing:0.08em; color:var(--marigold); margin-bottom:4px; font-weight:300; }
-.curated-avail { font-size:0.8rem; color:var(--mid); font-weight:300; }
+/* CURATED GRID — masonry style matching feminist collage */
+.curated-grid { columns:3; column-gap:4px; }
+.curated-item { break-inside:avoid; margin-bottom:4px; position:relative; overflow:hidden; background:#0e0c0a; cursor:pointer; }
+.curated-item img { width:100%; display:block; object-fit:contain; background:#0e0c0a; transition:transform 0.5s; }
+.curated-item:hover img { transform:scale(1.02); }
+.curated-overlay { position:absolute; inset:0; background:rgba(14,12,10,0); transition:background 0.4s; display:flex; align-items:flex-end; padding:20px; }
+.curated-item:hover .curated-overlay { background:rgba(14,12,10,0.85); }
+.curated-title { font-family:'Playfair Display',serif; font-size:1.1rem; font-style:italic; color:var(--off-white); opacity:0; transition:opacity 0.3s; }
+.curated-details { font-size:0.82rem; color:var(--marigold); opacity:0; transition:opacity 0.3s; margin-top:3px; font-weight:300; }
+.curated-avail { font-size:0.8rem; color:var(--mid); opacity:0; transition:opacity 0.3s; margin-top:2px; font-weight:300; }
+.curated-item:hover .curated-title,
+.curated-item:hover .curated-details,
+.curated-item:hover .curated-avail { opacity:1; }
 
 /* PORTFOLIO GRIDS */
 .portfolio-grid { display:grid; gap:4px; }
@@ -170,7 +173,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
   .curatorial-note { padding:40px 24px 0; }
   .statement-grid { grid-template-columns:1fr; }
   .facts-grid { grid-template-columns:1fr 1fr; }
-  .curated-grid { grid-template-columns:1fr 1fr; }
+  .curated-grid { columns:2; }
   .portfolio-grid.cols-4 { grid-template-columns:1fr 1fr; }
   .natural-gallery { columns:2; }
 }
@@ -246,7 +249,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 <!-- IN-PAGE NAV -->
 <div class="page-nav">
   <a href="#installation">Installation</a>
-  <a href="#daily-practice">Daily Practice</a>
+  <a href="#daily-practice">Collector's Selection</a>
   <a href="#collage">Feminist Collage</a>
   <a href="dive.html">Deep Dive</a>
 </div>
@@ -258,7 +261,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 
 <!-- CURATORIAL NOTE -->
 <div class="curatorial-note reveal">
-  <p>"I am a Venusian enthusiast with very strong opinions about color. What you're about to see is the result of showing up every morning, across every medium, for years. Something in here was made for you."</p>
+  <p>I am a Venusian enthusiast with very strong opinions about color. What you're about to see is the result of showing up every morning, across every medium, for years. Something in here was made for you.</p>
 </div>
 
 <!-- ARTIST STATEMENT -->
@@ -333,174 +336,81 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
     <div class="curated-grid reveal">
 
       <!-- #2 Birdman -->
-      <div class="curated-item" onclick="openCurated(this)"
-        data-title="Birdman"
-        data-details="2024 · Acrylic · 24×36in"
-        data-avail="Prints available"
-        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355115/Screenshot_20250209_212759_WhatsAppBusiness_hiyej5.jpg">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778355115/Screenshot_20250209_212759_WhatsAppBusiness_hiyej5.jpg" alt="Birdman">
-        <div class="curated-overlay">
-          <div class="curated-title">Birdman</div>
-          <div class="curated-details">2024 · Acrylic · 24×36in</div>
-          <div class="curated-avail">Prints available</div>
-        </div>
+      <div class="curated-item" onclick="openLbNat(this)" data-title="Birdman" data-details="2024 · Acrylic · 24×36in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355115/Screenshot_20250209_212759_WhatsAppBusiness_hiyej5.jpg" alt="Birdman">
+        <div class="curated-overlay"><div class="curated-title">Birdman</div><div class="curated-details">2024 · Acrylic · 24×36in</div><div class="curated-avail">Prints available</div></div>
       </div>
 
       <!-- #3 Galaxy Girl -->
-      <div class="curated-item" onclick="openCurated(this)"
-        data-title="Galaxy Girl"
-        data-details="2022 · Mixed media, watercolor + collage · 9×11in"
-        data-avail="Prints available"
-        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355113/Screenshot_20221010_131537_qnhbs1.jpg">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778355113/Screenshot_20221010_131537_qnhbs1.jpg" alt="Galaxy Girl">
-        <div class="curated-overlay">
-          <div class="curated-title">Galaxy Girl</div>
-          <div class="curated-details">2022 · Mixed media, watercolor + collage · 9×11in</div>
-          <div class="curated-avail">Prints available</div>
-        </div>
+      <div class="curated-item" onclick="openLbNat(this)" data-title="Galaxy Girl" data-details="2022 · Mixed media, watercolor + collage · 9×11in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355113/Screenshot_20221010_131537_qnhbs1.jpg" alt="Galaxy Girl">
+        <div class="curated-overlay"><div class="curated-title">Galaxy Girl</div><div class="curated-details">2022 · Mixed media, watercolor + collage · 9×11in</div><div class="curated-avail">Prints available</div></div>
       </div>
 
       <!-- #5 Halo -->
-      <div class="curated-item" onclick="openCurated(this)"
-        data-title="Halo"
-        data-details="2024 · Acrylic · 18×24in"
-        data-avail="Available"
-        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440909/IMG_20240826_112612_603_km8sfg.heic">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778440909/IMG_20240826_112612_603_km8sfg.heic" alt="Halo">
-        <div class="curated-overlay">
-          <div class="curated-title">Halo</div>
-          <div class="curated-details">2024 · Acrylic · 18×24in</div>
-          <div class="curated-avail">Available</div>
-        </div>
+      <div class="curated-item" onclick="openLbNat(this)" data-title="Halo" data-details="2024 · Acrylic · 18×24in" data-avail="Available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440909/IMG_20240826_112612_603_km8sfg.heic" alt="Halo">
+        <div class="curated-overlay"><div class="curated-title">Halo</div><div class="curated-details">2024 · Acrylic · 18×24in</div><div class="curated-avail">Available</div></div>
       </div>
 
       <!-- #9 Ink Orb -->
-      <div class="curated-item" onclick="openCurated(this)"
-        data-title="Ink Orb"
-        data-details="2024 · Watercolor, ink, gold furniture paint, collage · 9×12in"
-        data-avail="Prints available"
-        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355125/Screenshot_20250430_124741_Instagram_dajfrn.jpg">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778355125/Screenshot_20250430_124741_Instagram_dajfrn.jpg" alt="Ink Orb">
-        <div class="curated-overlay">
-          <div class="curated-title">Ink Orb</div>
-          <div class="curated-details">2024 · Watercolor, ink, gold furniture paint, collage · 9×12in</div>
-          <div class="curated-avail">Prints available</div>
-        </div>
+      <div class="curated-item" onclick="openLbNat(this)" data-title="Ink Orb" data-details="2024 · Watercolor, ink, gold furniture paint, collage · 9×12in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355125/Screenshot_20250430_124741_Instagram_dajfrn.jpg" alt="Ink Orb">
+        <div class="curated-overlay"><div class="curated-title">Ink Orb</div><div class="curated-details">2024 · Watercolor, ink, gold furniture paint, collage · 9×12in</div><div class="curated-avail">Prints available</div></div>
       </div>
 
       <!-- #10 Rootball -->
-      <div class="curated-item" onclick="openCurated(this)"
-        data-title="Rootball"
-        data-details="2021 · Pen and ink · 11×14in"
-        data-avail="Prints available"
-        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441649/20230912_013119_2_rahege.jpg">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778441649/20230912_013119_2_rahege.jpg" alt="Rootball">
-        <div class="curated-overlay">
-          <div class="curated-title">Rootball</div>
-          <div class="curated-details">2021 · Pen and ink · 11×14in</div>
-          <div class="curated-avail">Prints available</div>
-        </div>
+      <div class="curated-item" onclick="openLbNat(this)" data-title="Rootball" data-details="2021 · Pen and ink · 11×14in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441649/20230912_013119_2_rahege.jpg" alt="Rootball">
+        <div class="curated-overlay"><div class="curated-title">Rootball</div><div class="curated-details">2021 · Pen and ink · 11×14in</div><div class="curated-avail">Prints available</div></div>
       </div>
 
       <!-- #15 Mini Tiger -->
-      <div class="curated-item" onclick="openCurated(this)"
-        data-title="Mini Tiger"
-        data-details="2023 · Ink, gold furniture paint, collage · 5×7in"
-        data-avail="Prints available"
-        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355111/IMG-20260408-WA0001_ghpqgw.jpg">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778355111/IMG-20260408-WA0001_ghpqgw.jpg" alt="Mini Tiger">
-        <div class="curated-overlay">
-          <div class="curated-title">Mini Tiger</div>
-          <div class="curated-details">2023 · Ink, gold furniture paint, collage · 5×7in</div>
-          <div class="curated-avail">Prints available</div>
-        </div>
+      <div class="curated-item" onclick="openLbNat(this)" data-title="Mini Tiger" data-details="2023 · Ink, gold furniture paint, collage · 5×7in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355111/IMG-20260408-WA0001_ghpqgw.jpg" alt="Mini Tiger">
+        <div class="curated-overlay"><div class="curated-title">Mini Tiger</div><div class="curated-details">2023 · Ink, gold furniture paint, collage · 5×7in</div><div class="curated-avail">Prints available</div></div>
       </div>
 
       <!-- #19 Watercolor Pothos -->
-      <div class="curated-item" onclick="openCurated(this)"
-        data-title="Watercolor Pothos"
-        data-details="2019 · Watercolor and ink · 4×6in"
-        data-avail="Prints available"
-        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355109/IMG_20231103_000947_433_weeolz.jpg">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778355109/IMG_20231103_000947_433_weeolz.jpg" alt="Watercolor Pothos">
-        <div class="curated-overlay">
-          <div class="curated-title">Watercolor Pothos</div>
-          <div class="curated-details">2019 · Watercolor and ink · 4×6in</div>
-          <div class="curated-avail">Prints available</div>
-        </div>
+      <div class="curated-item" onclick="openLbNat(this)" data-title="Watercolor Pothos" data-details="2019 · Watercolor and ink · 4×6in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355109/IMG_20231103_000947_433_weeolz.jpg" alt="Watercolor Pothos">
+        <div class="curated-overlay"><div class="curated-title">Watercolor Pothos</div><div class="curated-details">2019 · Watercolor and ink · 4×6in</div><div class="curated-avail">Prints available</div></div>
       </div>
 
       <!-- #24 Oil Pastel Garden -->
-      <div class="curated-item" onclick="openCurated(this)"
-        data-title="Oil Pastel Garden"
-        data-details="2024 · Oil pastel · 8.5×11in"
-        data-avail="Available"
-        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440902/IMG_20231231_022153_317_un6aqd.jpg">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778440902/IMG_20231231_022153_317_un6aqd.jpg" alt="Oil Pastel Garden">
-        <div class="curated-overlay">
-          <div class="curated-title">Oil Pastel Garden</div>
-          <div class="curated-details">2024 · Oil pastel · 8.5×11in</div>
-          <div class="curated-avail">Available</div>
-        </div>
+      <div class="curated-item" onclick="openLbNat(this)" data-title="Oil Pastel Garden" data-details="2024 · Oil pastel · 8.5×11in" data-avail="Available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440902/IMG_20231231_022153_317_un6aqd.jpg" alt="Oil Pastel Garden">
+        <div class="curated-overlay"><div class="curated-title">Oil Pastel Garden</div><div class="curated-details">2024 · Oil pastel · 8.5×11in</div><div class="curated-avail">Available</div></div>
       </div>
 
       <!-- #25 7th Dimension (Map) -->
-      <div class="curated-item" onclick="openCurated(this)"
-        data-title="7th Dimension (Map)"
-        data-details="2025 · Acrylic paint, house paint, caulk · 60×48in"
-        data-avail="NFS"
-        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355125/Screenshot_20260508_021518_Photos_xgcn5c.jpg">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778355125/Screenshot_20260508_021518_Photos_xgcn5c.jpg" alt="7th Dimension Map">
-        <div class="curated-overlay">
-          <div class="curated-title">7th Dimension (Map)</div>
-          <div class="curated-details">2025 · Acrylic paint, house paint, caulk · 60×48in</div>
-          <div class="curated-avail">NFS</div>
-        </div>
+      <div class="curated-item" onclick="openLbNat(this)" data-title="7th Dimension (Map)" data-details="2025 · Acrylic paint, house paint, caulk · 60×48in" data-avail="NFS">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778355125/Screenshot_20260508_021518_Photos_xgcn5c.jpg" alt="7th Dimension Map">
+        <div class="curated-overlay"><div class="curated-title">7th Dimension (Map)</div><div class="curated-details">2025 · Acrylic paint, house paint, caulk · 60×48in</div><div class="curated-avail">NFS</div></div>
       </div>
 
       <!-- #27 Oil and Water -->
-      <div class="curated-item" onclick="openCurated(this)"
-        data-title="Oil and Water"
-        data-details="2020 · Collage and ink · 6×9in"
-        data-avail="Prints available"
-        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441654/20231029_144125_2_kgg48d.jpg">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778441654/20231029_144125_2_kgg48d.jpg" alt="Oil and Water">
-        <div class="curated-overlay">
-          <div class="curated-title">Oil and Water</div>
-          <div class="curated-details">2020 · Collage and ink · 6×9in</div>
-          <div class="curated-avail">Prints available</div>
-        </div>
+      <div class="curated-item" onclick="openLbNat(this)" data-title="Oil and Water" data-details="2020 · Collage and ink · 6×9in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778441654/20231029_144125_2_kgg48d.jpg" alt="Oil and Water">
+        <div class="curated-overlay"><div class="curated-title">Oil and Water</div><div class="curated-details">2020 · Collage and ink · 6×9in</div><div class="curated-avail">Prints available</div></div>
       </div>
 
       <!-- #36 Stones -->
-      <div class="curated-item" onclick="openCurated(this)"
-        data-title="Stones"
-        data-details="2023 · Ink · 9×11in"
-        data-avail="Prints available"
-        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440872/20220721_072522_gry6de.jpg">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778440872/20220721_072522_gry6de.jpg" alt="Stones">
-        <div class="curated-overlay">
-          <div class="curated-title">Stones</div>
-          <div class="curated-details">2023 · Ink · 9×11in</div>
-          <div class="curated-avail">Prints available</div>
-        </div>
+      <div class="curated-item" onclick="openLbNat(this)" data-title="Stones" data-details="2023 · Ink · 9×11in" data-avail="Prints available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778440872/20220721_072522_gry6de.jpg" alt="Stones">
+        <div class="curated-overlay"><div class="curated-title">Stones</div><div class="curated-details">2023 · Ink · 9×11in</div><div class="curated-avail">Prints available</div></div>
       </div>
 
       <!-- Aster -->
-      <div class="curated-item" onclick="openCurated(this)"
-        data-title="Aster"
-        data-details="2024 · Acrylic and house paint · 60×48in"
-        data-avail="Available"
-        data-img="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778565984/Screenshot_20221225_231848_Gallery_1_b6sdcq.jpg">
-        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto,w_600/f_auto/v1778565984/Screenshot_20221225_231848_Gallery_1_b6sdcq.jpg" alt="Aster">
-        <div class="curated-overlay">
-          <div class="curated-title">Aster</div>
-          <div class="curated-details">2024 · Acrylic and house paint · 60×48in</div>
-          <div class="curated-avail">Available</div>
-        </div>
+      <div class="curated-item" onclick="openLbNat(this)" data-title="Aster" data-details="2024 · Acrylic and house paint · 60×48in" data-avail="Available">
+        <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1778565984/Screenshot_20221225_231848_Gallery_1_b6sdcq.jpg" alt="Aster">
+        <div class="curated-overlay"><div class="curated-title">Aster</div><div class="curated-details">2024 · Acrylic and house paint · 60×48in</div><div class="curated-avail">Available</div></div>
       </div>
 
     </div><!-- end curated-grid -->
+
+    <!-- COLLECTIONS LINE -->
+    <p class="reveal" style="text-align:center;font-size:1rem;color:rgba(242,237,228,0.45);letter-spacing:0.06em;margin-top:40px;font-family:'Jost',sans-serif;font-weight:300;">Works held in private collections in San Francisco, Atlanta, New York, Mumbai, and Washington DC.</p>
 
     <!-- DEEP DIVE CTA -->
     <div class="deep-dive-cta reveal">

@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact — Sunnie Anand</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Jost:ital,wght@0,200;0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-:root { --black:#0e0c0a; --off-white:#f2ede4; --marigold:#f5c842; --gold:#c9a84c; --rose:#e8917f; --rose-deep:#8c4a3f; --mid:#6b6259; }
-html { scroll-behavior:smooth; }
+:root { --black:#0e0c0a; --off-white:#f2ede4; --warm-white:#faf7f2; --marigold:#f5c842; --gold:#c9a84c; --rose:#e8917f; --rose-deep:#8c4a3f; --ink:#1c1814; --mid:#6b6259; }
+html { scroll-behavior:smooth; overflow-x:hidden; }
 body { background:var(--black); color:var(--off-white); font-family:'Jost',sans-serif; font-weight:300; font-size:1.2rem; line-height:1.8; overflow-x:hidden; cursor:none; }
 .cursor { width:8px; height:8px; background:var(--marigold); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; mix-blend-mode:screen; }
 .cursor-ring { width:32px; height:32px; border:1px solid rgba(245,200,66,0.5); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9998; transition:transform 0.4s ease, width 0.3s, height 0.3s, border-color 0.3s; }
@@ -20,8 +20,6 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .nav-links { display:flex; gap:28px; list-style:none; flex-wrap:wrap; align-items:center; }
 .nav-links a { font-size:0.9rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,237,228,0.75); text-decoration:none; transition:color 0.2s; }
 .nav-links a:hover, .nav-links a.active { color:var(--marigold); }
-
-/* HAMBURGER */
 .hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; z-index:200; background:none; border:none; }
 .hamburger span { display:block; width:24px; height:2px; background:var(--off-white); transition:transform 0.3s, opacity 0.3s; }
 .hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
@@ -35,42 +33,73 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .mobile-menu-close { position:absolute; top:24px; right:24px; font-size:2rem; color:var(--off-white); background:none; border:none; cursor:pointer; padding:8px; opacity:0.7; line-height:1; }
 @media(max-width:900px) { nav { padding:20px 24px; } .nav-links { display:none; } .hamburger { display:flex; } }
 
-/* CONTACT */
-.contact-wrap { max-width:680px; margin:0 auto; padding:80px 40px 120px; }
-.contact-eyebrow { font-size:1rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--marigold); margin-bottom:20px; }
-.contact-pre { font-family:'Playfair Display',serif; font-size:clamp(1.1rem,1.8vw,1.4rem); font-style:italic; color:var(--mid); margin-bottom:16px; line-height:1.6; }
-.contact-main { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,7vw,5rem); font-weight:900; line-height:1; color:var(--off-white); margin-bottom:56px; }
-.contact-main em { color:var(--marigold); font-style:italic; font-weight:400; }
+/* BURST */
+.burst-divider { width:100%; display:flex; align-items:center; justify-content:center; padding:20px 0; }
 
-.form-group { margin-bottom:28px; }
-.form-label { display:block; font-size:1rem; letter-spacing:0.18em; text-transform:uppercase; color:rgba(242,237,228,0.6); margin-bottom:10px; }
-.form-input, .form-select, .form-textarea {
-  width:100%; background:rgba(242,237,228,0.05); border:1px solid rgba(245,200,66,0.2);
-  color:var(--off-white); font-family:'Jost',sans-serif; font-size:1.2rem;
-  padding:16px 20px; outline:none; transition:border-color 0.3s;
-  appearance:none; -webkit-appearance:none; border-radius:0;
-}
-.form-input:focus, .form-select:focus, .form-textarea:focus { border-color:var(--marigold); }
-.form-input::placeholder, .form-textarea::placeholder { color:rgba(242,237,228,0.25); }
-.form-textarea { min-height:160px; resize:vertical; }
-.form-select {
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23f5c842' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat; background-position:right 20px center;
-  background-color:rgba(242,237,228,0.05); cursor:pointer;
-}
-.form-select option { background:var(--black); color:var(--off-white); }
-.form-submit {
-  width:100%; background:transparent; border:1px solid var(--marigold);
-  color:var(--marigold); font-family:'Playfair Display',serif;
-  font-size:1.3rem; font-style:italic; padding:20px; cursor:pointer;
-  transition:background 0.3s, color 0.3s; letter-spacing:0.05em; margin-top:8px;
-}
-.form-submit:hover { background:var(--marigold); color:var(--black); }
+/* PAGE HERO */
+.contact-hero { max-width:900px; margin:0 auto; padding:80px 60px 0; text-align:center; }
+.contact-eyebrow { font-size:1rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--marigold); margin-bottom:16px; opacity:0; animation:fadeUp 0.8s 0.2s forwards; }
+.contact-h1 { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,7vw,5rem); font-weight:900; color:var(--off-white); line-height:1; opacity:0; animation:fadeUp 0.8s 0.4s forwards; }
+.contact-h1 em { color:var(--marigold); font-style:italic; font-weight:400; }
+.contact-avail { margin-top:20px; font-size:1.05rem; color:rgba(242,237,228,0.5); font-family:'Jost',sans-serif; font-weight:300; letter-spacing:0.03em; opacity:0; animation:fadeUp 0.8s 0.55s forwards; }
+.contact-press-above { margin-top:14px; font-size:0.95rem; color:rgba(242,237,228,0.4); font-family:'Jost',sans-serif; font-weight:300; opacity:0; animation:fadeUp 0.8s 0.65s forwards; }
+.contact-press-above a { color:var(--marigold); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.3); transition:border-color 0.2s; }
+.contact-press-above a:hover { border-color:var(--marigold); }
 
-.contact-details { display:flex; gap:40px; justify-content:center; padding:40px 60px; border-top:1px solid rgba(245,200,66,0.1); flex-wrap:wrap; }
-.contact-detail-label { font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--mid); margin-bottom:8px; }
-.contact-detail-value a { font-size:1.1rem; color:var(--off-white); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.3); padding-bottom:2px; transition:color 0.2s; }
-.contact-detail-value a:hover { color:var(--marigold); }
+/* PREFER TO TALK */
+.prefer-talk { display:inline-block; margin-top:20px; border:1px solid rgba(245,200,66,0.2); padding:10px 24px; font-size:0.95rem; color:rgba(242,237,228,0.5); font-family:'Jost',sans-serif; font-weight:300; opacity:0; animation:fadeUp 0.8s 0.75s forwards; }
+.prefer-talk a { color:var(--marigold); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.3); }
+.prefer-talk a:hover { border-color:var(--marigold); }
+
+/* MAIN LAYOUT */
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; max-width:1100px; margin:0 auto; padding:80px 60px; align-items:start; }
+
+/* FORM */
+.contact-form-col h2 { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:var(--off-white); margin-bottom:32px; }
+.contact-form-col h2 em { color:var(--marigold); font-style:italic; font-weight:400; }
+.form-group { margin-bottom:20px; }
+.form-group label { display:block; font-size:0.85rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--mid); margin-bottom:8px; }
+.form-group input,
+.form-group select,
+.form-group textarea { width:100%; background:rgba(242,237,228,0.04); border:1px solid rgba(242,237,228,0.15); color:var(--off-white); font-family:'Jost',sans-serif; font-weight:300; font-size:1.1rem; padding:14px 16px; outline:none; transition:border-color 0.2s; -webkit-appearance:none; appearance:none; }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-color:var(--marigold); }
+.form-group select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23f5c842' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 16px center; padding-right:40px; cursor:pointer; }
+.form-group select option { background:#1a1814; color:var(--off-white); }
+.form-group textarea { resize:vertical; min-height:140px; }
+.form-submit { font-family:'Playfair Display',serif; font-style:italic; font-size:1.2rem; color:var(--black); background:var(--marigold); border:none; padding:18px 48px; cursor:pointer; transition:background 0.2s, opacity 0.2s; display:inline-block; margin-top:8px; }
+.form-submit:hover { background:var(--gold); }
+
+/* SALONS */
+.salons-col { border-top:2px solid var(--marigold); padding-top:32px; }
+.salons-col h3 { font-family:'Playfair Display',serif; font-size:clamp(1.4rem,2.5vw,2rem); font-weight:700; color:var(--off-white); margin-bottom:12px; }
+.salons-col h3 em { color:var(--marigold); font-style:italic; font-weight:400; }
+.salons-col p { font-size:1.1rem; color:rgba(242,237,228,0.7); line-height:1.8; margin-bottom:28px; }
+.salons-tag { font-size:0.88rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); margin-bottom:16px; }
+.salon-form-group { margin-bottom:16px; }
+.salon-form-group input { width:100%; background:rgba(242,237,228,0.04); border:1px solid rgba(242,237,228,0.15); color:var(--off-white); font-family:'Jost',sans-serif; font-weight:300; font-size:1.05rem; padding:12px 16px; outline:none; transition:border-color 0.2s; }
+.salon-form-group input:focus { border-color:var(--marigold); }
+.salon-submit { font-family:'Playfair Display',serif; font-style:italic; font-size:1.1rem; color:var(--black); background:var(--marigold); border:none; padding:14px 36px; cursor:pointer; transition:background 0.2s; }
+.salon-submit:hover { background:var(--gold); }
+.salon-success { display:none; font-size:1rem; color:var(--marigold); margin-top:16px; letter-spacing:0.05em; }
+.salon-artist-note { margin-top:20px; font-size:1rem; color:rgba(242,237,228,0.4); }
+.salon-artist-note a { color:rgba(242,237,228,0.55); border-bottom:1px solid rgba(242,237,228,0.2); text-decoration:none; }
+
+/* INFO STRIP */
+.contact-info-strip { background:#0a0907; border-top:1px solid rgba(245,200,66,0.08); border-bottom:1px solid rgba(245,200,66,0.08); padding:48px 60px; }
+.contact-info-inner { max-width:1100px; margin:0 auto; display:flex; gap:60px; align-items:flex-start; flex-wrap:wrap; }
+.info-item { flex:1; min-width:180px; }
+.info-label { font-size:0.85rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--mid); margin-bottom:8px; }
+.info-value { font-size:1.1rem; color:var(--off-white); }
+.info-value a { color:var(--marigold); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.3); }
+
+/* LMSB */
+.lmsb-strip { background:var(--black); text-align:center; padding:100px 40px; }
+.lmsb-main { font-family:'Playfair Display',serif; font-size:clamp(2rem,5.6vw,4rem); font-weight:900; color:var(--off-white); text-decoration:none; display:block; line-height:1; transition:opacity 0.3s; }
+.lmsb-main em { color:var(--marigold); font-style:italic; font-weight:400; }
+.lmsb-main:hover { opacity:0.8; }
+.lmsb-sub { display:block; margin-top:20px; font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); text-decoration:none; }
 
 /* BACK TO TOP */
 .back-to-top { position:fixed; bottom:32px; right:32px; width:44px; height:44px; background:rgba(14,12,10,0.85); border:1px solid rgba(245,200,66,0.3); color:var(--marigold); font-size:1.2rem; display:flex; align-items:center; justify-content:center; text-decoration:none; opacity:0; transition:opacity 0.3s; z-index:500; }
@@ -78,15 +107,29 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 .back-to-top:hover { border-color:var(--marigold); }
 
 .site-footer { background:var(--black); text-align:center; padding:32px 60px; border-top:1px solid rgba(245,200,66,0.08); }
+.footer-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
 .footer-note { font-size:1rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--rose); }
+.footer-press { font-size:0.9rem; color:rgba(242,237,228,0.35); font-family:'Jost',sans-serif; font-weight:300; }
+.footer-press a { color:rgba(245,200,66,0.6); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.2); transition:color 0.2s; }
+.footer-press a:hover { color:var(--marigold); }
 
+@keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
 .reveal { opacity:0; transform:translateY(40px); transition:opacity 0.8s ease, transform 0.8s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
+
+@media(max-width:900px) {
+  .contact-hero { padding:60px 24px 0; }
+  .contact-grid { grid-template-columns:1fr; gap:60px; padding:60px 24px; }
+  .contact-info-strip { padding:40px 24px; }
+  .contact-info-inner { flex-direction:column; gap:32px; }
+}
 </style>
 </head>
 <body>
+
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+<a class="back-to-top" id="backTop" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
@@ -99,8 +142,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
   <a href="contact.html" class="active">Contact</a>
 </div>
 
-<a class="back-to-top" id="backTop" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
-
+<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">Sunnie Anand</a>
   <ul class="nav-links">
@@ -111,94 +153,140 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
     <li><a href="pov.html">POV</a></li>
     <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
-  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
-<div class="contact-wrap reveal">
+<!-- BURST -->
+<div class="burst-divider" style="background:var(--black);">
+  <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="140" y1="16" x2="75" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="140" y1="16" x2="75" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="180" y1="16" x2="245" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="180" y1="16" x2="245" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/></svg>
+</div>
+
+<!-- PAGE HERO -->
+<div class="contact-hero">
   <p class="contact-eyebrow">A Venusian enthusiast · Los Angeles</p>
-  <p class="contact-pre">"You can just... do that?" Yes we can.</p>
-  <h1 class="contact-main">Let's make<br>something <em>beautiful.</em></h1>
-
-  <form action="https://formspree.io/f/meenpzgo" method="POST">
-    <div class="form-group">
-      <label class="form-label" for="name">Your Name</label>
-      <input class="form-input" type="text" id="name" name="name" required placeholder="Full name">
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="email">Email Address</label>
-      <input class="form-input" type="email" id="email" name="email" required placeholder="your@email.com">
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="subject">I'm reaching out about</label>
-      <select class="form-select" id="subject" name="subject">
-        <option value="" disabled selected>Select a topic</option>
-        <option>Art Curation &amp; Consulting</option>
-        <option>Sunnie Salons Waitlist</option>
-        <option>Commission a Creative Work</option>
-        <option>Fashion &amp; Styling</option>
-        <option>Press &amp; Media</option>
-        <option>Speaking &amp; Art Talks</option>
-        <option>General Hello</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <label class="form-label" for="message">Your Message</label>
-      <textarea class="form-textarea" id="message" name="message" required placeholder="Tell me what you're dreaming up..."></textarea>
-    </div>
-    <button type="submit" class="form-submit">Let's talk. →</button>
-  </form>
+  <h1 class="contact-h1">Let's make <br>something <em>beautiful.</em></h1>
+  <p class="contact-avail">Currently available for art consultation, gallery talks, art walks, curatorial projects, fashion production, and styling.</p>
+  <p class="contact-press-above"><a href="https://sunnieanand.com/sunnieAnand_press.pdf" target="_blank">Download the press one-pager →</a></p>
+  <div class="prefer-talk">Prefer to talk? Email <a href="mailto:hello@sunnieanand.com">hello@sunnieanand.com</a> to arrange a call.</div>
 </div>
 
-<!-- SUNNIE SALONS KIT SIGNUP -->
-<div id="salons" style="max-width:680px;margin:0 auto;padding:48px 40px 80px;">
-  <div style="border:1px solid var(--marigold);padding:40px 48px;position:relative;background:rgba(245,200,66,0.03);">
-    <div style="position:absolute;top:-1px;left:0;right:0;height:3px;background:var(--marigold);"></div>
-    <p style="font-size:1rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--marigold);margin-bottom:12px;">Now Accepting</p>
-    <h3 style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:var(--off-white);margin-bottom:12px;line-height:1.1;">Sunnie <em style="color:var(--marigold);font-style:italic;font-weight:400;">Salons</em></h3>
-    <p style="font-size:1.2rem;line-height:1.9;color:rgba(242,237,228,0.8);margin-bottom:32px;">An invitation-only gathering around art, ideas, and conversation. Live and in person in Los Angeles, CA.</p>
-    <form action="https://app.kit.com/forms/9430928/subscriptions" method="post" id="salons-kit-form" style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;">
-      <div style="flex:1;min-width:180px;">
-        <label style="display:block;font-size:1rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(242,237,228,0.6);margin-bottom:8px;">First Name</label>
-        <input type="text" name="fields[first_name]" placeholder="Your first name" style="width:100%;background:rgba(242,237,228,0.05);border:1px solid rgba(245,200,66,0.25);color:var(--off-white);font-family:'Jost',sans-serif;font-size:1.1rem;padding:14px 18px;outline:none;border-radius:0;-webkit-appearance:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='#f5c842'" onblur="this.style.borderColor='rgba(245,200,66,0.25)'">
+<!-- BURST -->
+<div class="burst-divider" style="background:var(--black);">
+  <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/></svg>
+</div>
+
+<!-- MAIN CONTACT GRID -->
+<div class="contact-grid reveal">
+
+  <!-- CONTACT FORM -->
+  <div class="contact-form-col">
+    <h2>Let's <em>talk</em></h2>
+    <form action="https://formspree.io/f/hello@sunnieanand.com" method="POST" onsubmit="return handleSubmit(event)">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="Your Name" required>
       </div>
-      <div style="flex:2;min-width:200px;">
-        <label style="display:block;font-size:1rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(242,237,228,0.6);margin-bottom:8px;">Email Address</label>
-        <input type="email" name="email_address" placeholder="your@email.com" required style="width:100%;background:rgba(242,237,228,0.05);border:1px solid rgba(245,200,66,0.25);color:var(--off-white);font-family:'Jost',sans-serif;font-size:1.1rem;padding:14px 18px;outline:none;border-radius:0;-webkit-appearance:none;transition:border-color 0.3s;" onfocus="this.style.borderColor='#f5c842'" onblur="this.style.borderColor='rgba(245,200,66,0.25)'">
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="Email Address" required>
       </div>
-      <div style="flex-shrink:0;">
-        <button type="submit" style="background:transparent;border:1px solid var(--marigold);color:var(--marigold);font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;padding:14px 32px;cursor:pointer;transition:background 0.3s,color 0.3s;white-space:nowrap;" onmouseover="this.style.background='#f5c842';this.style.color='#0e0c0a'" onmouseout="this.style.background='transparent';this.style.color='#f5c842'">I'm on the list. →</button>
+      <div class="form-group">
+        <label for="topic">I'm reaching out about</label>
+        <select id="topic" name="topic">
+          <option value="">Select a topic</option>
+          <option>Art Curation &amp; Consulting</option>
+          <option>Sunnie Salons Waitlist</option>
+          <option>Commission a Creative Work</option>
+          <option>Fashion &amp; Styling</option>
+          <option>Press &amp; Media</option>
+          <option>Speaking &amp; Art Talks</option>
+          <option>General Hello</option>
+        </select>
       </div>
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" placeholder="Your Message"></textarea>
+      </div>
+      <button type="submit" class="form-submit">Let's talk. →</button>
     </form>
-    <div id="salons-success" style="display:none;font-family:'Playfair Display',serif;font-style:italic;font-size:1.2rem;color:var(--marigold);margin-top:20px;">You're on the list. ✦ Watch your inbox.</div>
-    <p style="margin-top:20px;font-size:1rem;color:rgba(242,237,228,0.45);">An artist who wants to be featured? <a href="mailto:hello@sunnieanand.com" style="color:rgba(242,237,228,0.65);border-bottom:1px solid rgba(242,237,228,0.25);text-decoration:none;">hello@sunnieanand.com</a></p>
+  </div>
+
+  <!-- SALONS WAITLIST -->
+  <div class="salons-col" id="salons">
+    <p class="salons-tag">Now Accepting · Los Angeles</p>
+    <h3>Sunnie <em>Salons</em></h3>
+    <p>An invitation-only gathering around art, ideas, and conversation. Live and in person in Los Angeles, CA.</p>
+    <form onsubmit="return handleSalonSubmit(event)">
+      <div class="salon-form-group">
+        <input type="text" name="first_name" placeholder="First Name" required>
+      </div>
+      <div class="salon-form-group">
+        <input type="email" name="salon_email" placeholder="Email Address" required>
+      </div>
+      <button type="submit" class="salon-submit">I'm on the list. →</button>
+      <p class="salon-success" id="salonSuccess">You're on the list. ✦ Watch your inbox.</p>
+    </form>
+    <p class="salon-artist-note">An artist who wants to be featured? <a href="mailto:hello@sunnieanand.com">hello@sunnieanand.com</a></p>
+  </div>
+
+</div>
+
+<!-- INFO STRIP -->
+<div class="contact-info-strip reveal">
+  <div class="contact-info-inner">
+    <div class="info-item">
+      <div class="info-label">Email</div>
+      <div class="info-value"><a href="mailto:hello@sunnieanand.com">hello@sunnieanand.com</a></div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Website</div>
+      <div class="info-value"><a href="https://sunnieanand.com">sunnieanand.com</a></div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Based in</div>
+      <div class="info-value">Los Angeles, CA</div>
+    </div>
   </div>
 </div>
 
-<div class="contact-details reveal">
-  <div>
-    <p class="contact-detail-label">Email</p>
-    <p class="contact-detail-value"><a href="mailto:hello@sunnieanand.com">hello@sunnieanand.com</a></p>
-  </div>
-  <div>
-    <p class="contact-detail-label">Based in</p>
-    <p class="contact-detail-value"><a href="#">Los Angeles, CA</a></p>
-  </div>
-  <div>
-    <p class="contact-detail-label">Website</p>
-    <p class="contact-detail-value"><a href="https://sunnieanand.com" target="_blank">sunnieanand.com</a></p>
-  </div>
+<!-- BURST -->
+<div class="burst-divider" style="background:var(--black);">
+  <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/></svg>
 </div>
 
-<footer class="site-footer"><p class="footer-note">SunnieAnand.com · 2026 · Los Angeles</p></footer>
+<!-- LMSB -->
+<div class="lmsb-strip">
+  <a href="mailto:hello@sunnieanand.com" class="lmsb-main">Let's make something <em>beautiful.</em></a>
+  <a href="mailto:hello@sunnieanand.com" class="lmsb-sub">hello@sunnieanand.com →</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p class="footer-note">SunnieAnand.com · 2026</p>
+    <p class="footer-press"><a href="https://sunnieanand.com/sunnieAnand_press.pdf" target="_blank">Download press one-pager →</a></p>
+  </div>
+</footer>
 
 <script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Sent. ✦';
+  btn.style.background = 'var(--gold)';
+  btn.disabled = true;
+  return false;
+}
+function handleSalonSubmit(e) {
+  e.preventDefault();
+  document.getElementById('salonSuccess').style.display = 'block';
+  e.target.querySelector('.salon-submit').style.display = 'none';
+  return false;
+}
+
 function toggleMobileMenu() {
-  const menu = document.getElementById('mobileMenu');
-  const btn = document.getElementById('hamburgerBtn');
-  menu.classList.toggle('open');
-  btn.classList.toggle('open');
+  const menu = document.getElementById('mobileMenu'), btn = document.getElementById('hamburgerBtn');
+  menu.classList.toggle('open'); btn.classList.toggle('open');
   document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
 }
 function closeMobileMenu() {
@@ -211,29 +299,18 @@ document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('cli
 const backTop = document.getElementById('backTop');
 window.addEventListener('scroll', () => backTop.classList.toggle('visible', window.scrollY > 400));
 
-const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+const cursor = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;});
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cursor.style.transform=`translate(${mx-4}px,${my-4}px)`; });
 function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;requestAnimationFrame(animRing);}
 animRing();
-document.querySelectorAll('a,button').forEach(el=>{el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(245,200,66,0.8)';});el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(245,200,66,0.5)';});});
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-</script>
-
-<script>
-document.getElementById('salons-kit-form').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const form = e.target;
-  const data = new FormData(form);
-  try {
-    await fetch(form.action, { method:'POST', body:data, headers:{'Accept':'application/json'} });
-    form.style.display = 'none';
-    document.getElementById('salons-success').style.display = 'block';
-  } catch(err) {
-    form.submit();
-  }
+document.querySelectorAll('a,input,textarea,select,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(245,200,66,0.8)';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(245,200,66,0.5)';});
 });
+
+const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold:0.06 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 </script>
 </body>
 </html>
