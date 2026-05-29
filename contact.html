@@ -193,7 +193,7 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
   <!-- CONTACT FORM -->
   <div class="contact-form-col">
     <h2>Let's <em>talk</em></h2>
-    <form action="https://formspree.io/f/hello@sunnieanand.com" method="POST" onsubmit="return handleSubmit(event)">
+    <form action="https://formspree.io/f/meenpzgo" method="POST" onsubmit="return handleSubmit(event)">
       <div class="form-group">
         <label for="name">Your Name</label>
         <input type="text" id="name" name="name" placeholder="Your Name" required>
@@ -228,12 +228,12 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
     <p class="salons-tag">Now Accepting · Los Angeles</p>
     <h3>Sunnie <em>Salons</em></h3>
     <p>An invitation-only gathering around art, ideas, and conversation. Live and in person in Los Angeles, CA.</p>
-    <form onsubmit="return handleSalonSubmit(event)">
+    <form id="salonForm" action="https://app.kit.com/forms/9430928/subscriptions" method="post" onsubmit="return handleSalonSubmit(event)">
       <div class="salon-form-group">
-        <input type="text" name="first_name" placeholder="First Name" required>
+        <input type="text" name="fields[first_name]" placeholder="First Name" required>
       </div>
       <div class="salon-form-group">
-        <input type="email" name="salon_email" placeholder="Email Address" required>
+        <input type="email" name="email_address" placeholder="Email Address" required>
       </div>
       <button type="submit" class="salon-submit">I'm on the list. →</button>
       <p class="salon-success" id="salonSuccess">You're on the list. ✦ Watch your inbox.</p>
@@ -282,18 +282,35 @@ nav { display:flex; justify-content:space-between; align-items:center; padding:2
 
 <script>
 function handleSubmit(e) {
-  e.preventDefault();
+  // Let Formspree handle submission natively — don't preventDefault
   const btn = e.target.querySelector('.form-submit');
-  btn.textContent = 'Sent. ✦';
+  btn.textContent = 'Sending... ✦';
   btn.style.background = 'var(--gold)';
   btn.disabled = true;
-  return false;
+  return true; // allow native submit to Formspree
 }
 function handleSalonSubmit(e) {
-  e.preventDefault();
-  document.getElementById('salonSuccess').style.display = 'block';
-  e.target.querySelector('.salon-submit').style.display = 'none';
-  return false;
+  const form = document.getElementById('salonForm');
+
+  // Create hidden iframe to absorb Kit redirect
+  let iframe = document.getElementById('kit-frame');
+  if (!iframe) {
+    iframe = document.createElement('iframe');
+    iframe.id = 'kit-frame';
+    iframe.name = 'kit-frame';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+  }
+  form.target = 'kit-frame';
+
+  // Clear fields and show success after delay
+  setTimeout(function() {
+    form.querySelectorAll('input').forEach(i => i.value = '');
+    form.querySelector('.salon-submit').style.display = 'none';
+    document.getElementById('salonSuccess').style.display = 'block';
+  }, 600);
+
+  return true; // allow native submit to Kit
 }
 
 function toggleMobileMenu() {
