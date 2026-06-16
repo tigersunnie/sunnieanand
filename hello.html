@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Update · Sunnie Anand</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Jost:ital,wght@0,200;0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root { --black:#0e0c0a; --off-white:#f2ede4; --warm-white:#faf7f2; --marigold:#f5c842; --gold:#c9a84c; --rose:#e8917f; --rose-deep:#8c4a3f; --ink:#1c1814; --mid:#6b6259; }
+html { scroll-behavior:smooth; overflow-x:hidden; }
+body { background:var(--black); color:var(--off-white); font-family:'Jost',sans-serif; font-weight:300; font-size:1.1rem; line-height:1.9; overflow-x:hidden; cursor:none; }
+.cursor { width:8px; height:8px; background:var(--marigold); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9999; mix-blend-mode:screen; }
+.cursor-ring { width:32px; height:32px; border:1px solid rgba(245,200,66,0.5); border-radius:50%; position:fixed; top:0; left:0; pointer-events:none; z-index:9998; transition:transform 0.4s ease, width 0.3s, height 0.3s, border-color 0.3s; }
+body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:1000; opacity:0.5; }
+
+/* NAV */
+nav { display:flex; justify-content:space-between; align-items:center; padding:28px 60px; position:relative; z-index:20; }
+.nav-logo { font-family:'Playfair Display',serif; font-style:italic; font-weight:400; font-size:1.1rem; letter-spacing:0.08em; color:var(--off-white); text-decoration:none; transition:color 0.2s; }
+.nav-logo:hover { color:var(--marigold); }
+.nav-links { display:flex; gap:28px; list-style:none; flex-wrap:wrap; align-items:center; }
+.nav-links a { font-size:0.9rem; letter-spacing:0.15em; text-transform:uppercase; color:rgba(242,237,228,0.75); text-decoration:none; transition:color 0.2s; }
+.nav-links a:hover { color:var(--marigold); }
+.ig-link { display:inline-flex; align-items:center; justify-content:center; color:rgba(242,237,228,0.6); transition:color 0.2s; text-decoration:none; }
+.ig-link:hover { color:var(--marigold); }
+.ig-link svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+.nav-ig { margin-left:4px; }
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; padding:8px; z-index:200; background:none; border:none; }
+.hamburger span { display:block; width:24px; height:2px; background:var(--off-white); transition:transform 0.3s, opacity 0.3s; }
+.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
+.mobile-menu { display:none; position:fixed; inset:0; background:rgba(14,12,10,0.98); z-index:150; flex-direction:column; align-items:center; justify-content:center; }
+.mobile-menu.open { display:flex; }
+.mobile-menu a { font-family:'Playfair Display',serif; font-size:clamp(1.6rem,6vw,2.4rem); font-style:italic; color:var(--off-white); text-decoration:none; padding:16px 40px; letter-spacing:0.04em; transition:color 0.2s; border-bottom:1px solid rgba(245,200,66,0.08); width:100%; text-align:center; }
+.mobile-menu a:last-child { border-bottom:none; }
+.mobile-menu a:hover { color:var(--marigold); }
+.mobile-menu-close { position:absolute; top:24px; right:24px; font-size:2rem; color:var(--off-white); background:none; border:none; cursor:pointer; padding:8px; opacity:0.7; line-height:1; }
+@media(max-width:900px) { nav { padding:20px 24px; } .nav-links { display:none; } .hamburger { display:flex; } }
+
+/* BURST */
+.burst-divider { width:100%; display:flex; align-items:center; justify-content:center; padding:20px 0; }
+
+/* PAGE HERO */
+.hello-hero { max-width:900px; margin:0 auto; padding:64px 60px 0; text-align:center; }
+.hello-eyebrow { font-size:1rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--marigold); margin-bottom:16px; opacity:0; animation:fadeUp 0.8s 0.2s forwards; }
+.hello-h1 { font-family:'Playfair Display',serif; font-size:clamp(2rem,6vw,4rem); font-weight:900; color:var(--off-white); line-height:1.1; opacity:0; animation:fadeUp 0.8s 0.4s forwards; }
+.hello-h1 em { color:var(--marigold); font-style:italic; font-weight:400; }
+
+/* PORTRAIT */
+.hello-portrait { width:100%; max-width:480px; margin:48px auto 0; display:block; opacity:0; animation:fadeUp 0.8s 0.6s forwards; overflow:hidden; }
+.hello-portrait img { width:100%; display:block; object-fit:cover; }
+
+/* LETTER */
+.letter-wrap { max-width:760px; margin:0 auto; padding:64px 60px 80px; }
+.letter-body { color:rgba(242,237,228,0.88); line-height:2; }
+.letter-body p { margin-bottom:1.4em; font-size:1.1rem; }
+.letter-body a { color:var(--marigold); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.3); transition:border-color 0.2s; }
+.letter-body a:hover { border-color:var(--marigold); }
+.letter-divider { border:none; border-top:1px solid rgba(245,200,66,0.15); margin:36px 0; }
+.letter-section-head { font-family:'Playfair Display',serif; font-size:1.2rem; font-weight:700; color:var(--off-white); margin-bottom:16px; margin-top:40px; }
+.letter-section-head em { color:var(--marigold); font-style:italic; font-weight:400; }
+.work-item { margin-bottom:20px; }
+.work-item strong { color:var(--off-white); font-weight:400; font-family:'Playfair Display',serif; font-style:italic; font-size:1.15rem; }
+.intro-list { list-style:none; padding:0; margin:16px 0 0; }
+.intro-list li { padding:8px 0; border-bottom:1px solid rgba(242,237,228,0.06); color:rgba(242,237,228,0.7); font-size:1.05rem; padding-left:16px; position:relative; }
+.intro-list li::before { content:'·'; position:absolute; left:0; color:var(--marigold); }
+.intro-list li:last-child { border-bottom:none; }
+.letter-ps { margin-top:32px; font-size:1rem; color:rgba(242,237,228,0.55); font-style:italic; }
+.letter-sign { margin-top:40px; }
+.letter-sign .sign-off { font-size:1.1rem; color:rgba(242,237,228,0.7); margin-bottom:8px; }
+.letter-sign .sign-name { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:var(--off-white); font-style:italic; }
+.press-line { margin-top:12px; font-size:1rem; color:rgba(242,237,228,0.45); }
+.press-line a { color:var(--marigold); text-decoration:none; border-bottom:1px solid rgba(245,200,66,0.3); font-size:0.95rem; }
+
+/* LMSB */
+.lmsb-strip { background:var(--black); text-align:center; padding:100px 40px; }
+.lmsb-main { font-family:'Playfair Display',serif; font-size:clamp(2rem,5.6vw,4rem); font-weight:900; color:var(--off-white); text-decoration:none; display:block; line-height:1; transition:opacity 0.3s; }
+.lmsb-main em { color:var(--marigold); font-style:italic; font-weight:400; }
+.lmsb-main:hover { opacity:0.8; }
+.lmsb-sub { display:block; margin-top:20px; font-size:1rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--marigold); text-decoration:none; }
+.lmsb-ig { margin-top:16px; display:flex; align-items:center; justify-content:center; }
+.lmsb-ig a { color:rgba(242,237,228,0.4); transition:color 0.2s; display:inline-flex; align-items:center; }
+.lmsb-ig a:hover { color:var(--marigold); }
+.lmsb-ig svg { width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round; stroke-linejoin:round; }
+
+/* BACK TO TOP */
+.back-to-top { position:fixed; bottom:32px; right:32px; width:44px; height:44px; background:rgba(14,12,10,0.85); border:1px solid rgba(245,200,66,0.3); color:var(--marigold); font-size:1.2rem; display:flex; align-items:center; justify-content:center; text-decoration:none; opacity:0; transition:opacity 0.3s; z-index:500; }
+.back-to-top.visible { opacity:1; }
+.back-to-top:hover { border-color:var(--marigold); }
+
+.site-footer { background:var(--black); text-align:center; padding:32px 60px; border-top:1px solid rgba(245,200,66,0.08); }
+.footer-note { font-size:1rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--rose); }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+.reveal { opacity:0; transform:translateY(40px); transition:opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+@media(max-width:900px) {
+  .hello-hero { padding:40px 24px 0; }
+  .letter-wrap { padding:48px 24px 60px; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<a class="back-to-top" id="backTop" href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑</a>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+  <a href="index.html#about">About</a>
+  <a href="curation.html">Curation &amp; Consult</a>
+  <a href="fashion.html">Fashion</a>
+  <a href="works.html">Creative Works</a>
+  <a href="pov.html">POV</a>
+  <a href="contact.html">Contact</a>
+  <a href="https://instagram.com/sunnie.anand" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:center;gap:10px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg> @sunnie.anand</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">Sunnie Anand</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="curation.html">Curation &amp; Consult</a></li>
+    <li><a href="fashion.html">Fashion</a></li>
+    <li><a href="works.html">Creative Works</a></li>
+    <li><a href="pov.html">POV</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="https://instagram.com/sunnie.anand" target="_blank" rel="noopener" class="ig-link nav-ig" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg></a></li>
+  </ul>
+  <button class="hamburger" id="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- BURST -->
+<div class="burst-divider" style="background:var(--black);">
+  <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="140" y1="16" x2="75" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="140" y1="16" x2="75" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><line x1="180" y1="16" x2="245" y2="5" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/><line x1="180" y1="16" x2="245" y2="27" stroke="#c9a84c" stroke-width="0.5" stroke-opacity="0.2"/></svg>
+</div>
+
+<!-- HERO -->
+<div class="hello-hero">
+  <p class="hello-eyebrow">Studio Sunnie · Los Angeles</p>
+  <h1 class="hello-h1">A Note from the <em>City of Angels</em></h1>
+</div>
+
+<!-- PORTRAIT -->
+<div class="hello-portrait reveal">
+  <img src="https://res.cloudinary.com/dndippf4k/image/upload/q_auto/f_auto/v1781579568/20250416_162757_r1igig.jpg" alt="Sunnie Anand in Los Angeles">
+  <p style="text-align:center;font-size:0.88rem;letter-spacing:0.18em;color:rgba(242,237,228,0.35);margin-top:12px;font-family:'Jost',sans-serif;font-weight:300;text-transform:uppercase;">Sunnie · Los Angeles</p>
+</div>
+
+<!-- LETTER -->
+<div class="letter-wrap reveal">
+  <div class="letter-body">
+
+    <p>Greetings friends and colleagues,</p>
+
+    <p>I've been heads-down for a few months — deep in the studio, deep in a new city, deep in a creative chapter I've been building toward for a long time. This felt like the right moment to surface, say hello, and catch you up.</p>
+
+    <p>The short version: I'm now based in sunny LA — and yes, the name fits.</p>
+
+    <p style="font-size:1rem;color:rgba(242,237,228,0.55);font-style:italic;border-left:2px solid rgba(245,200,66,0.25);padding-left:20px;margin-bottom:1.4em;">A quick note on the name: many of you know me as Shelley. Sunnie is a nickname that goes back to preschool — a teacher called me Sunshine, it stuck, and over time it simply felt more like me. As I stepped into this creative chapter, I chose to use Sunnie Anand for my artwork, creative projects, and professional work. Nothing dramatic — I still happily answer to Shelley or Sunnie. Just wanted to connect the dots in case you landed here and wondered.</p>
+
+    <p>The longer version is below, and I promise it's worth the scroll.</p>
+
+    <p class="press-line">For the quick overview, there's also a <a href="https://sunnieanand.com/sunnieAnand_press.pdf" target="_blank">one-page summary →</a></p>
+
+    <hr class="letter-divider">
+
+    <h2 class="letter-section-head">What I've been <em>building</em></h2>
+
+    <p>After many rewarding years in corporate sustainability, I'm dedicating this chapter to the work that has always run alongside everything else — art, curation, slow fashion, writing, and the kind of community-building that happens in living rooms and galleries rather than conference rooms.</p>
+
+    <p>This season has given me the opportunity to go deep on my creative practice, pursue long-held artistic goals, and explore new ways of bringing together the worlds I've always loved: creativity, sustainability, culture, and social impact.</p>
+
+    <p>Today, my work includes:</p>
+
+    <div class="work-item">
+      <p><strong>Fine art and creative practice</strong> — twenty years of studio work across painting, ink, watercolor, collage, and large-scale installation. I show up every morning and make something. It adds up. <a href="https://sunnieanand.com/works">See the full body of work →</a></p>
+    </div>
+
+    <div class="work-item">
+      <p><strong>Art curation and cultural projects</strong> — bespoke gallery talks, museum tours, art walks, private art advisory, and exhibition development. I've logged 80+ world-class museums across four continents and have very strong opinions about all of them. <a href="https://sunnieanand.com/curation">Learn more →</a></p>
+    </div>
+
+    <div class="work-item">
+      <p><strong>Sustainable fashion and circular design</strong> — garment construction, material sourcing, costume design, and personal styling rooted in slow fashion values. The fashion fairies are real and they lead me straight to the good stuff. <a href="https://sunnieanand.com/fashion">Explore →</a></p>
+    </div>
+
+    <div class="work-item">
+      <p><strong>Consulting and advisory</strong> — available for select engagements in sustainability, systems change, circular economy, and mission-driven organizations. The corporate operator brain didn't go anywhere — it just comes with a fuller perspective now.</p>
+    </div>
+
+    <div class="work-item">
+      <p><strong>Speaking, writing, and community</strong> — including <a href="https://sunnieanand.com/pov">essays on art, sustainability, and culture</a> and intimate <a href="https://sunnieanand.com/contact#salons">Sunnie Salons</a> in Los Angeles — invitation-only evenings around art, ideas, and good conversation.</p>
+    </div>
+
+    <hr class="letter-divider">
+
+    <h2 class="letter-section-head">Who I'd love to <em>meet</em></h2>
+
+    <p>If someone comes to mind who works in any of the following, I'd genuinely love an introduction:</p>
+
+    <ul class="intro-list">
+      <li>Art, culture, museums, and galleries</li>
+      <li>Creative entrepreneurship</li>
+      <li>Sustainable fashion and circular economy</li>
+      <li>Social impact and mission-driven work</li>
+      <li>Community building</li>
+      <li>South Asian diaspora creative communities</li>
+    </ul>
+
+    <p style="margin-top:24px;">Some of the most meaningful things in my life have started with a simple introduction. I don't take those lightly.</p>
+
+    <hr class="letter-divider">
+
+    <h2 class="letter-section-head">And I'm equally <em>here for you</em></h2>
+
+    <p>This isn't just a one-way update. Whether you want to catch up, talk through something you're working on, share a recommendation, or simply reconnect — my door is open. I'm genuinely excited to be back in conversation. Please don't hesitate to <a href="https://sunnieanand.com/contact.html">reach out</a> — I mean that.</p>
+
+    <hr class="letter-divider">
+
+    <h2 class="letter-section-head">If you're working on something <em>interesting</em></h2>
+
+    <p>I'm available for select consulting, advising, facilitation, and strategy projects — particularly those touching sustainability, systems change, stakeholder engagement, and mission-driven organizations. If something's brewing, <a href="https://sunnieanand.com/contact.html">let's talk</a>.</p>
+
+    <hr class="letter-divider">
+
+    <h2 class="letter-section-head">Stay in <em>touch</em></h2>
+
+    <p>The best place to follow along is <a href="https://sunnieanand.com">sunnieanand.com</a> — newly launched, very much me. Have a wander around while you're <a href="https://sunnieanand.com">here</a> — it's a full picture of what I've been up to, and I think you'll enjoy it.</p>
+
+    <p>And the usual methods still work — however you know me, that's exactly how to reach me. I'd genuinely love to hear from you.</p>
+
+    <p>Whether we worked together last year or our paths crossed a decade ago — I'm glad you're in my orbit. Truly.</p>
+
+    <div class="letter-sign">
+      <p class="sign-off">Sending sunshine from LA,</p>
+      <p class="sign-name">Sunnie</p>
+    </div>
+
+    <p class="letter-ps">P.S. If we haven't spoken in a while, I'd especially love to hear from you.</p>
+
+  </div>
+</div>
+
+<!-- BURST -->
+<div class="burst-divider" style="background:var(--black);">
+  <svg width="320" height="32" viewBox="0 0 320 32" xmlns="http://www.w3.org/2000/svg"><line x1="148" y1="16" x2="0" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/><circle cx="160" cy="16" r="5" fill="none" stroke="#f5c842" stroke-width="1.3" stroke-opacity="0.75"/><circle cx="160" cy="16" r="2.2" fill="#f5c842" fill-opacity="0.55"/><line x1="172" y1="16" x2="320" y2="16" stroke="#c9a84c" stroke-width="0.8" stroke-opacity="0.35"/></svg>
+</div>
+
+<!-- LMSB -->
+<div class="lmsb-strip">
+  <a href="https://sunnieanand.com" class="lmsb-main">Let's make something <em>beautiful.</em></a>
+  <a href="contact.html" class="lmsb-sub">reach out →</a>
+  <div class="lmsb-ig"><a href="https://instagram.com/sunnie.anand" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg></a></div>
+</div>
+
+<footer class="site-footer"><p class="footer-note">SunnieAnand.com · 2026 · Los Angeles</p></footer>
+
+<script>
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu'), btn = document.getElementById('hamburgerBtn');
+  menu.classList.toggle('open'); btn.classList.toggle('open');
+  document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+}
+function closeMobileMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburgerBtn').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', closeMobileMenu));
+
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => backTop.classList.toggle('visible', window.scrollY > 400));
+
+const cursor = document.getElementById('cursor'), ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; cursor.style.transform=`translate(${mx-4}px,${my-4}px)`; });
+function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.transform=`translate(${rx-16}px,${ry-16}px)`;requestAnimationFrame(animRing);}
+animRing();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ring.style.width='52px';ring.style.height='52px';ring.style.borderColor='rgba(245,200,66,0.8)';});
+  el.addEventListener('mouseleave',()=>{ring.style.width='32px';ring.style.height='32px';ring.style.borderColor='rgba(245,200,66,0.5)';});
+});
+
+const obs = new IntersectionObserver(entries => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold:0.06 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
