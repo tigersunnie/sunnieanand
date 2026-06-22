@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunnie Anand — Curriculum Vitae</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #1a1a1a; --marigold: #E8A320; --gold: #C8941A;
+      --rose: #C4776A; --cream: #FAF7F2; --mid: #6b6b6b; --light: #e8e2d9;
+    }
+    body { font-family: 'Jost', sans-serif; font-weight: 300; background: var(--cream); color: var(--black); line-height: 1.7; }
+    header { background: var(--black); color: var(--cream); padding: 4rem 2rem 3rem; text-align: center; }
+    header .eyebrow { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--marigold); margin-bottom: 1rem; }
+    header h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 6vw, 3.8rem); font-weight: 400; letter-spacing: 0.02em; margin-bottom: 0.5rem; }
+    header h1 em { color: var(--marigold); font-style: italic; }
+    header .title { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 1rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--light); margin-bottom: 2rem; }
+    header .contact-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.5rem; font-size: 0.85rem; color: var(--light); }
+    header .contact-row a { color: var(--marigold); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+    header .contact-row a:hover { border-color: var(--marigold); }
+    .page { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+    .profile { border-left: 3px solid var(--marigold); padding-left: 1.5rem; margin-bottom: 3.5rem; }
+    .profile p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.1rem; color: var(--black); line-height: 1.8; }
+    section { margin-bottom: 3rem; }
+    .section-label { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 0.82rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--marigold); margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--light); }
+    .entry { margin-bottom: 2rem; }
+    .entry-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.25rem; }
+    .entry-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; }
+    .entry-date { font-size: 0.92rem; color: var(--mid); font-weight: 400; white-space: nowrap; }
+    .entry-org { font-size: 0.97rem; color: var(--mid); margin-bottom: 0.6rem; font-style: italic; }
+    .entry ul { padding-left: 1.2rem; }
+    .entry ul li { font-size: 1rem; margin-bottom: 0.4rem; color: #333; }
+    .entry ul li strong { color: var(--black); font-weight: 500; }
+    .talks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+    .talk-card { background: white; border-top: 2px solid var(--marigold); padding: 1rem 1.1rem; }
+    .talk-card h4 { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 600; margin-bottom: 0.3rem; }
+    .talk-card p { font-size: 0.92rem; color: var(--mid); line-height: 1.5; }
+    .exhibition-entry { margin-bottom: 1.5rem; padding-left: 1rem; border-left: 2px solid var(--light); }
+    .exhibition-entry h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .exhibition-entry p { font-size: 0.97rem; color: var(--mid); }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } .entry-header { flex-direction: column; } }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag { font-size: 0.9rem; font-weight: 400; background: white; border: 1px solid var(--light); padding: 0.3rem 0.7rem; color: var(--black); }
+    .recognition-item { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 0.6rem; font-size: 1rem; }
+    .recognition-item::before { content: '—'; color: var(--marigold); flex-shrink: 0; }
+    .language-row { display: flex; flex-wrap: wrap; gap: 0.4rem 1.5rem; font-size: 1rem; }
+    .language-row span { color: var(--mid); }
+    .language-row span strong { color: var(--black); }
+    footer { text-align: center; padding: 2rem; font-size: 0.9rem; color: var(--mid); border-top: 1px solid var(--light); }
+    footer a { color: var(--marigold); text-decoration: none; }
+    .pull-quote { background: var(--black); color: var(--cream); padding: 2rem 2.5rem; margin: 3rem 0; }
+    .pull-quote p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; line-height: 1.8; }
+    .pull-quote cite { display: block; margin-top: 0.75rem; font-family: 'Jost', sans-serif; font-size: 0.9rem; letter-spacing: 0.1em; color: var(--marigold); font-style: normal; }
+    @media print { header { background: white; color: black; } .pull-quote { background: #f0f0f0; color: black; } body { font-size: 12px; } }
+  </style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Curriculum Vitae · 2026</p>
+  <h1>Sunnie <em>Anand</em></h1>
+  <p class="title">Working Artist · Independent Curator · Sustainability Leader</p>
+  <div class="contact-row">
+    <span>Los Angeles, CA</span>
+    <a href="mailto:hello@sunnieanand.com">hello@sunnieanand.com</a>
+    <a href="https://sunnieanand.com" target="_blank">sunnieanand.com</a>
+    <a href="https://instagram.com/sunnieanand" target="_blank">@sunnieanand</a>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- PROFILE -->
+  <div class="profile">
+    <p>A life spent in beauty's company — as a working artist, independent curator, and sustainability leader whose practice moves fluidly between the studio, the gallery, and the boardroom. 20+ years of making and collecting; four continents of museums, markets, and research. A polyglot and natural collaborator who has built trust-based relationships across disciplines — collectors, executives, creatives, frontline workers, government agencies, international partners, brides and their families, and the full beautiful chaos of real people in meaningful moments — with a track record of turning complex, multi-stakeholder environments into aligned, functional teams. Brings to every room an eye trained by decades of looking, a zero-waste philosophy and slow fashion values developed across Fortune 100 sustainability work, and a genuine belief that beauty and accountability are not opposites. Driven by one conviction: every shred of art deserves to exist.</p>
+  </div>
+
+  <!-- CURATORIAL PRACTICE -->
+  <section>
+    <p class="section-label">Curatorial Practice</p>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Independent Curator, Art Advisor & Public Educator</span>
+        <span class="entry-date">2018 – Present</span>
+      </div>
+      <p class="entry-org">Los Angeles, CA (formerly Atlanta, GA)</p>
+      <ul>
+        <li>Acquire art on behalf of private collectors, designers, and hospitality clients — from brief through installation; trusted for a discerning eye built across 20+ years of active practice</li>
+        <li>Develop and lead bespoke gallery opening talks, museum tours, and art walks — Paris, Los Angeles, Boston, Washington D.C.; known for weaving architecture, history, and art into a single immersive story</li>
+        <li>Host <strong>Sunnie Salons</strong> — invitation-only artist evenings for 25 guests featuring moderated conversations between collectors, artists, and curious minds</li>
+        <li>Attended Venice Biennale 2026 "In Minor Keys" as independent curator and scholar; developed exhibition concept <em>The Creator Caste</em> in direct response to the work</li>
+        <li>80+ world-class institutions visited across four continents including Musée d'Orsay, L'Orangerie, National Gallery DC, MFA Boston, Mint Museum, and the 2026 Venice Biennale</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">First Solo Exhibition</span>
+        <span class="entry-date">2006</span>
+      </div>
+      <p class="entry-org">Espresso Royale · Athens, Georgia</p>
+      <ul>
+        <li>Large-format documentary photography from Badlands National Park, Yellowstone, and the Tetons — organized independently; works sold</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- EXHIBITIONS IN DEVELOPMENT -->
+  <section>
+    <p class="section-label">Exhibitions in Development</p>
+    <div class="exhibition-entry">
+      <h4>The Creator Caste</h4>
+      <p>Works by South Asian women of the diaspora who have claimed creative selfhood alongside — not instead of — their inherited roles. Developed in dialogue with Venice Biennale 2026.</p>
+    </div>
+    <div class="exhibition-entry">
+      <h4>Light Language: Transmissions from the Ancient Future</h4>
+      <p>Large-scale paintings and mixed media works exploring the visual grammar of consciousness — forms and frequencies that feel simultaneously primordial and extraterrestrial. Anchored by <em>Aster</em> (60×48in acrylic). Proposed for the LAX Art Program.</p>
+    </div>
+    <div class="exhibition-entry">
+      <h4>Return of Gaia</h4>
+      <p>Painting, sculpture, textile, and land-based installation imagining earth not as victim or backdrop but as active, generative, sovereign force.</p>
+    </div>
+    <div class="exhibition-entry">
+      <h4>Beyond Wear</h4>
+      <p>Textile works freed entirely from the body — no wearability required. Form, memory, labor, politics, and the unbearable intimacy of materials.</p>
+    </div>
+  </section>
+
+  <!-- PULL QUOTE -->
+  <div class="pull-quote">
+    <p>"She wove together Haussmann's Paris, the light on the Seine, and the paintings at the Orsay into one seamless story — the architecture, the history, the art — until the City of Lights itself felt like the masterpiece. Genuinely one of the most illuminating afternoons I've had."</p>
+    <cite>— A guest, Paris art walks</cite>
+  </div>
+
+  <!-- ART TALKS -->
+  <section>
+    <p class="section-label">Signature Art Talks & Tours</p>
+    <div class="talks-grid">
+      <div class="talk-card">
+        <h4>The Impressionist Rupture</h4>
+        <p>How a group of rejected painters changed what art was allowed to be — and why it still matters.</p>
+      </div>
+      <div class="talk-card">
+        <h4>Napoleon and the Canon</h4>
+        <p>What colonial looting tells us about whose stories get enshrined in art history — and what we can see happening now with repatriation debates worldwide.</p>
+      </div>
+      <div class="talk-card">
+        <h4>AI and the Human Hand</h4>
+        <p>Why making things by hand is a political act right now, and why the forecast is dark but not inevitable.</p>
+      </div>
+      <div class="talk-card">
+        <h4>The Feminist Gaze</h4>
+        <p>From radical non-linear filmmaking of the 1970s to the female gaze turned back on itself.</p>
+      </div>
+      <div class="talk-card">
+        <h4>Art and the Environment</h4>
+        <p>French Impressionism, American conservation, and the landscape as subject — a conversation that never got resolved.</p>
+      </div>
+      <div class="talk-card">
+        <h4>How to Look at Anything</h4>
+        <p>An interactive method for standing in front of work that stops you cold — with better questions and more room to feel it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STUDIO PRACTICE -->
+  <section>
+    <p class="section-label">Studio Practice</p>
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Visual Artist</span>
+        <span class="entry-date">2005 – Present</span>
+      </div>
+      <p class="entry-org">Los Angeles, CA</p>
+      <ul>
+        <li>20+ years of active studio practice across large-scale painting, watercolor, feminist collage, sculpture, assemblage, embroidery, and textile arts</li>
+        <li>500+ works in personal collection; works held in private collections in Atlanta, New York, Los Angeles, London, and Paris</li>
+        <li>Large-scale signature work: <strong>Taj Mahal Installation</strong> (15×30ft, 74 canvases, 2005) — conceived and executed independently</li>
+        <li>Anchor work: <strong>Aster</strong> (60×48in acrylic) — leads proposed LAX Art Program exhibition <em>Light Language: Transmissions from the Ancient Future</em></li>
+        <li>Current series in development: galactic + ancient cosmological works, large-scale canvas</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROFESSIONAL EXPERIENCE -->
+  <section>
+    <p class="section-label">Selected Professional Experience</p>
+
+    <!-- DELTA -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Program Manager, Global Sustainability — Materials & Waste</span>
+        <span class="entry-date">2022 – 2025</span>
+      </div>
+      <p class="entry-org">Delta Air Lines · Atlanta, GA</p>
+      <ul>
+        <li><strong>Industry first — Waste Baseline Study:</strong> Delivered Delta's first-ever waste baseline across 249 stations including international operations — developing the model, protocol, and a multi-million dollar 5–25 year strategic plan supporting Delta's Zero Waste by 2025 and 65% landfill diversion by 2035 goals; unprecedented ambition in commercial aviation</li>
+        <li><strong>Campus transformation:</strong> Led multi-campus Delta World HQ Centralized Waste Program from inception through 100% implementation — 30,000 desks, 6 buildings, 4 cafeterias — in partnership with cross-functional stakeholders including campus representatives, haulers, janitorial staff, and waste touchpoint managers; developed comprehensive change management plan, multilingual trainings across digital, card game, and live event formats, and designed the new 3-stream bin system</li>
+        <li><strong>Impact:</strong> More than doubled the 5% landfill diversion goal in year one — peak months reaching 14% — tracked via a monthly digital dashboard built to ensure transparency across 6 data partners</li>
+        <li><strong>DeltaRecycles.com:</strong> Spearheaded platform engaging 700+ frontline employees across 12 innovation sessions; co-created with 80+ OEMs; resulted in comprehensive onboard recycling redesign across aircraft, airports, and catering kitchens</li>
+        <li><strong>Cup design:</strong> Helped design the aviation industry's first-ever fully paper cup — the only cup of its kind currently flying; meets EU regulations for less than 0.5% plastic with no bioplastics; investigated materials composition and recyclability across multiple trial products</li>
+        <li><strong>Partnerships — international:</strong> Worked with CDG (Paris) catering kitchens for trial recycling program across transatlantic flights; collaborated with government affairs and APHIS/USDA to rewrite international catering waste regulations</li>
+        <li><strong>Onboard technology:</strong> Proposed multiple onboard waste tracking and management technology innovations; presented before FAA engineering committees in one of aviation's most constrained environments</li>
+        <li><strong>Hub airports:</strong> Co-developed multi-million dollar Hub Airport Recycling Scorecard across 9 U.S. hub airports — fostering shared accountability and measurable progress; created strategic plan to stand up recycling at the world's busiest airport (ATL) across multiple vendor partners and airport stakeholders</li>
+        <li><strong>Events:</strong> Designed and delivered Delta's first-ever Delta Recycles Day in coordination with America Recycles Day — launched at Atlanta world headquarters, scaled for integration into annual operations; ran waste component of SkyTeam's Sustainable Flight Challenge for 3 consecutive years</li>
+        <li><strong>Data:</strong> Built Delta's first waste-tracking dashboard; developed transferable double and triple donut data visualization methodology</li>
+        <li><strong>Recognition:</strong> Chairman's Club nomination — Delta's highest employee honor; IGEL graduate — competitive statewide Georgia environmental leadership program</li>
+      </ul>
+    </div>
+
+    <!-- JLL -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Ambassador, Experience Services</span>
+        <span class="entry-date">2022 – 2025</span>
+      </div>
+      <p class="entry-org">Jones Lang LaSalle (JLL) at Delta Air Lines · Atlanta, GA</p>
+      <ul>
+        <li>Served as primary liaison between Delta campus clients and property management — managing 80+ administrator relationships across 6 buildings; fielded maintenance tickets, managed resolution timelines, and maintained high-touch client communications</li>
+        <li>Produced monthly campus newsletter — sourcing content, managing multi-stakeholder approvals process, designing and distributing to thousands of campus employees</li>
+        <li>Planned and executed campus engagement events — community building, sustainability activations, and programming across the Delta GO headquarters</li>
+        <li>Established and scaled "Space Champions" program — change management initiative building campus-wide engagement with new operational procedures</li>
+        <li>Helped launch the first 3-bin recycling program in Delta campus cafeterias — first foothold into Delta Sustainability that grew into full Program Manager role</li>
+      </ul>
+    </div>
+
+    <!-- ELECTIONS -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Team Lead; Mobile Polling Manager; Training Assistant</span>
+        <span class="entry-date">2020 – 2021</span>
+      </div>
+      <p class="entry-org">Fulton County Elections & Registration · Atlanta, GA</p>
+      <ul>
+        <li>Led pilot program supporting first-time poll managers across 120 precincts; managed technicians, administrative staff, volunteers, and media to enable Georgia's first-ever Fulton County mobile poll</li>
+        <li>Served as ACLU Liaison delivering comprehensive multi-platform trainings across all technology skill levels; participated in the official ballot recount in the historic 2020 federal election with Fulton County at the epicenter</li>
+      </ul>
+    </div>
+
+    <!-- NEW SOUTH -->
+    <div class="entry">
+      <div class="entry-header">
+        <span class="entry-title">Operations Manager</span>
+        <span class="entry-date">2014 – 2020</span>
+      </div>
+      <p class="entry-org">New South Package Store · Riverdale, GA</p>
+      <ul>
+        <li>Managed full operations of a mid-sized family-run business — 18 employees, 8,500 sq ft, $3M annual sales — including all IT systems, QuickBooks payroll and 401k, tax processing, and vendor contract negotiation</li>
+        <li>Authored comprehensive diagrammed SOPs for every operational department; developed employee manual and debt collection management system; conducted annual trainings and new hire onboarding in multiple languages</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- EVENT PRODUCTION -->
+  <section>
+    <p class="section-label">Event Production — Selected Experience</p>
+    <div class="entry">
+      <ul>
+        <li>Produced a public outreach event in Delaware (2008) drawing <strong>30,000 attendees</strong> — managing vendors, food service, speakers, and full day-of logistics as Field Organizer for MoveOn.org; one of the largest events of its kind in the state's recent history</li>
+        <li>Planned and executed a national student conference as lead organizer — multi-track programming, housing coordination for 200+ out-of-state attendees, speaker management, and full lobbying day logistics</li>
+        <li>Day-of and pre-event wedding planning for celebrations of <strong>400+ guests</strong> — developed cue-to-cue from scratch, managed vendor timelines, and served as primary point of contact across all production elements</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section>
+    <p class="section-label">Education</p>
+    <div class="two-col">
+      <div class="entry">
+        <div class="entry-header"><span class="entry-title">MS Natural Resources & Environment</span></div>
+        <p class="entry-org">+ Environmental Justice · University of Michigan, Ann Arbor · 2016</p>
+      </div>
+      <div class="entry">
+        <div class="entry-header"><span class="entry-title">BA Women's Studies</span></div>
+        <p class="entry-org">+ Environmental Ethics · University of Georgia, Athens · 2006</p>
+      </div>
+      <div class="entry">
+        <div class="entry-header"><span class="entry-title">Hindustani Classical Music</span></div>
+        <p class="entry-org">One-year intensive conservatory study · Harmonium, Dholki, Voice</p>
+      </div>
+      <div class="entry">
+        <div class="entry-header"><span class="entry-title">Continuing Study</span></div>
+        <p class="entry-org">Self-directed art history · French Impressionism 1850–1920 · American Modernism · Feminist Film & Media Theory · seven college-level art history courses</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LANGUAGES -->
+  <section>
+    <p class="section-label">Languages</p>
+    <div class="language-row">
+      <span><strong>English</strong> — Native</span>
+      <span><strong>Hindi</strong> — Fluent</span>
+      <span><strong>Punjabi</strong> — Fluent</span>
+      <span><strong>French</strong> — Highly proficient; navigates museums, galleries, and professional contexts with ease</span>
+      <span><strong>Spanish</strong> — Conversational</span>
+      <span><strong>American Sign Language</strong> — Functional; introductions, directions, fingerspelling</span>
+      <span style="color: #999; font-size: 0.82rem;">+ quick acquisition of Romance languages when immersed</span>
+    </div>
+  </section>
+
+  <!-- RECOGNITION -->
+  <section>
+    <p class="section-label">Recognition & Leadership</p>
+    <div class="recognition-item">Delta Chairman's Club Nomination — Delta's highest employee honor</div>
+    <div class="recognition-item">IGEL Graduate — Institute for Georgia Environmental Leadership, competitive statewide program representing Delta Air Lines</div>
+    <div class="recognition-item">Venice Biennale 2026 — "In Minor Keys" — attended as independent curator and scholar; developed <em>The Creator Caste</em> exhibition concept in response</div>
+    <div class="recognition-item">Fulton County Elections — ACLU Liaison and Team Lead during historic 2020 federal election ballot recount</div>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <p class="section-label">Areas of Expertise</p>
+    <div class="tags">
+      <span class="tag">Exhibition Development</span>
+      <span class="tag">Art Advisory & Acquisition</span>
+      <span class="tag">Collection Management</span>
+      <span class="tag">Art Writing & Catalog Essays</span>
+      <span class="tag">Public Speaking & Talks</span>
+      <span class="tag">Museum & Gallery Tours</span>
+      <span class="tag">Event Production & Management</span>
+      <span class="tag">Venue & Facility Management</span>
+      <span class="tag">VIP & Client Relations</span>
+      <span class="tag">Stakeholder Engagement</span>
+      <span class="tag">Cross-Cultural Programming</span>
+      <span class="tag">Change Management</span>
+      <span class="tag">Budget Oversight</span>
+      <span class="tag">Vendor & Contract Management</span>
+      <span class="tag">Project Management</span>
+      <span class="tag">Sustainability Strategy</span>
+      <span class="tag">Data Visualization</span>
+      <span class="tag">Google Workspace</span>
+      <span class="tag">Canva</span>
+      <span class="tag">HTML / Web Design</span>
+      <span class="tag">Art Installation</span>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>Sunnie Anand · <a href="https://sunnieanand.com">sunnieanand.com</a> · Los Angeles, CA · <a href="mailto:hello@sunnieanand.com">hello@sunnieanand.com</a></p>
+  <p style="margin-top: 0.5rem; font-style: italic;">"A truly alarming number of museum receipts."</p>
+</footer>
+
+</body>
+</html>
