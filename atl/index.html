@@ -339,6 +339,31 @@
     transition: transform 0.15s ease;
   }
   .btn:hover { transform: translateY(-2px); }
+  .btn-alt {
+    background: var(--lavender-deep);
+    box-shadow: 0 10px 24px rgba(141,111,209,0.35);
+  }
+
+  .loop {
+    margin-top: 44px;
+    padding: 30px 26px;
+    background: var(--paper);
+    border-radius: 24px;
+    border: 2px dashed var(--fuchsia);
+  }
+  .loop-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .loop p {
+    font-size: 15.5px;
+    color: rgba(26,18,37,0.72);
+    max-width: 420px;
+    margin: 0 auto 20px;
+  }
 
   .also {
     margin-top: 40px;
@@ -451,6 +476,12 @@
     <h2>Ready to give me your color?</h2>
     <p>Send me your prompt and your size — I'll confirm and let you know when it's ready to come home with you.</p>
     <a href="mailto:hello@sunnieanand.com?subject=I%20have%20my%20color" class="btn">Send Me Your Prompt →</a>
+
+    <div class="loop">
+      <div class="loop-title">Not Ready Yet? Stay In The Loop.</div>
+      <p>Not ready for this round, or just want to follow along? Join my list to hear about future drops, new work, and what's next.</p>
+      <a href="https://forms.gle/pdvMmq2Mnr651BsF9" target="_blank" class="btn btn-alt">Join The List →</a>
+    </div>
 
     <div class="also">
       <div class="also-title">While you're here...</div>
