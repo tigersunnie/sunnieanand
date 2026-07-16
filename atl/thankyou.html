@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You — Sunnie Anand</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lavender: #b9a3e3;
+    --lavender-deep: #8d6fd1;
+    --fuchsia: #fe4164;
+    --marigold: #f7c948;
+    --orange: #f2793e;
+    --ink: #1a1225;
+    --cream: #fdf8ef;
+    --paper: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+    opacity: 0.5;
+    z-index: 0;
+  }
+  .blob1 { width: 140px; height: 140px; background: var(--marigold); top: 40px; right: -40px; opacity: 0.35; }
+  .blob2 { width: 90px; height: 90px; background: var(--fuchsia); top: 340px; left: -30px; opacity: 0.2; }
+  .blob3 { width: 110px; height: 110px; background: var(--lavender); bottom: 60px; right: -20px; opacity: 0.3; }
+
+  section { position: relative; z-index: 1; }
+
+  .hero { padding: 80px 0 20px; text-align: center; }
+  .eyebrow {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--paper);
+    background: var(--fuchsia);
+    padding: 9px 20px;
+    border-radius: 100px;
+    margin-bottom: 26px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(32px, 6.5vw, 52px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  h1 .pop { color: var(--fuchsia); font-style: italic; font-weight: 700; }
+  .sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(17px, 2.4vw, 21px);
+    color: var(--lavender-deep);
+    margin: 18px auto 0;
+    max-width: 480px;
+  }
+  .body-copy {
+    font-size: 17.5px;
+    color: rgba(26,18,37,0.82);
+    max-width: 540px;
+    margin: 24px auto 0;
+    font-weight: 400;
+  }
+  .body-copy strong { color: var(--fuchsia); font-weight: 600; }
+
+  .next-card {
+    margin: 40px auto 0;
+    max-width: 520px;
+    background: var(--paper);
+    border-radius: 26px;
+    padding: 34px 30px;
+    box-shadow: 0 10px 28px rgba(26,18,37,0.09);
+    text-align: left;
+  }
+  .next-card .label {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--paper);
+    background: var(--lavender-deep);
+    padding: 7px 16px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+  .next-card p {
+    font-family: 'Playfair Display', serif;
+    font-size: 18.5px;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .next-card p:last-child { margin-bottom: 0; }
+  .next-card .accent { color: var(--fuchsia); font-weight: 600; font-style: italic; }
+
+  .package-shot {
+    margin: 32px auto 0;
+    max-width: 420px;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 5px solid var(--paper);
+    box-shadow: 0 12px 32px rgba(26,18,37,0.18);
+    transform: rotate(1.2deg);
+  }
+  .package-shot img { width: 100%; display: block; }
+  .package-caption {
+    text-align: center;
+    font-size: 13.5px;
+    font-style: italic;
+    color: rgba(26,18,37,0.5);
+    margin-top: 14px;
+  }
+
+  .havent-shared {
+    margin: 24px auto 0;
+    max-width: 520px;
+    padding: 26px 28px;
+    background: linear-gradient(150deg, var(--lavender), var(--fuchsia));
+    border-radius: 24px;
+    color: var(--paper);
+  }
+  .havent-shared .title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  .havent-shared p { font-size: 15.5px; margin-bottom: 16px; }
+  .havent-shared .btn {
+    display: inline-block;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 14px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 100px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.15s ease;
+  }
+  .havent-shared .btn:hover { transform: translateY(-2px); }
+
+  .gallery-strip {
+    padding: 56px 0 10px;
+    text-align: center;
+  }
+  .gallery-strip .label {
+    display: inline-block;
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--paper);
+    background: var(--lavender-deep);
+    padding: 7px 16px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+  }
+  .gallery-strip h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 24px;
+    margin-bottom: 26px;
+  }
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .strip img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    background: var(--paper);
+    border-radius: 20px;
+    border: 3px solid var(--paper);
+    box-shadow: 0 6px 16px rgba(26,18,37,0.14);
+  }
+
+  .also {
+    margin: 56px 0 0;
+    padding: 30px 28px;
+    background: var(--paper);
+    border-radius: 24px;
+    font-size: 16px;
+    color: rgba(26,18,37,0.78);
+    text-align: left;
+  }
+  .also .also-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .also a { color: var(--fuchsia); font-weight: 600; text-decoration: none; }
+  .also a:hover { text-decoration: underline; }
+  .also p { margin-bottom: 12px; }
+  .also p:last-child { margin-bottom: 0; }
+
+  footer {
+    text-align: center;
+    padding: 40px 0 60px;
+    font-size: 13px;
+    color: rgba(26,18,37,0.4);
+    font-style: italic;
+  }
+
+  @media (max-width: 640px) {
+    .strip { grid-template-columns: repeat(3, 1fr); }
+    .hero { padding: 56px 0 10px; }
+    .blob1, .blob2, .blob3 { display: none; }
+    .next-card, .havent-shared, .also { padding: 26px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+
+  <section class="hero">
+    <span class="eyebrow">Thank You ☀️</span>
+    <h1>You're officially<br><span class="pop">part of this.</span></h1>
+    <p class="sub">Thank you for trusting me with something this personal.</p>
+    <p class="body-copy">I'm genuinely so moved that you're here — that you wanted a piece of what I make, made just for you. This is the whole point of what I do, and you being part of it means more than you know. <strong>Thank you.</strong></p>
+
+    <div class="next-card">
+      <span class="label">What Happens Next</span>
+      <p>I'll be painting throughout the next few weeks, and I'll <span class="accent">reach out personally</span> to confirm details, share progress, and let you know when your piece is ready.</p>
+      <p>If you're local to Atlanta, we'll set up a time for hand delivery or pickup. Thank you for your patience as I work through this small batch with care.</p>
+    </div>
+
+    <div class="package-shot">
+      <img src="https://res.cloudinary.com/dndippf4k/image/upload/v1778355109/IMG_20220823_235451_u0re0l.jpg" alt="Sunnie carefully packaging an original painting">
+    </div>
+    <p class="package-caption">Every piece is packaged with this much care — this could be yours</p>
+
+    <div class="havent-shared">
+      <div class="title">Haven't shared your word yet?</div>
+      <p>If you haven't told me your word, color, feeling, or memory yet (or if you'd rather I just surprise you), reach out and let me know!</p>
+      <a href="mailto:hello@sunnieanand.com?subject=I%20have%20my%20color" class="btn">Send Me Your Prompt →</a>
+    </div>
+  </section>
+
+  <section class="gallery-strip">
+    <span class="label">A Little More Of My World</span>
+    <h2>Joyful, colorful, wonderfully abstract.</h2>
+    <div class="strip">
+      <img src="https://res.cloudinary.com/dndippf4k/image/upload/v1778355111/IMG-20260408-WA0001_ghpqgw.jpg" alt="Original abstract painting">
+      <img src="https://res.cloudinary.com/dndippf4k/image/upload/v1778355109/IMG_20231103_000947_433_weeolz.jpg" alt="Original abstract painting">
+      <img src="https://res.cloudinary.com/dndippf4k/image/upload/v1778440879/20231008_181837_sdvbox.jpg" alt="Original abstract painting">
+      <img src="https://res.cloudinary.com/dndippf4k/image/upload/v1778440869/20220727_225805_olhm3i.jpg" alt="Original abstract painting">
+    </div>
+  </section>
+
+  <div class="also">
+    <div class="also-title">While you're here...</div>
+    <p>Feel like getting in touch about something else — a different commission, a question about prints, or just to say hi? Email me anytime at <a href="mailto:hello@sunnieanand.com">hello@sunnieanand.com</a> or visit <a href="https://sunnieanand.com/contact.html" target="_blank">sunnieanand.com/contact</a>.</p>
+    <p>If we haven't been in touch in a while, I shared my life update here and would love to invite you into my next chapter: <a href="https://sunnieanand.com/hello" target="_blank">sunnieanand.com/hello</a></p>
+    <p>Want to hear about future drops, new work, and what's next? Join my list here: <a href="https://forms.gle/pdvMmq2Mnr651BsF9" target="_blank">Join The List</a></p>
+    <p>And check out my brand new, fabulous website with more about me, my new life in LA, and even more artwork: <a href="https://sunnieanand.com" target="_blank">sunnieanand.com</a></p>
+  </div>
+
+  <footer>Sunnie Anand — Creator · Curator · Collector</footer>
+</div>
+
+</body>
+</html>
